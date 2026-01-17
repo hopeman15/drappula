@@ -6,3 +6,7 @@
 [![License](https://img.shields.io/dub/l/vibe-d.svg)](LICENSE)
 
 Vampire Sound Machine 🧛‍♂️
+
+## AI Assistant Support
+
+This repository is configured for AI-assisted development. See [.claude/README.md](.claude/README.md) for details.
