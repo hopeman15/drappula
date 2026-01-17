@@ -1,0 +1,27 @@
+# Gradle Guidelines
+
+globs: ["**/*.gradle.kts", "**/libs.versions.toml"]
+
+## Version Catalog
+All dependencies and versions are managed in `gradle/libs.versions.toml`.
+
+When adding new dependencies:
+1. Add version to `[versions]` section
+2. Add library to `[libraries]` section
+3. Add plugins to `[plugins]` section
+4. Reference using `libs.` in build.gradle.kts files
+
+## Common Tasks
+Prefer using `just` commands which wrap Gradle:
+- `just build` - Build all platforms
+- `just build-shared` - Build only shared module
+- `just build-android` - Build Android app
+- `just clean` - Clean build outputs
+
+Direct Gradle commands (for reference):
+- `./gradlew build` - Full build
+- `./gradlew :shared:build` - Build only shared module
+- `./gradlew :android:assembleDebug` - Build Android debug APK
+
+## Plugin Configuration
+Plugins are applied via version catalog aliases. Check `gradle/libs.versions.toml` for available plugins.
