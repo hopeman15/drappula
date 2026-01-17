@@ -15,6 +15,9 @@ concurrency:
 permissions:
   contents: read
 
+env:
+  IOS_SIMULATOR: ${{ vars.IOS_SIMULATOR }}
+
 jobs:
   lint:
     name: Lint
