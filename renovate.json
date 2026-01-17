@@ -13,6 +13,35 @@
         "patch"
       ],
       "automerge": true
+    },
+    {
+      "groupName": "Android Gradle Plugin",
+      "matchPackageNames": [
+        "/com.android.library/",
+        "/com.android.application/"
+      ]
+    },
+    {
+      "groupName": "Android Test",
+      "matchPackageNames": [
+        "/androidx.test*/"
+      ]
+    },
+    {
+      "groupName": "Compose",
+      "matchPackageNames": [
+        "/androidx.compose.*/"
+      ]
+    },
+    {
+      "groupName": "Kotlin & Compose Compiler",
+      "matchPackageNames": [
+        "/composeOptions/",
+        "/org.jetbrains.kotlin.android/",
+        "/org.jetbrains.kotlin:kotlin-stdlib*/",
+        "/org.jetbrains.kotlin.plugin.*/",
+        "/org.jetbrains.kotlin:kotlin-gradle-plugin*/"
+      ]
     }
   ]
 }
