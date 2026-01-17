@@ -45,7 +45,7 @@ build-ios:
 
 # Build iOS native app
 build-ios-native:
-    xcodebuild -project ios/drappula.xcodeproj -scheme drappula -sdk iphonesimulator -configuration Debug build
+    xcodebuild -project ios/drappula.xcodeproj -scheme drappula -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -configuration Debug build
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Clean
@@ -116,7 +116,7 @@ test-shared-ios:
 test-ios:
     rm -rf build/ios/results.xcresult
     mkdir -p build/ios
-    xcodebuild -project ios/drappula.xcodeproj -scheme drappula -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 17' -enableCodeCoverage YES -resultBundlePath build/ios/results.xcresult test
+    xcodebuild -project ios/drappula.xcodeproj -scheme drappula -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -enableCodeCoverage YES -resultBundlePath build/ios/results.xcresult test
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Report (Code Coverage)
