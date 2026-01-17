@@ -1,13 +1,8 @@
-# Scaffold Repo
+# drappula 🧛‍♂️
 
+[![Build Status](https://github.com/hopeman15/drappula/actions/workflows/main.yml/badge.svg?event=push)](https://github.com/hopeman15/drappula/actions)
+[![codecov](https://codecov.io/gh/hopeman15/drappula/graph/badge.svg?token=RCSUAJZFRB)](https://codecov.io/gh/hopeman15/drappula)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+[![License](https://img.shields.io/dub/l/vibe-d.svg)](LICENSE)
 
-Template for quick starting new projects
-
-# TODOS
-
-- [ ] Update the [code of conduct](CODE_OF_CONDUCT.md) email.
-- [ ] Update [funding](.github/FUNDING.yml)
-- [ ] Update [license](LICENSE) information.
-- [ ] Update [PR template](.github/PULL_REQUEST_TEMPLATE.md)
-- [ ] Update [workflows](.github/workflows/main.yml)
+Vampire Sound Machine 🧛‍♂️
