@@ -1,0 +1,20 @@
+# Git & Pull Request Guidelines
+
+## Pull Request Format
+When creating pull requests:
+- Use conventional commits style for titles: `type: description`
+  - `feat:` new feature
+  - `fix:` bug fix
+  - `docs:` documentation changes
+  - `chore:` maintenance tasks
+  - `refactor:` code refactoring
+  - `test:` adding or updating tests
+  - `ci:` CI/CD changes
+- Do NOT include a "Test plan" section
+- Do NOT include AI/Cursor attribution
+- Keep the summary concise with bullet points
+
+## Commit Messages
+- Use conventional commits style: `type: description`
+- Keep the first line under 72 characters
+- Use lowercase for the description (e.g., `feat: add user auth` not `feat: Add user auth`)
