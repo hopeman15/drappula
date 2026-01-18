@@ -137,8 +137,10 @@ report-android:
     ./gradlew :android:koverHtmlReport :android:koverXmlReport
 
 # Generate shared module coverage report
+# Kover disabled for shared module until it supports com.android.kotlin.multiplatform.library
+# See: https://github.com/hopeman15/drappula/issues/11
 report-shared:
-    ./gradlew :shared:koverHtmlReport :shared:koverXmlReport
+    @echo "Kover is disabled for shared module - see issue #11"
 
 # Generate iOS coverage report (runs tests first)
 report-ios: test-ios
