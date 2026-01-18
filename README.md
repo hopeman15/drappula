@@ -1,6 +1,8 @@
 # drappula 🧛‍♂️
 
-[![Build Status](https://github.com/hopeman15/drappula/actions/workflows/main.yml/badge.svg?event=push)](https://github.com/hopeman15/drappula/actions)
+[![Android 🤖](https://github.com/hopeman15/drappula/actions/workflows/android.yml/badge.svg)](https://github.com/hopeman15/drappula/actions/workflows/android.yml)
+[![iOS 🍎](https://github.com/hopeman15/drappula/actions/workflows/ios.yml/badge.svg)](https://github.com/hopeman15/drappula/actions/workflows/ios.yml)
+[![Shared 🤝](https://github.com/hopeman15/drappula/actions/workflows/shared.yml/badge.svg)](https://github.com/hopeman15/drappula/actions/workflows/shared.yml)
 [![codecov](https://codecov.io/gh/hopeman15/drappula/graph/badge.svg?token=RCSUAJZFRB)](https://codecov.io/gh/hopeman15/drappula)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 [![License](https://img.shields.io/dub/l/vibe-d.svg)](LICENSE)
