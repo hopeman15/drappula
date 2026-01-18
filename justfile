@@ -88,9 +88,9 @@ lint-other:
 lint-android:
     ./gradlew :android:lintKotlin :android:detekt :android:lint{{build_type}}
 
-# Lint shared module
+# Lint shared module (no Android Lint with com.android.kotlin.multiplatform.library)
 lint-shared:
-    ./gradlew :shared:lintKotlin :shared:detekt :shared:lint{{build_type}}
+    ./gradlew :shared:lintKotlin :shared:detekt
 
 # Lint iOS code with SwiftLint
 lint-ios:

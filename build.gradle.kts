@@ -31,6 +31,7 @@ allprojects {
     }
 
     tasks.withType<Detekt>().configureEach {
+        jvmTarget = "19"
         reports {
             xml.required.set(false)
             html.required.set(true)
