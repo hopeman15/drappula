@@ -6,7 +6,7 @@ build_type := "Debug"
 ios_simulator := env("IOS_SIMULATOR", "iPhone 17")
 
 # Default recipe - runs all quality gates
-all: clean health format lint test report assemble
+all: clean health validate-renovate format lint test report assemble
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Assemble & Bundle
@@ -154,6 +154,14 @@ report-ios: test-ios
 # Run dependency analysis health check
 health:
     ./gradlew projectHealth buildHealth
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Validation
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Validate Renovate configuration
+validate-renovate:
+    npx --yes --package renovate -- renovate-config-validator
 
 # ─────────────────────────────────────────────────────────────────────────────
 # CI Workflows
