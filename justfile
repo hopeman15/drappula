@@ -6,7 +6,7 @@ build_type := "Debug"
 ios_simulator := env("IOS_SIMULATOR", "iPhone 17")
 
 # Default recipe - runs all quality gates
-all: clean format lint test report assemble
+all: clean health format lint test report assemble
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Assemble & Bundle
@@ -146,6 +146,14 @@ report-shared:
 report-ios: test-ios
     xcrun xccov view --report --json build/ios/results.xcresult > build/ios/coverage.json
     xcrun xccov view --report build/ios/results.xcresult
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Dependency Analysis (Health Checks)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Run dependency analysis health check
+health:
+    ./gradlew projectHealth buildHealth
 
 # ─────────────────────────────────────────────────────────────────────────────
 # CI Workflows
