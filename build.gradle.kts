@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.androidLibrary) apply false
     alias(libs.plugins.androidKotlinMultiplatformLibrary) apply false
     alias(libs.plugins.composeCompiler) apply false
+    alias(libs.plugins.dependencyAnalysis)
     alias(libs.plugins.detekt)
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.kotlinAndroid) apply false
@@ -41,6 +42,19 @@ allprojects {
         }
         exclude("**/resources/**")
         exclude("**/build/**")
+    }
+}
+
+subprojects {
+    apply(plugin = "com.autonomousapps.dependency-analysis")
+}
+
+dependencyAnalysis {
+    issues {
+        all {
+            onUnusedDependencies { severity("fail") }
+            onUsedTransitiveDependencies { severity("fail") }
+        }
     }
 }
 
