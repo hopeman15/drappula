@@ -8,6 +8,10 @@
   ],
   "packageRules": [
     {
+      "matchLabels": [":no_entry_sign: DISABLE REBASING :no_entry_sign:"],
+      "rebaseWhen": "never"
+    },
+    {
       "matchUpdateTypes": [
         "minor",
         "patch"
