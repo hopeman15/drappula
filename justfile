@@ -1,6 +1,10 @@
 # Default build type
 build_type := "Debug"
 
+# iOS simulator for testing - override with IOS_SIMULATOR env var
+# Use 'xcrun simctl list devices available' to see options
+ios_simulator := env("IOS_SIMULATOR", "iPhone 17")
+
 # Default recipe - runs all quality gates
 all: clean format lint test report assemble
 
@@ -116,7 +120,7 @@ test-shared-ios:
 test-ios:
     rm -rf build/ios/results.xcresult
     mkdir -p build/ios
-    xcodebuild -project ios/drappula.xcodeproj -scheme drappula -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -enableCodeCoverage YES -resultBundlePath build/ios/results.xcresult test
+    xcodebuild -project ios/drappula.xcodeproj -scheme drappula -sdk iphonesimulator -destination 'platform=iOS Simulator,name={{ios_simulator}}' -enableCodeCoverage YES -resultBundlePath build/ios/results.xcresult test
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Report (Code Coverage)
