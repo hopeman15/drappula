@@ -79,7 +79,9 @@ format:
 # ─────────────────────────────────────────────────────────────────────────────
 
 # Lint all modules
-lint:
+lint: lint-other lint-android lint-ios lint-shared
+
+lint-other:
     ./gradlew lintKotlin detekt lint{{build_type}}
 
 # Lint Android module
