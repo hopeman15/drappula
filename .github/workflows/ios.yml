@@ -48,6 +48,11 @@ jobs:
           cache: 'gradle'
       - name: Build iOS Framework
         run: just build-ios
+      - name: Boot simulator
+        run: |
+          UDID=$(xcrun simctl list devices available -j | jq -r ".devices[] | .[] | select(.name == \"$IOS_SIMULATOR\") | .udid" | head -1)
+          xcrun simctl boot "$UDID" || true
+          xcrun simctl bootstatus "$UDID" -b
       - name: Test
         run: just report-ios
       - name: Report
