@@ -60,15 +60,24 @@ dependencies {
     implementation(project(":shared"))
 
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.animation)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.foundation.layout)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.text)
     implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.foundation)
 
+    implementation(libs.androidx.activity)
     implementation(libs.androidx.activity.compose)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     testImplementation(libs.kotlin.test)
+
+    androidTestRuntimeOnly(libs.androidx.test.core)
+    androidTestRuntimeOnly(libs.androidx.test.runner)
+    androidTestRuntimeOnly(libs.junit)
 }

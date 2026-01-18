@@ -53,7 +53,7 @@ dependencyAnalysis {
     issues {
         all {
             onUnusedDependencies { severity("fail") }
-            onUsedTransitiveDependencies { severity("warn") }
+            onUsedTransitiveDependencies { severity("fail") }
         }
     }
 }
