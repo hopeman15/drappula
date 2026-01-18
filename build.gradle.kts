@@ -6,6 +6,7 @@ plugins {
     // in each subproject's classloader
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.androidLibrary) apply false
+    alias(libs.plugins.androidKotlinMultiplatformLibrary) apply false
     alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.detekt)
     alias(libs.plugins.kotlinMultiplatform) apply false
@@ -17,7 +18,12 @@ plugins {
 allprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
     apply(plugin = "org.jmailen.kotlinter")
-    apply(plugin = "org.jetbrains.kotlinx.kover")
+    // Kover doesn't support com.android.kotlin.multiplatform.library plugin yet
+    // Upstream: https://github.com/Kotlin/kotlinx-kover/issues/772
+    // Tracking: https://github.com/hopeman15/drappula/issues/11
+    if (name != "shared") {
+        apply(plugin = "org.jetbrains.kotlinx.kover")
+    }
 
     detekt {
         config.setFrom("$rootDir/detekt/detekt.yml")
@@ -39,5 +45,7 @@ allprojects {
 
 dependencies {
     kover(project(":android"))
-    kover(project(":shared"))
+    // TODO: Re-enable once Kover supports com.android.kotlin.multiplatform.library
+    // https://github.com/hopeman15/drappula/issues/11
+    // kover(project(":shared"))
 }

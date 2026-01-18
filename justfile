@@ -110,9 +110,9 @@ test-android:
 # Run all shared module tests
 test-shared: test-shared-android test-shared-ios
 
-# Run shared module tests on Android
+# Run shared module tests on Android (host test)
 test-shared-android:
-    ./gradlew :shared:test{{build_type}}UnitTest
+    ./gradlew :shared:testAndroidHostTest
 
 # Run shared module tests on iOS
 test-shared-ios:
