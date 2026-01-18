@@ -88,9 +88,9 @@ lint-other:
 lint-android:
     ./gradlew :android:lintKotlin :android:detekt :android:lint{{build_type}}
 
-# Lint shared module
+# Lint shared module (no Android Lint with com.android.kotlin.multiplatform.library)
 lint-shared:
-    ./gradlew :shared:lintKotlin :shared:detekt :shared:lint{{build_type}}
+    ./gradlew :shared:lintKotlin :shared:detekt
 
 # Lint iOS code with SwiftLint
 lint-ios:
@@ -110,9 +110,9 @@ test-android:
 # Run all shared module tests
 test-shared: test-shared-android test-shared-ios
 
-# Run shared module tests on Android
+# Run shared module tests on Android (host test)
 test-shared-android:
-    ./gradlew :shared:test{{build_type}}UnitTest
+    ./gradlew :shared:testAndroidHostTest
 
 # Run shared module tests on iOS
 test-shared-ios:
@@ -137,8 +137,10 @@ report-android:
     ./gradlew :android:koverHtmlReport :android:koverXmlReport
 
 # Generate shared module coverage report
+# Kover disabled for shared module until it supports com.android.kotlin.multiplatform.library
+# See: https://github.com/hopeman15/drappula/issues/11
 report-shared:
-    ./gradlew :shared:koverHtmlReport :shared:koverXmlReport
+    @echo "Kover is disabled for shared module - see issue #11"
 
 # Generate iOS coverage report (runs tests first)
 report-ios: test-ios
