@@ -32,6 +32,11 @@ kotlin {
     }
 
     sourceSets {
+        val androidHostTest by getting {
+            dependencies {
+                implementation(libs.mockk)
+            }
+        }
         commonMain.dependencies {
             // put your Multiplatform dependencies here
         }

@@ -2,26 +2,44 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-    @State private var showContent = false
+    private let soundPlayer: SoundPlayer
+
+    init() {
+        let bundle = NSBundleWrapper()
+        let audioPlayer = AVAudioPlayerWrapper()
+        soundPlayer = SoundPlayer(bundle: bundle, audioPlayer: audioPlayer)
+    }
+
     var body: some View {
-        VStack {
-            Button("Click me!") {
-                withAnimation {
-                    showContent = !showContent
-                }
+        VStack(spacing: 20) {
+            Text("Drappula")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+
+            Button {
+                soundPlayer.play(sound: Dracula.iAm)
+            } label: {
+                Text("I Am")
+                    .font(.title2)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.red)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
             }
 
-            if showContent {
-                VStack(spacing: 16) {
-                    Image(systemName: "swift")
-                        .font(.system(size: 200))
-                        .foregroundColor(.accentColor)
-                    Text("SwiftUI: \(Greeting().greet())")
-                }
-                .transition(.move(edge: .top).combined(with: .opacity))
+            Button {
+                soundPlayer.play(sound: Dracula.dracula)
+            } label: {
+                Text("Dracula")
+                    .font(.title2)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.red)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding()
     }
 }
