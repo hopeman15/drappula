@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		27258E1D2F1EB5FA00688FE1 /* 02_dracula.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27258E1A2F1EB5FA00688FE1 /* 02_dracula.mp3 */; };
+		27258E1E2F1EB5FA00688FE1 /* 01_i_am.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27258E192F1EB5FA00688FE1 /* 01_i_am.mp3 */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		B1C2D3E4F5A6B7C8D9E0F1A2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -17,12 +22,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27258E192F1EB5FA00688FE1 /* 01_i_am.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 01_i_am.mp3; sourceTree = "<group>"; };
+		27258E1A2F1EB5FA00688FE1 /* 02_dracula.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 02_dracula.mp3; sourceTree = "<group>"; };
 		90CE39122609CA37718CC2D8 /* Drappula.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drappula.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B2C3D4E5F6A7B8C9D0E1F2 /* drappulaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = drappulaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A482470CA822AE529623E74F /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		A482470CA822AE529623E74F /* Exceptions for "drappula" folder in "Drappula" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -40,7 +47,7 @@
 		4C4677AA553DA74ED2507B89 /* drappula */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				A482470CA822AE529623E74F /* PBXFileSystemSynchronizedBuildFileExceptionSet */,
+				A482470CA822AE529623E74F /* Exceptions for "drappula" folder in "Drappula" target */,
 			);
 			path = drappula;
 			sourceTree = "<group>";
@@ -70,9 +77,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27258E1B2F1EB5FA00688FE1 /* dracula */ = {
+			isa = PBXGroup;
+			children = (
+				27258E192F1EB5FA00688FE1 /* 01_i_am.mp3 */,
+				27258E1A2F1EB5FA00688FE1 /* 02_dracula.mp3 */,
+			);
+			path = dracula;
+			sourceTree = "<group>";
+		};
+		27258E1C2F1EB5FA00688FE1 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				27258E1B2F1EB5FA00688FE1 /* dracula */,
+			);
+			name = audio;
+			path = ../audio;
+			sourceTree = SOURCE_ROOT;
+		};
 		7FE6191B4F238DE24BF8F7F3 = {
 			isa = PBXGroup;
 			children = (
+				27258E1C2F1EB5FA00688FE1 /* audio */,
 				3EAF842F2C2084D8F7353CEC /* Configuration */,
 				4C4677AA553DA74ED2507B89 /* drappula */,
 				C1D2E3F4A5B6C7D8E9F0A1B2 /* drappulaTests */,
@@ -182,6 +208,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27258E1D2F1EB5FA00688FE1 /* 02_dracula.mp3 in Resources */,
+				27258E1E2F1EB5FA00688FE1 /* 01_i_am.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
