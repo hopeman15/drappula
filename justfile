@@ -6,7 +6,7 @@ build_type := "Debug"
 ios_simulator := env("IOS_SIMULATOR", "iPhone 17")
 
 # Default recipe - runs all quality gates
-all: clean health validate-renovate format lint test report assemble
+all: clean validate-renovate format lint test report assemble
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Assets
