@@ -18,7 +18,7 @@ junit = "4.13.2"
 kotlin = "2.3.0"
 kotlinter = "5.3.0"
 kover = "0.9.4"
-mockk = "1.13.16"
+mockk = "1.14.7"
 robolectric = "4.14.1"
 turbine = "1.2.1"
 
