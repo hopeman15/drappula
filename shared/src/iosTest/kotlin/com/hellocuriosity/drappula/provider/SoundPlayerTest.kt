@@ -65,4 +65,11 @@ class SoundPlayerTest {
 
         assertTrue(audioPlayer.stopCalled)
     }
+
+    @Test
+    fun testRelease() {
+        soundPlayer.release()
+
+        assertTrue(audioPlayer.releaseCalled)
+    }
 }
