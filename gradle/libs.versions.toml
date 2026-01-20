@@ -19,6 +19,7 @@ kotlin = "2.3.0"
 kotlinter = "5.3.0"
 kover = "0.9.4"
 mockk = "1.13.16"
+robolectric = "4.14.1"
 turbine = "1.2.1"
 
 [libraries]
@@ -39,6 +40,7 @@ androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-espresso" }
+androidx-lifecycle-common = { module = "androidx.lifecycle:lifecycle-common", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
@@ -54,6 +56,8 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockk-dsl = { module = "io.mockk:mockk-dsl", version.ref = "mockk" }
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+robolectric-annotations = { module = "org.robolectric:annotations", version.ref = "robolectric" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 [plugins]
