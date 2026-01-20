@@ -15,6 +15,8 @@ interface AudioPlayer {
     fun play(): Boolean
 
     fun stop()
+
+    fun release()
 }
 
 @OptIn(ExperimentalForeignApi::class)
@@ -47,5 +49,10 @@ class AVAudioPlayerWrapper : AudioPlayer {
 
     override fun stop() {
         player?.stop()
+    }
+
+    override fun release() {
+        stop()
+        player = null
     }
 }

@@ -8,6 +8,7 @@ class FakeAudioPlayer : AudioPlayer {
     var prepareToPlayCalled = false
     var playCalled = false
     var stopCalled = false
+    var releaseCalled = false
 
     override fun load(url: NSURL) {
         loadCalled = true
@@ -28,11 +29,16 @@ class FakeAudioPlayer : AudioPlayer {
         stopCalled = true
     }
 
+    override fun release() {
+        releaseCalled = true
+    }
+
     fun reset() {
         loadCalled = false
         lastLoadedUrl = null
         prepareToPlayCalled = false
         playCalled = false
         stopCalled = false
+        releaseCalled = false
     }
 }

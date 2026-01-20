@@ -26,4 +26,9 @@ actual class SoundPlayer(
         }
         mediaPlayer.reset()
     }
+
+    actual fun release() {
+        stop()
+        mediaPlayer.release()
+    }
 }
