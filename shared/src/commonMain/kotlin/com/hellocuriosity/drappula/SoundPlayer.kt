@@ -6,4 +6,6 @@ expect class SoundPlayer {
     fun play(sound: Sound)
 
     fun stop()
+
+    fun release()
 }

@@ -1,6 +1,5 @@
-package com.hellocuriosity.drappula
+package com.hellocuriosity.drappula.ui.screens
 
-import android.media.MediaPlayer
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,27 +13,18 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.hellocuriosity.drappula.SoundPlayer
 import com.hellocuriosity.drappula.models.Dracula
+import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
 
 @Composable
-fun App() {
-    val context = LocalContext.current
-    val mediaPlayer = remember { MediaPlayer() }
-    val soundPlayer = remember { SoundPlayer(context, mediaPlayer) }
-
-    DisposableEffect(Unit) {
-        onDispose {
-            mediaPlayer.release()
-        }
-    }
+fun SoundPlayerScreen(viewModel: SoundPlayerViewModel) {
+    val state by viewModel.state.collectAsState()
 
     MaterialTheme {
         Column(
@@ -53,13 +43,14 @@ fun App() {
             )
 
             Button(
-                onClick = { soundPlayer.play(Dracula.I_AM) },
+                onClick = { viewModel.playSound(Dracula.I_AM) },
                 modifier =
                     Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
+                enabled = !state.isPlaying,
             ) {
                 Text(
                     text = "I Am",
@@ -69,13 +60,14 @@ fun App() {
             }
 
             Button(
-                onClick = { soundPlayer.play(Dracula.DRACULA) },
+                onClick = { viewModel.playSound(Dracula.DRACULA) },
                 modifier =
                     Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
+                enabled = !state.isPlaying,
             ) {
                 Text(
                     text = "Dracula",

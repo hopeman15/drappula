@@ -22,4 +22,8 @@ actual class SoundPlayer(
     actual fun stop() {
         audioPlayer.stop()
     }
+
+    actual fun release() {
+        audioPlayer.release()
+    }
 }

@@ -45,6 +45,7 @@ class SoundPlayerTest {
         every { mediaPlayer.setDataSource(any<FileDescriptor>(), any(), any()) } just Runs
         every { mediaPlayer.prepare() } just Runs
         every { mediaPlayer.start() } just Runs
+        every { mediaPlayer.release() } just Runs
     }
 
     @AfterTest
@@ -115,5 +116,18 @@ class SoundPlayerTest {
 
         verify { mediaPlayer.isPlaying }
         verify { mediaPlayer.reset() }
+    }
+
+    @Test
+    fun testRelease() {
+        every { mediaPlayer.isPlaying } returns false
+
+        soundPlayer.release()
+
+        verifyOrder {
+            mediaPlayer.isPlaying
+            mediaPlayer.reset()
+            mediaPlayer.release()
+        }
     }
 }
