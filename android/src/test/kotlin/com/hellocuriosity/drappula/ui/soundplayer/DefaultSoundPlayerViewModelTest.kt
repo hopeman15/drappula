@@ -37,7 +37,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
     }
 
     @Test
-    fun `initial state is not playing with no error`() =
+    fun testInitialStateIsNotPlayingWithNoError() =
         runBlockingTest {
             viewModel.state.test {
                 val initialState = awaitItem()
@@ -47,7 +47,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
         }
 
     @Test
-    fun `playSound updates state to playing then not playing`() =
+    fun testPlaySoundUpdatesStateToPlayingThenNotPlaying() =
         runBlockingTest {
             val sound = Dracula.I_AM
             every { soundPlayer.play(sound) } just runs
@@ -75,7 +75,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
         }
 
     @Test
-    fun `playSound with DRACULA sound plays correctly`() =
+    fun testPlaySoundWithDraculaSoundPlaysCorrectly() =
         runBlockingTest {
             val sound = Dracula.DRACULA
             every { soundPlayer.play(sound) } just runs
@@ -93,7 +93,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
         }
 
     @Test
-    fun `playSound handles exception and sets error state`() =
+    fun testPlaySoundHandlesExceptionAndSetsErrorState() =
         runBlockingTest {
             val sound = Dracula.I_AM
             val exception = RuntimeException("Audio playback failed")
@@ -117,7 +117,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
         }
 
     @Test
-    fun `playing sound clears previous error`() =
+    fun testPlayingSoundClearsPreviousError() =
         runBlockingTest {
             val sound = Dracula.I_AM
             val exception = RuntimeException("First failure")
@@ -150,7 +150,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
         }
 
     @Test
-    fun `onCleared releases soundPlayer`() =
+    fun testOnClearedReleasesSoundPlayer() =
         runBlockingTest {
             every { soundPlayer.release() } just runs
 
