@@ -9,10 +9,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(
-    application = MockApplication::class,
-    packageName = "com.hellocuriosity.drappula",
-)
+@Config(application = MockApplication::class)
 class MainActivityTest {
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
