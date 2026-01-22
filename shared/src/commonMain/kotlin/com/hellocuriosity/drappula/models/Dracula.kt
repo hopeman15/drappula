@@ -8,9 +8,4 @@ enum class Dracula(
 ) : Sound {
     I_AM(id = "i_am", displayName = "I Am", fileName = "01_i_am.mp3"),
     DRACULA(id = "dracula", displayName = "Dracula", fileName = "02_dracula.mp3"),
-    ;
-
-    companion object {
-        fun allCases(): List<Dracula> = entries
-    }
 }
