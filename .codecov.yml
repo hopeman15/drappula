@@ -40,3 +40,17 @@ comment:
   layout: "header, diff, flags"
   behavior: default
   require_changes: false
+
+flags:
+  android:
+    paths:
+      - android/
+    carryforward: true
+  ios:
+    paths:
+      - ios/
+    carryforward: true
+  shared:
+    paths:
+      - shared/
+    carryforward: true
