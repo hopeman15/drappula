@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.hellocuriosity.drappula.models.Category
 import com.hellocuriosity.drappula.ui.common.viewModelBuilder
 import com.hellocuriosity.drappula.ui.screens.SoundPlayerScreen
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
@@ -20,7 +21,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            SoundPlayerScreen(viewModel = viewModel)
+            SoundPlayerScreen(
+                category = Category.DRACULA,
+                viewModel = viewModel,
+            )
         }
     }
 }
