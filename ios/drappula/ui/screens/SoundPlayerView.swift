@@ -2,40 +2,37 @@ import SwiftUI
 import shared
 
 struct SoundPlayerView: View {
+    let category: shared.Category
     @ObservedObject var viewModel: SoundPlayerViewModel
 
+    private let columns = [
+        GridItem(.adaptive(minimum: 120))
+    ]
+
+    private var sounds: [Sound] {
+        SoundProvider().soundFor(category: category).compactMap { $0 as? Sound }
+    }
+
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Drappula")
-                .font(.largeTitle)
-                .fontWeight(.bold)
+        ScrollView {
+            VStack(spacing: 20) {
+                Text("Drappula")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding(.vertical, 24)
 
-            Button {
-                viewModel.playSound(Dracula.iAm)
-            } label: {
-                Text("I Am")
-                    .font(.title2)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.red)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                LazyVGrid(columns: columns, spacing: 8) {
+                    ForEach(sounds, id: \.id) { sound in
+                        SoundButton(
+                            sound: sound,
+                            isPlaying: viewModel.state.isPlaying,
+                            onTap: { viewModel.playSound(sound) }
+                        )
+                    }
+                }
+                .padding(.horizontal, 16)
             }
-            .disabled(viewModel.state.isPlaying)
-
-            Button {
-                viewModel.playSound(Dracula.dracula)
-            } label: {
-                Text("Dracula")
-                    .font(.title2)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.red)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            .disabled(viewModel.state.isPlaying)
+            .padding()
         }
-        .padding()
     }
 }

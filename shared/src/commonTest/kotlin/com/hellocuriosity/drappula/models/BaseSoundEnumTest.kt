@@ -20,6 +20,7 @@ import kotlin.test.assertTrue
 abstract class BaseSoundEnumTest<T> where T : Enum<T>, T : Sound {
     data class ExpectedSound(
         val id: String,
+        val displayName: String,
         val fileName: String,
     )
 
@@ -33,6 +34,7 @@ abstract class BaseSoundEnumTest<T> where T : Enum<T>, T : Sound {
     fun verifyAll() {
         verifyEntryCount()
         verifyIds()
+        verifyDisplayNames()
         verifyFileNames()
         verifyCategory()
         verifySoundInterface()
@@ -55,6 +57,16 @@ abstract class BaseSoundEnumTest<T> where T : Enum<T>, T : Sound {
                 expected = expected.id,
                 actual = entry.id,
                 message = "Entry ${entry.name} has incorrect id",
+            )
+        }
+    }
+
+    private fun verifyDisplayNames() {
+        entries.zip(values).forEach { (entry, expected) ->
+            assertEquals(
+                expected = expected.displayName,
+                actual = entry.displayName,
+                message = "Entry ${entry.name} has incorrect displayName",
             )
         }
     }
@@ -83,6 +95,7 @@ abstract class BaseSoundEnumTest<T> where T : Enum<T>, T : Sound {
         entries.forEach { entry ->
             val sound: Sound = entry
             assertEquals(entry.id, sound.id)
+            assertEquals(entry.displayName, sound.displayName)
             assertEquals(entry.fileName, sound.fileName)
             assertEquals(entry.category, sound.category)
         }
