@@ -62,6 +62,7 @@ robolectric-annotations = { module = "org.robolectric:annotations", version.ref 
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 curiosity-test-utils = { module = "io.github.hellocuriosity:test-utils", version.ref = "curiosity" }
+androidx-compose-ui-test = { module = "androidx.compose.ui:ui-test" }
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 
