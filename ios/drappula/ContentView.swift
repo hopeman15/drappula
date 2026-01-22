@@ -5,7 +5,10 @@ struct ContentView: View {
     @StateObject private var viewModel = SoundPlayerViewModel.create()
 
     var body: some View {
-        SoundPlayerView(viewModel: viewModel)
+        SoundPlayerView(
+            category: shared.Category.dracula,
+            viewModel: viewModel
+        )
     }
 }
 

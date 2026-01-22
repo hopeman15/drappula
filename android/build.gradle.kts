@@ -95,6 +95,9 @@ dependencies {
     testImplementation(libs.robolectric)
     testImplementation(libs.robolectric.annotations)
     testImplementation(libs.turbine)
+    testImplementation(libs.curiosity.test.utils)
+    testImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     androidTestRuntimeOnly(libs.androidx.test.core)
     androidTestRuntimeOnly(libs.androidx.test.runner)

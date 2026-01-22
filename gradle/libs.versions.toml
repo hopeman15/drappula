@@ -1,5 +1,6 @@
 [versions]
 agp = "8.13.2"
+curiosity = "0.12.0"
 dependencyAnalysis = "3.5.1"
 android-compileSdk = "36"
 android-minSdk = "24"
@@ -59,6 +60,10 @@ kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 robolectric-annotations = { module = "org.robolectric:annotations", version.ref = "robolectric" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+
+curiosity-test-utils = { module = "io.github.hellocuriosity:test-utils", version.ref = "curiosity" }
+androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
