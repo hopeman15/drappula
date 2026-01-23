@@ -53,6 +53,7 @@ jobs:
         uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         with:
           files: ./build/reports/kover/report.xml
+          flags: android
           token: ${{ secrets.CODECOV_TOKEN }}
 
   build:
