@@ -4,6 +4,7 @@ import shared
 struct SoundPlayerView: View {
     let category: shared.Category
     @ObservedObject var viewModel: SoundPlayerViewModel
+    @Environment(\.colorScheme) private var colorScheme
 
     private let columns = [
         GridItem(.adaptive(minimum: 120))
@@ -14,11 +15,14 @@ struct SoundPlayerView: View {
     }
 
     var body: some View {
+        let colors = DraculaTheme.colors(for: colorScheme)
+
         ScrollView {
             VStack(spacing: 20) {
-                Text("Drappula")
-                    .font(.largeTitle)
+                Text(category.displayName)
+                    .font(.custom("Cinzel-Bold", size: 32))
                     .fontWeight(.bold)
+                    .foregroundColor(Color(hex: colors.onBackground))
                     .padding(.vertical, 24)
 
                 LazyVGrid(columns: columns, spacing: 8) {
@@ -26,6 +30,7 @@ struct SoundPlayerView: View {
                         SoundButton(
                             sound: sound,
                             isPlaying: viewModel.state.isPlaying,
+                            colors: colors,
                             onTap: { viewModel.playSound(sound) }
                         )
                     }
@@ -34,5 +39,6 @@ struct SoundPlayerView: View {
             }
             .padding()
         }
+        .background(DraculaTheme.backgroundGradient(for: colorScheme))
     }
 }
