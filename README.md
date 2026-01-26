@@ -7,7 +7,7 @@
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 [![License](https://img.shields.io/dub/l/vibe-d.svg)](LICENSE)
 
-Vampire Sound Machine 🧛‍♂️
+Vampire Soundboard 🧛‍♂️
 
 ## AI Assistant Support
 
