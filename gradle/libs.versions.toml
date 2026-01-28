@@ -19,7 +19,7 @@ junit = "4.13.2"
 kotlin = "2.3.0"
 kotlinter = "5.4.0"
 kover = "0.9.4"
-mockk = "1.14.7"
+mockk = "1.14.9"
 robolectric = "4.16.1"
 turbine = "1.2.1"
 
@@ -51,10 +51,12 @@ androidx-testExt-junit = { module = "androidx.test.ext:junit", version.ref = "an
 
 junit = { module = "junit:junit", version.ref = "junit" }
 
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+mockk-core = { module = "io.mockk:mockk-core", version.ref = "mockk" }
 mockk-dsl = { module = "io.mockk:mockk-dsl", version.ref = "mockk" }
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
