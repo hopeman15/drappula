@@ -1,6 +1,6 @@
 package com.hellocuriosity.drappula.themes
 
-data class ThemeColors(
+data class ThemeColor(
     val primary: String,
     val secondary: String,
     val background: String,

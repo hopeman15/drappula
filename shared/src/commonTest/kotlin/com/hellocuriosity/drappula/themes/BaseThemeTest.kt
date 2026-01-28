@@ -7,8 +7,8 @@ abstract class BaseThemeTest {
 
     abstract val name: String
 
-    abstract val darkColors: ThemeColors
-    abstract val lightColors: ThemeColors
+    abstract val darkColors: ThemeColor
+    abstract val lightColors: ThemeColor
 
     fun verifyAll() {
         verifyDarkTheme()

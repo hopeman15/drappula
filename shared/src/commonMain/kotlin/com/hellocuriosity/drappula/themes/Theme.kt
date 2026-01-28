@@ -2,7 +2,7 @@ package com.hellocuriosity.drappula.themes
 
 interface Theme {
     val name: String
-    val darkColors: ThemeColors
-    val lightColors: ThemeColors
-    val typography: ThemeTypography
+    val darkColors: ThemeColor
+    val lightColors: ThemeColor
+    val typography: Typography
 }

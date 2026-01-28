@@ -6,10 +6,20 @@ object DraculaTheme : Theme {
     private const val BONE_WHITE = "f0e6d3"
 
     override val name: String = "Dracula"
-    override val typography: ThemeTypography = DraculaTypography
 
-    override val darkColors: ThemeColors =
-        ThemeColors(
+    override val typography: Typography =
+        object : Typography {
+            override val fontFamily: String = "Cinzel"
+            override val display: TextStyleConfig = TextStyleConfig(size = 32, weight = FontWeight.BOLD)
+            override val headline: TextStyleConfig = TextStyleConfig(size = 24, weight = FontWeight.BOLD)
+            override val title: TextStyleConfig = TextStyleConfig(size = 20, weight = FontWeight.BOLD)
+            override val body: TextStyleConfig = TextStyleConfig(size = 16, weight = FontWeight.NORMAL)
+            override val button: TextStyleConfig = TextStyleConfig(size = 16, weight = FontWeight.MEDIUM)
+            override val caption: TextStyleConfig = TextStyleConfig(size = 12, weight = FontWeight.NORMAL)
+        }
+
+    override val darkColors: ThemeColor =
+        ThemeColor(
             primary = DEEP_PURPLE,
             secondary = BURGUNDY,
             background = DEEP_PURPLE,
@@ -21,8 +31,8 @@ object DraculaTheme : Theme {
             gradientEnd = BURGUNDY,
         )
 
-    override val lightColors: ThemeColors =
-        ThemeColors(
+    override val lightColors: ThemeColor =
+        ThemeColor(
             primary = DEEP_PURPLE,
             secondary = BURGUNDY,
             background = DEEP_PURPLE,

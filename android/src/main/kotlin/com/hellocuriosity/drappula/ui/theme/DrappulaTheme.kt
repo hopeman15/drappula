@@ -7,13 +7,13 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Brush
 import com.hellocuriosity.drappula.themes.DraculaTheme
-import com.hellocuriosity.drappula.themes.ThemeColors
+import com.hellocuriosity.drappula.themes.ThemeColor
 
 /**
  * Local provider for theme colors (includes gradients not in MaterialTheme).
  */
 val LocalThemeColors =
-    staticCompositionLocalOf<ThemeColors> {
+    staticCompositionLocalOf<ThemeColor> {
         error("No ThemeColors provided")
     }
 
@@ -62,7 +62,7 @@ fun DrappulaTheme(
  * Convenience object for accessing Drappula-specific theme values.
  */
 object DrappulaTheme {
-    val colors: ThemeColors
+    val colors: ThemeColor
         @Composable
         get() = LocalThemeColors.current
 

@@ -23,13 +23,13 @@ struct DrappulaThemeValues {
 
     static let light = DrappulaThemeValues(
         colors: DrappulaColors(themeColors: DraculaTheme.shared.lightColors),
-        typography: DrappulaTypography(),
+        typography: DrappulaTypography(typography: DraculaTheme.shared.typography),
         gradients: DrappulaGradients(themeColors: DraculaTheme.shared.lightColors)
     )
 
     static let dark = DrappulaThemeValues(
         colors: DrappulaColors(themeColors: DraculaTheme.shared.darkColors),
-        typography: DrappulaTypography(),
+        typography: DrappulaTypography(typography: DraculaTheme.shared.typography),
         gradients: DrappulaGradients(themeColors: DraculaTheme.shared.darkColors)
     )
 
@@ -49,7 +49,7 @@ struct DrappulaColors {
     let onBackground: Color
     let onSurface: Color
 
-    init(themeColors: ThemeColors) {
+    init(themeColors: ThemeColor) {
         self.primary = Color(hex: themeColors.primary)
         self.secondary = Color(hex: themeColors.secondary)
         self.background = Color(hex: themeColors.background)
@@ -70,13 +70,30 @@ struct DrappulaTypography {
     let button: Font
     let caption: Font
 
-    init() {
-        self.display = .custom("Cinzel-Bold", size: 32)
-        self.headline = .custom("Cinzel-Bold", size: 24)
-        self.title = .custom("Cinzel-Bold", size: 20)
-        self.body = .custom("Cinzel-Regular", size: 16)
-        self.button = .custom("Cinzel-Medium", size: 16)
-        self.caption = .custom("Cinzel-Regular", size: 12)
+    init(typography: Typography_) {
+        let fontFamily = typography.fontFamily
+        self.display = Self.font(family: fontFamily, config: typography.display)
+        self.headline = Self.font(family: fontFamily, config: typography.headline)
+        self.title = Self.font(family: fontFamily, config: typography.title)
+        self.body = Self.font(family: fontFamily, config: typography.body)
+        self.button = Self.font(family: fontFamily, config: typography.button)
+        self.caption = Self.font(family: fontFamily, config: typography.caption)
+    }
+
+    private static func font(family: String, config: TextStyleConfig) -> Font {
+        let fontName = "\(family)-\(config.weight.fontSuffix)"
+        return .custom(fontName, size: CGFloat(config.size))
+    }
+}
+
+private extension FontWeight {
+    var fontSuffix: String {
+        switch self {
+        case .normal: return "Regular"
+        case .medium: return "Medium"
+        case .bold: return "Bold"
+        default: return "Regular"
+        }
     }
 }
 
@@ -86,7 +103,7 @@ struct DrappulaGradients {
     let background: LinearGradient
     let button: LinearGradient
 
-    init(themeColors: ThemeColors) {
+    init(themeColors: ThemeColor) {
         let gradientColors = [
             Color(hex: themeColors.gradientStart),
             Color(hex: themeColors.gradientEnd)

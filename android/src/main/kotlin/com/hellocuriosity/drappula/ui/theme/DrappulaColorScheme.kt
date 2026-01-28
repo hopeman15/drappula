@@ -4,12 +4,9 @@ import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Brush
-import com.hellocuriosity.drappula.themes.ThemeColors
+import com.hellocuriosity.drappula.themes.ThemeColor
 
-/**
- * Converts shared ThemeColors to Material3 ColorScheme.
- */
-fun ThemeColors.toColorScheme(isDark: Boolean): ColorScheme =
+fun ThemeColor.toColorScheme(isDark: Boolean): ColorScheme =
     if (isDark) {
         darkColorScheme(
             primary = primary.toColor(),
@@ -35,7 +32,7 @@ fun ThemeColors.toColorScheme(isDark: Boolean): ColorScheme =
 /**
  * Extension to create background gradient from theme colors.
  */
-fun ThemeColors.backgroundGradient(): Brush =
+fun ThemeColor.backgroundGradient(): Brush =
     Brush.verticalGradient(
         colors = listOf(gradientStart.toColor(), gradientEnd.toColor()),
     )
@@ -43,7 +40,7 @@ fun ThemeColors.backgroundGradient(): Brush =
 /**
  * Extension to create button gradient from theme colors.
  */
-fun ThemeColors.buttonGradient(): Brush =
+fun ThemeColor.buttonGradient(): Brush =
     Brush.verticalGradient(
         colors = listOf(gradientStart.toColor(), gradientEnd.toColor()),
     )
