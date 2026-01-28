@@ -4,4 +4,5 @@ interface Theme {
     val name: String
     val darkColors: ThemeColors
     val lightColors: ThemeColors
+    val typography: ThemeTypography
 }

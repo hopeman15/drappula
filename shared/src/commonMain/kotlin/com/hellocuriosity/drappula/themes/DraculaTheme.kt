@@ -6,6 +6,7 @@ object DraculaTheme : Theme {
     private const val BONE_WHITE = "f0e6d3"
 
     override val name: String = "Dracula"
+    override val typography: ThemeTypography = DraculaTypography
 
     override val darkColors: ThemeColors =
         ThemeColors(

@@ -1,6 +1,7 @@
 package com.hellocuriosity.drappula.themes
 
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class DraculaThemeTest : BaseThemeTest() {
     override val theme: Theme = DraculaTheme
@@ -32,4 +33,9 @@ class DraculaThemeTest : BaseThemeTest() {
 
     @Test
     fun runAllTests() = verifyAll()
+
+    @Test
+    fun themeHasTypography() {
+        assertEquals("Cinzel", DraculaTheme.typography.fontFamily)
+    }
 }

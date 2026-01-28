@@ -1,10 +1,10 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 struct SoundPlayerView: View {
     let category: shared.Category
     @ObservedObject var viewModel: SoundPlayerViewModel
-    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.drappulaTheme) private var theme
 
     private let columns = [
         GridItem(.adaptive(minimum: 120))
@@ -15,14 +15,12 @@ struct SoundPlayerView: View {
     }
 
     var body: some View {
-        let colors = DraculaTheme.colors(for: colorScheme)
-
         ScrollView {
             VStack(spacing: 20) {
                 Text(category.displayName)
-                    .font(.custom("Cinzel-Bold", size: 32))
+                    .font(theme.typography.display)
                     .fontWeight(.bold)
-                    .foregroundColor(Color(hex: colors.onBackground))
+                    .foregroundColor(theme.colors.onBackground)
                     .padding(.vertical, 24)
 
                 LazyVGrid(columns: columns, spacing: 8) {
@@ -30,7 +28,6 @@ struct SoundPlayerView: View {
                         SoundButton(
                             sound: sound,
                             isPlaying: viewModel.state.isPlaying,
-                            colors: colors,
                             onTap: { viewModel.playSound(sound) }
                         )
                     }
@@ -39,6 +36,6 @@ struct SoundPlayerView: View {
             }
             .padding()
         }
-        .background(DraculaTheme.backgroundGradient(for: colorScheme))
+        .background(theme.gradients.background)
     }
 }

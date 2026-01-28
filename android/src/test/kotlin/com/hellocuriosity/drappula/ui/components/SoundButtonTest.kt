@@ -10,6 +10,7 @@ import com.hellocuriosity.drappula.MockApplication
 import com.hellocuriosity.drappula.coroutines.CoroutinesComposeTest
 import com.hellocuriosity.drappula.models.Dracula
 import com.hellocuriosity.drappula.ui.screens.SoundPlayerTestTags
+import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 import org.junit.Test
 import org.robolectric.annotation.Config
 
@@ -18,11 +19,13 @@ class SoundButtonTest : CoroutinesComposeTest() {
     @Test
     fun testSoundButtonDisplaysName() {
         composeTestRule.setContent {
-            SoundButton(
-                sound = Dracula.I_AM,
-                isPlaying = false,
-                onClick = {},
-            )
+            DrappulaTheme {
+                SoundButton(
+                    sound = Dracula.I_AM,
+                    isPlaying = false,
+                    onClick = {},
+                )
+            }
         }
 
         composeTestRule
@@ -34,11 +37,13 @@ class SoundButtonTest : CoroutinesComposeTest() {
     @Test
     fun testSoundButtonIsEnabledWhenNotPlaying() {
         composeTestRule.setContent {
-            SoundButton(
-                sound = Dracula.I_AM,
-                isPlaying = false,
-                onClick = {},
-            )
+            DrappulaTheme {
+                SoundButton(
+                    sound = Dracula.I_AM,
+                    isPlaying = false,
+                    onClick = {},
+                )
+            }
         }
 
         composeTestRule
@@ -49,11 +54,13 @@ class SoundButtonTest : CoroutinesComposeTest() {
     @Test
     fun testSoundButtonIsDisabledWhenPlaying() {
         composeTestRule.setContent {
-            SoundButton(
-                sound = Dracula.I_AM,
-                isPlaying = true,
-                onClick = {},
-            )
+            DrappulaTheme {
+                SoundButton(
+                    sound = Dracula.I_AM,
+                    isPlaying = true,
+                    onClick = {},
+                )
+            }
         }
 
         composeTestRule
@@ -65,11 +72,13 @@ class SoundButtonTest : CoroutinesComposeTest() {
     fun testSoundButtonClickTriggersOnClick() {
         var clicked = false
         composeTestRule.setContent {
-            SoundButton(
-                sound = Dracula.I_AM,
-                isPlaying = false,
-                onClick = { clicked = true },
-            )
+            DrappulaTheme {
+                SoundButton(
+                    sound = Dracula.I_AM,
+                    isPlaying = false,
+                    onClick = { clicked = true },
+                )
+            }
         }
 
         composeTestRule

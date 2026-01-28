@@ -8,6 +8,7 @@ import com.hellocuriosity.drappula.models.Category
 import com.hellocuriosity.drappula.ui.common.viewModelBuilder
 import com.hellocuriosity.drappula.ui.screens.SoundPlayerScreen
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
+import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 
 class MainActivity : ComponentActivity() {
     private val viewModel: SoundPlayerViewModel by viewModelBuilder {
@@ -21,10 +22,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            SoundPlayerScreen(
-                category = Category.DRACULA,
-                viewModel = viewModel,
-            )
+            DrappulaTheme {
+                SoundPlayerScreen(
+                    category = Category.DRACULA,
+                    viewModel = viewModel,
+                )
+            }
         }
     }
 }

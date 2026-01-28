@@ -2,8 +2,8 @@ package com.hellocuriosity.drappula.ui.screens
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.hellocuriosity.drappula.MockApplication
 import com.hellocuriosity.drappula.SoundPlayer
@@ -12,6 +12,7 @@ import com.hellocuriosity.drappula.models.Category
 import com.hellocuriosity.drappula.models.Dracula
 import com.hellocuriosity.drappula.ui.soundplayer.DefaultSoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
+import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Test
@@ -31,10 +32,12 @@ class SoundPlayerScreenTest : CoroutinesComposeTest() {
     @Test
     fun testSoundPlayerScreenDisplaysCorrectly() {
         composeTestRule.setContent {
-            SoundPlayerScreen(
-                category = Category.DRACULA,
-                viewModel = viewModel,
-            )
+            DrappulaTheme {
+                SoundPlayerScreen(
+                    category = Category.DRACULA,
+                    viewModel = viewModel,
+                )
+            }
         }
 
         composeTestRule
@@ -46,11 +49,7 @@ class SoundPlayerScreenTest : CoroutinesComposeTest() {
             .onNodeWithTag(SoundPlayerTestTags.TITLE)
             .assertExists()
             .assertIsDisplayed()
-
-        composeTestRule
-            .onNodeWithText("Drappula")
-            .assertExists()
-            .assertIsDisplayed()
+            .assertTextEquals(Category.DRACULA.displayName)
 
         composeTestRule
             .onNodeWithTag(SoundPlayerTestTags.FLOW_ROW)
@@ -61,10 +60,12 @@ class SoundPlayerScreenTest : CoroutinesComposeTest() {
     @Test
     fun testAllSoundButtonsAreDisplayed() {
         composeTestRule.setContent {
-            SoundPlayerScreen(
-                category = Category.DRACULA,
-                viewModel = viewModel,
-            )
+            DrappulaTheme {
+                SoundPlayerScreen(
+                    category = Category.DRACULA,
+                    viewModel = viewModel,
+                )
+            }
         }
 
         Dracula.entries.forEach { sound ->
@@ -72,21 +73,19 @@ class SoundPlayerScreenTest : CoroutinesComposeTest() {
                 .onNodeWithTag(SoundPlayerTestTags.soundButton(sound.id))
                 .assertExists()
                 .assertIsDisplayed()
-
-            composeTestRule
-                .onNodeWithText(sound.displayName)
-                .assertExists()
-                .assertIsDisplayed()
+                .assertTextEquals(sound.displayName)
         }
     }
 
     @Test
     fun testButtonsAreEnabledInitially() {
         composeTestRule.setContent {
-            SoundPlayerScreen(
-                category = Category.DRACULA,
-                viewModel = viewModel,
-            )
+            DrappulaTheme {
+                SoundPlayerScreen(
+                    category = Category.DRACULA,
+                    viewModel = viewModel,
+                )
+            }
         }
 
         Dracula.entries.forEach { sound ->
@@ -99,10 +98,12 @@ class SoundPlayerScreenTest : CoroutinesComposeTest() {
     @Test
     fun testButtonClickPlaysSoundForIAm() {
         composeTestRule.setContent {
-            SoundPlayerScreen(
-                category = Category.DRACULA,
-                viewModel = viewModel,
-            )
+            DrappulaTheme {
+                SoundPlayerScreen(
+                    category = Category.DRACULA,
+                    viewModel = viewModel,
+                )
+            }
         }
 
         composeTestRule
@@ -115,10 +116,12 @@ class SoundPlayerScreenTest : CoroutinesComposeTest() {
     @Test
     fun testButtonClickPlaysSoundForDracula() {
         composeTestRule.setContent {
-            SoundPlayerScreen(
-                category = Category.DRACULA,
-                viewModel = viewModel,
-            )
+            DrappulaTheme {
+                SoundPlayerScreen(
+                    category = Category.DRACULA,
+                    viewModel = viewModel,
+                )
+            }
         }
 
         composeTestRule
