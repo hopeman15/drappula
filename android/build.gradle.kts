@@ -62,6 +62,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.kotlin.stdlib)
     implementation(project(":shared"))
 
     implementation(platform(libs.androidx.compose.bom))
@@ -90,6 +91,7 @@ dependencies {
     testImplementation(libs.androidx.test.core)
     testImplementation(libs.androidx.testExt.junit)
     testImplementation(libs.mockk)
+    testImplementation(libs.mockk.core)
     testImplementation(libs.mockk.dsl)
     testImplementation(libs.robolectric)
     testImplementation(libs.robolectric.annotations)
