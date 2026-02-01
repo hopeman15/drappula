@@ -1,5 +1,5 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = SoundPlayerViewModel.create()
@@ -9,6 +9,7 @@ struct ContentView: View {
             category: shared.Category.dracula,
             viewModel: viewModel
         )
+        .drappulaTheme()
     }
 }
 
