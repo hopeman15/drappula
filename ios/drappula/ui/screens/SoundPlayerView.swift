@@ -1,9 +1,10 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 struct SoundPlayerView: View {
     let category: shared.Category
     @ObservedObject var viewModel: SoundPlayerViewModel
+    @Environment(\.drappulaTheme) private var theme
 
     private let columns = [
         GridItem(.adaptive(minimum: 120))
@@ -16,9 +17,10 @@ struct SoundPlayerView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                Text("Drappula")
-                    .font(.largeTitle)
+                Text(category.displayName)
+                    .font(theme.typography.display)
                     .fontWeight(.bold)
+                    .foregroundColor(theme.colors.onBackground)
                     .padding(.vertical, 24)
 
                 LazyVGrid(columns: columns, spacing: 8) {
@@ -34,5 +36,6 @@ struct SoundPlayerView: View {
             }
             .padding()
         }
+        .background(theme.gradients.background)
     }
 }

@@ -1,5 +1,7 @@
 package com.hellocuriosity.drappula.models
 
-enum class Category {
-    DRACULA,
+enum class Category(
+    val displayName: String,
+) {
+    DRACULA("Dracula"),
 }
