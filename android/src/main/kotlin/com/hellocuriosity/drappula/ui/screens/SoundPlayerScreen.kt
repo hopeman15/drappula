@@ -24,6 +24,7 @@ import com.hellocuriosity.drappula.models.Category
 import com.hellocuriosity.drappula.provider.SoundProvider
 import com.hellocuriosity.drappula.ui.components.SoundButton
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
+import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -34,42 +35,41 @@ fun SoundPlayerScreen(
     val state by viewModel.state.collectAsState()
     val sounds = SoundProvider().soundFor(category)
 
-    MaterialTheme {
-        Column(
+    Column(
+        modifier =
+            Modifier
+                .background(DrappulaTheme.backgroundGradient)
+                .safeContentPadding()
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .testTag(SoundPlayerTestTags.SCREEN),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(
+            text = category.displayName,
+            style = MaterialTheme.typography.displayLarge,
+            color = MaterialTheme.colorScheme.onBackground,
             modifier =
                 Modifier
-                    .background(MaterialTheme.colorScheme.primaryContainer)
-                    .safeContentPadding()
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .testTag(SoundPlayerTestTags.SCREEN),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(
-                text = "Drappula",
-                style = MaterialTheme.typography.headlineLarge,
-                modifier =
-                    Modifier
-                        .padding(vertical = 24.dp)
-                        .testTag(SoundPlayerTestTags.TITLE),
-            )
+                    .padding(vertical = 24.dp)
+                    .testTag(SoundPlayerTestTags.TITLE),
+        )
 
-            FlowRow(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                        .testTag(SoundPlayerTestTags.FLOW_ROW),
-                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                sounds.forEach { sound ->
-                    SoundButton(
-                        sound = sound,
-                        isPlaying = state.isPlaying,
-                        onClick = { viewModel.playSound(sound) },
-                    )
-                }
+        FlowRow(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .testTag(SoundPlayerTestTags.FLOW_ROW),
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            sounds.forEach { sound ->
+                SoundButton(
+                    sound = sound,
+                    isPlaying = state.isPlaying,
+                    onClick = { viewModel.playSound(sound) },
+                )
             }
         }
     }
