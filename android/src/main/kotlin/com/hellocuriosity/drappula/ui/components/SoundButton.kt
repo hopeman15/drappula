@@ -16,7 +16,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.hellocuriosity.drappula.models.Sound
 import com.hellocuriosity.drappula.ui.screens.SoundPlayerTestTags
-import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 
 @Composable
 fun SoundButton(
@@ -33,7 +32,7 @@ fun SoundButton(
                 .testTag(SoundPlayerTestTags.soundButton(sound.id))
                 .shadow(4.dp, shape)
                 .clip(shape)
-                .background(DrappulaTheme.buttonGradient)
+                .background(MaterialTheme.colorScheme.surface)
                 .clickable(enabled = !isPlaying, onClick = onClick)
                 .padding(horizontal = 16.dp, vertical = 12.dp),
         contentAlignment = Alignment.Center,

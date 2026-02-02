@@ -15,7 +15,7 @@ struct SoundButton: View {
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
                 .frame(maxWidth: .infinity)
-                .background(theme.gradients.button)
+                .background(theme.colors.surface)
                 .foregroundColor(isPlaying ? theme.colors.onSurface.opacity(0.5) : theme.colors.onSurface)
                 .cornerRadius(10)
                 .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)

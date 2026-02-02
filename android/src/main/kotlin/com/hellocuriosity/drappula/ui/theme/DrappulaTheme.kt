@@ -20,7 +20,6 @@ fun DrappulaTheme(
     CompositionLocalProvider(
         LocalThemeColors provides themeColors,
         LocalBackgroundGradient provides themeColors.backgroundGradient(),
-        LocalButtonGradient provides themeColors.buttonGradient(),
     ) {
         MaterialTheme(
             colorScheme = colorScheme,
@@ -47,14 +46,6 @@ val LocalBackgroundGradient =
     }
 
 /**
- * Local provider for button gradient.
- */
-val LocalButtonGradient =
-    staticCompositionLocalOf<Brush> {
-        error("No ButtonGradient provided")
-    }
-
-/**
  * Convenience object for accessing Drappula-specific theme values.
  */
 object DrappulaTheme {
@@ -65,8 +56,4 @@ object DrappulaTheme {
     val backgroundGradient: Brush
         @Composable
         get() = LocalBackgroundGradient.current
-
-    val buttonGradient: Brush
-        @Composable
-        get() = LocalButtonGradient.current
 }

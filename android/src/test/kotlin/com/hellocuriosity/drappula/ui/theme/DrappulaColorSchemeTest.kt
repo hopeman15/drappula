@@ -55,15 +55,4 @@ class DrappulaColorSchemeTest {
             gradient.hashCode(),
         )
     }
-
-    @Test
-    fun testButtonGradientContainsCorrectColors() {
-        val gradient = testThemeColor.buttonGradient()
-
-        // Verify gradient is created consistently
-        assertEquals(
-            testThemeColor.buttonGradient().hashCode(),
-            gradient.hashCode(),
-        )
-    }
 }
