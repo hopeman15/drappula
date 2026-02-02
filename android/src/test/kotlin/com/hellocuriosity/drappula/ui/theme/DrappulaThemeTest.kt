@@ -52,19 +52,6 @@ class DrappulaThemeTest : CoroutinesComposeTest() {
     }
 
     @Test
-    fun testThemeProvidesButtonGradient() {
-        var buttonGradient: Brush? = null
-
-        composeTestRule.setContent {
-            DrappulaTheme(isDarkTheme = true) {
-                buttonGradient = DrappulaTheme.buttonGradient
-            }
-        }
-
-        assertEquals(SharedDraculaTheme.darkColors.buttonGradient(), buttonGradient)
-    }
-
-    @Test
     fun testMaterialThemeHasCorrectTypography() {
         var typography: androidx.compose.material3.Typography? = null
 

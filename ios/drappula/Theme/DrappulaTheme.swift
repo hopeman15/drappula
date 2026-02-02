@@ -101,7 +101,6 @@ private extension FontWeight {
 
 struct DrappulaGradients {
     let background: LinearGradient
-    let button: LinearGradient
 
     init(themeColors: ThemeColor) {
         let gradientColors = [
@@ -109,11 +108,6 @@ struct DrappulaGradients {
             Color(hex: themeColors.gradientEnd)
         ]
         self.background = LinearGradient(
-            colors: gradientColors,
-            startPoint: .top,
-            endPoint: .bottom
-        )
-        self.button = LinearGradient(
             colors: gradientColors,
             startPoint: .top,
             endPoint: .bottom

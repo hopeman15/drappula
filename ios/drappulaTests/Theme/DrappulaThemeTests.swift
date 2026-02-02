@@ -32,7 +32,6 @@ struct DrappulaThemeTests {
         let theme = DrappulaThemeValues.light
         // Gradients should be initialized
         _ = theme.gradients.background
-        _ = theme.gradients.button
     }
 
     @Test

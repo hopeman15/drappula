@@ -33,8 +33,3 @@ fun ThemeColor.backgroundGradient(): Brush =
     Brush.verticalGradient(
         colors = listOf(gradientStart.toColor(), gradientEnd.toColor()),
     )
-
-fun ThemeColor.buttonGradient(): Brush =
-    Brush.verticalGradient(
-        colors = listOf(gradientStart.toColor(), gradientEnd.toColor()),
-    )
