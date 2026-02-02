@@ -121,8 +121,35 @@ struct DrappulaThemeModifier: ViewModifier {
     @Environment(\.colorScheme) private var colorScheme
 
     func body(content: Content) -> some View {
+        let theme = DrappulaThemeValues.forColorScheme(colorScheme)
         content
-            .environment(\.drappulaTheme, DrappulaThemeValues.forColorScheme(colorScheme))
+            .environment(\.drappulaTheme, theme)
+            .tint(theme.colors.onBackground)
+            .onAppear {
+                configureTabBarAppearance(theme: theme)
+            }
+            .onChange(of: colorScheme) { _, _ in
+                let updatedTheme = DrappulaThemeValues.forColorScheme(colorScheme)
+                configureTabBarAppearance(theme: updatedTheme)
+            }
+    }
+
+    private func configureTabBarAppearance(theme: DrappulaThemeValues) {
+        let iconColor = UIColor(theme.colors.onBackground)
+
+        let appearance = UITabBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.stackedLayoutAppearance.normal.iconColor = iconColor
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
+            .foregroundColor: iconColor
+        ]
+        appearance.stackedLayoutAppearance.selected.iconColor = iconColor
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
+            .foregroundColor: iconColor
+        ]
+
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
     }
 }
 

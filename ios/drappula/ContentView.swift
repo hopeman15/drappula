@@ -5,10 +5,20 @@ struct ContentView: View {
     @StateObject private var viewModel = SoundPlayerViewModel.create()
 
     var body: some View {
-        SoundPlayerView(
-            category: shared.Category.dracula,
-            viewModel: viewModel
-        )
+        TabView {
+            SoundPlayerView(
+                category: shared.Category.dracula,
+                viewModel: viewModel
+            )
+            .tabItem {
+                Label("Audio", systemImage: "speaker.wave.2")
+            }
+
+            SettingsView()
+            .tabItem {
+                Label("Settings", systemImage: "gear")
+            }
+        }
         .drappulaTheme()
     }
 }

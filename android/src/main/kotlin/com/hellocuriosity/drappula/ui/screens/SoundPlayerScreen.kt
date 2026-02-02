@@ -31,13 +31,14 @@ import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 fun SoundPlayerScreen(
     category: Category,
     viewModel: SoundPlayerViewModel,
+    modifier: Modifier = Modifier,
 ) {
     val state by viewModel.state.collectAsState()
     val sounds = SoundProvider().soundFor(category)
 
     Column(
         modifier =
-            Modifier
+            modifier
                 .background(DrappulaTheme.backgroundGradient)
                 .safeContentPadding()
                 .fillMaxSize()
