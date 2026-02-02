@@ -4,9 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.hellocuriosity.drappula.models.Category
 import com.hellocuriosity.drappula.ui.common.viewModelBuilder
-import com.hellocuriosity.drappula.ui.screens.SoundPlayerScreen
+import com.hellocuriosity.drappula.ui.screens.DashboardScreen
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 
@@ -23,9 +22,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             DrappulaTheme {
-                SoundPlayerScreen(
-                    category = Category.DRACULA,
-                    viewModel = viewModel,
+                DashboardScreen(
+                    soundPlayerViewModel = viewModel,
                 )
             }
         }
