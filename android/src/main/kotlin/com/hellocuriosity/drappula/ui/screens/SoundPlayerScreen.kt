@@ -47,7 +47,7 @@ fun SoundPlayerScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = category.displayName,
+            text = category.title,
             style = MaterialTheme.typography.displayLarge,
             color = MaterialTheme.colorScheme.onBackground,
             modifier =

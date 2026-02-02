@@ -17,7 +17,7 @@ struct SoundPlayerView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                Text(category.displayName)
+                Text(category.title)
                     .font(theme.typography.display)
                     .fontWeight(.bold)
                     .foregroundColor(theme.colors.onBackground)
