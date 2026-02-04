@@ -8,7 +8,7 @@ struct SoundButtonTests {
     func soundButtonCanBeInitialized() async {
         var tapCount = 0
         let _ = SoundButton(
-            sound: Dracula.iAm,
+            sound: Dracula.i,
             isPlaying: false,
             onTap: { tapCount += 1 }
         )
@@ -19,7 +19,7 @@ struct SoundButtonTests {
     @Test
     func soundButtonAcceptsPlayingState() async {
         let _ = SoundButton(
-            sound: Dracula.iAm,
+            sound: Dracula.i,
             isPlaying: true,
             onTap: {}
         )

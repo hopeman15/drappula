@@ -56,7 +56,7 @@ class SoundPlayerTest {
 
     @Test
     fun testPlay() {
-        val sound = Dracula.I_AM
+        val sound = Dracula.I
         soundPlayer.play(sound)
 
         verifyOrder {
@@ -78,7 +78,7 @@ class SoundPlayerTest {
     fun testPlayStopsCurrentSoundFirst() {
         every { mediaPlayer.isPlaying } returns true
 
-        val sound = Dracula.I_AM
+        val sound = Dracula.I
         soundPlayer.play(sound)
 
         verifyOrder {

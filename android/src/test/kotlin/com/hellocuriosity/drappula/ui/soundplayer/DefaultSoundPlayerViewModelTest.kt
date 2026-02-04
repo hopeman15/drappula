@@ -49,7 +49,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
     @Test
     fun testPlaySoundUpdatesStateToPlayingThenNotPlaying() =
         runBlockingTest {
-            val sound = Dracula.I_AM
+            val sound = Dracula.I
             every { soundPlayer.play(sound) } just runs
 
             viewModel.state.test {
@@ -95,7 +95,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
     @Test
     fun testPlaySoundHandlesExceptionAndSetsErrorState() =
         runBlockingTest {
-            val sound = Dracula.I_AM
+            val sound = Dracula.I
             val exception = RuntimeException("Audio playback failed")
             every { soundPlayer.play(sound) } throws exception
 
@@ -119,7 +119,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
     @Test
     fun testPlayingSoundClearsPreviousError() =
         runBlockingTest {
-            val sound = Dracula.I_AM
+            val sound = Dracula.I
             val exception = RuntimeException("First failure")
 
             // First call throws, second succeeds
