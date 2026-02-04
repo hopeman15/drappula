@@ -66,7 +66,10 @@ dependencies {
     implementation(project(":shared"))
 
     implementation(libs.androidx.annotation)
+    implementation(libs.androidx.core.ktx)
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.animation)
+    implementation(libs.androidx.compose.animation.core)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.foundation.layout)
     implementation(libs.androidx.compose.material3)
@@ -84,6 +87,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.kotlinx.coroutines.core)
 
+    implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     testImplementation(libs.junit)

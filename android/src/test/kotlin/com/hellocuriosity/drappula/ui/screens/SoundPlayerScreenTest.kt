@@ -49,7 +49,7 @@ class SoundPlayerScreenTest : CoroutinesComposeTest() {
             .onNodeWithTag(SoundPlayerTestTags.TITLE)
             .assertExists()
             .assertIsDisplayed()
-            .assertTextEquals(Category.DRACULA.displayName)
+            .assertTextEquals(Category.DRACULA.title)
 
         composeTestRule
             .onNodeWithTag(SoundPlayerTestTags.FLOW_ROW)

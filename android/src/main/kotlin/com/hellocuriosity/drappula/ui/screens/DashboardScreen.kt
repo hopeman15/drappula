@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import com.hellocuriosity.drappula.models.Category
+import com.hellocuriosity.drappula.navigation.SettingsNavigationHost
 import com.hellocuriosity.drappula.navigation.Tab
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
@@ -28,6 +29,7 @@ import com.hellocuriosity.drappula.ui.theme.toColor
 @Composable
 fun DashboardScreen(soundPlayerViewModel: SoundPlayerViewModel) {
     var selectedTab by rememberSaveable { mutableStateOf(Tab.AUDIO) }
+    var showBottomBar by rememberSaveable { mutableStateOf(true) }
 
     Box(
         modifier =
@@ -38,10 +40,12 @@ fun DashboardScreen(soundPlayerViewModel: SoundPlayerViewModel) {
         Scaffold(
             containerColor = Color.Transparent,
             bottomBar = {
-                DashboardNavigationBar(
-                    selectedTab = selectedTab,
-                    onTabSelected = { selectedTab = it },
-                )
+                if (showBottomBar) {
+                    DashboardNavigationBar(
+                        selectedTab = selectedTab,
+                        onTabSelected = { selectedTab = it },
+                    )
+                }
             },
         ) { paddingValues ->
             when (selectedTab) {
@@ -54,8 +58,9 @@ fun DashboardScreen(soundPlayerViewModel: SoundPlayerViewModel) {
                 }
 
                 Tab.SETTINGS -> {
-                    SettingsScreen(
+                    SettingsNavigationHost(
                         modifier = Modifier.padding(paddingValues),
+                        onShowBottomBar = { showBottomBar = it },
                     )
                 }
             }
