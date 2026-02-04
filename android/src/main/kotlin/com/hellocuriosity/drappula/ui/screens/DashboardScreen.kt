@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import com.hellocuriosity.drappula.models.Category
+import com.hellocuriosity.drappula.navigation.SettingsNavigationHost
 import com.hellocuriosity.drappula.navigation.Tab
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
@@ -54,7 +55,7 @@ fun DashboardScreen(soundPlayerViewModel: SoundPlayerViewModel) {
                 }
 
                 Tab.SETTINGS -> {
-                    SettingsScreen(
+                    SettingsNavigationHost(
                         modifier = Modifier.padding(paddingValues),
                     )
                 }
