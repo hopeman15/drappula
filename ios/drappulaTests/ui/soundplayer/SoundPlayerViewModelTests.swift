@@ -17,10 +17,10 @@ struct SoundPlayerViewModelTests {
         let mockPlayer = MockSoundPlayer()
         let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer)
 
-        viewModel.playSound(Dracula.iAm)
+        viewModel.playSound(Dracula.i)
 
         #expect(mockPlayer.playCallCount == 1)
-        #expect(mockPlayer.lastPlayedSound as? Dracula == Dracula.iAm)
+        #expect(mockPlayer.lastPlayedSound as? Dracula == Dracula.i)
     }
 
     @Test
@@ -39,7 +39,7 @@ struct SoundPlayerViewModelTests {
         let mockPlayer = MockSoundPlayer()
         let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer)
 
-        viewModel.playSound(Dracula.iAm)
+        viewModel.playSound(Dracula.i)
 
         #expect(viewModel.state.isPlaying == false)
     }

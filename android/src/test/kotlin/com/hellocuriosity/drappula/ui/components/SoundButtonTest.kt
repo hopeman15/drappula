@@ -21,7 +21,7 @@ class SoundButtonTest : CoroutinesComposeTest() {
         composeTestRule.setContent {
             DrappulaTheme {
                 SoundButton(
-                    sound = Dracula.I_AM,
+                    sound = Dracula.DRACULA,
                     isPlaying = false,
                     onClick = {},
                 )
@@ -29,7 +29,7 @@ class SoundButtonTest : CoroutinesComposeTest() {
         }
 
         composeTestRule
-            .onNodeWithText(Dracula.I_AM.displayName)
+            .onNodeWithText(Dracula.DRACULA.displayName)
             .assertExists()
             .assertIsDisplayed()
     }
@@ -39,7 +39,7 @@ class SoundButtonTest : CoroutinesComposeTest() {
         composeTestRule.setContent {
             DrappulaTheme {
                 SoundButton(
-                    sound = Dracula.I_AM,
+                    sound = Dracula.DRACULA,
                     isPlaying = false,
                     onClick = {},
                 )
@@ -47,7 +47,7 @@ class SoundButtonTest : CoroutinesComposeTest() {
         }
 
         composeTestRule
-            .onNodeWithTag(SoundPlayerTestTags.soundButton(Dracula.I_AM.id))
+            .onNodeWithTag(SoundPlayerTestTags.soundButton(Dracula.DRACULA.id))
             .assertIsEnabled()
     }
 
@@ -56,7 +56,7 @@ class SoundButtonTest : CoroutinesComposeTest() {
         composeTestRule.setContent {
             DrappulaTheme {
                 SoundButton(
-                    sound = Dracula.I_AM,
+                    sound = Dracula.DRACULA,
                     isPlaying = true,
                     onClick = {},
                 )
@@ -64,7 +64,7 @@ class SoundButtonTest : CoroutinesComposeTest() {
         }
 
         composeTestRule
-            .onNodeWithTag(SoundPlayerTestTags.soundButton(Dracula.I_AM.id))
+            .onNodeWithTag(SoundPlayerTestTags.soundButton(Dracula.DRACULA.id))
             .assertIsNotEnabled()
     }
 
@@ -74,7 +74,7 @@ class SoundButtonTest : CoroutinesComposeTest() {
         composeTestRule.setContent {
             DrappulaTheme {
                 SoundButton(
-                    sound = Dracula.I_AM,
+                    sound = Dracula.DRACULA,
                     isPlaying = false,
                     onClick = { clicked = true },
                 )
@@ -82,7 +82,7 @@ class SoundButtonTest : CoroutinesComposeTest() {
         }
 
         composeTestRule
-            .onNodeWithTag(SoundPlayerTestTags.soundButton(Dracula.I_AM.id))
+            .onNodeWithTag(SoundPlayerTestTags.soundButton(Dracula.DRACULA.id))
             .performClick()
 
         assert(clicked)

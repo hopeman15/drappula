@@ -21,12 +21,12 @@ class SoundPlayerTest {
 
     @Test
     fun testPlay() {
-        val sound = Dracula.I_AM
+        val sound = Dracula.I
         soundPlayer.play(sound)
 
         assertTrue(bundle.urlForSoundCalled)
         assertEquals("dracula", bundle.lastRequestedCategory)
-        assertEquals("01_i_am.mp3", bundle.lastRequestedFileName)
+        assertEquals("01_i.mp3", bundle.lastRequestedFileName)
         assertTrue(audioPlayer.loadCalled)
         assertTrue(audioPlayer.prepareToPlayCalled)
         assertTrue(audioPlayer.playCalled)
@@ -34,7 +34,7 @@ class SoundPlayerTest {
 
     @Test
     fun testPlayStopsCurrentSoundFirst() {
-        val firstSound = Dracula.I_AM
+        val firstSound = Dracula.I
         soundPlayer.play(firstSound)
 
         audioPlayer.reset()
@@ -50,7 +50,7 @@ class SoundPlayerTest {
 
     @Test
     fun testStop() {
-        val sound = Dracula.I_AM
+        val sound = Dracula.I
         soundPlayer.play(sound)
 
         audioPlayer.reset()

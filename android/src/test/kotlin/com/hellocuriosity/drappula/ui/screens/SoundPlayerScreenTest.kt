@@ -107,10 +107,10 @@ class SoundPlayerScreenTest : CoroutinesComposeTest() {
         }
 
         composeTestRule
-            .onNodeWithTag(SoundPlayerTestTags.soundButton(Dracula.I_AM.id))
+            .onNodeWithTag(SoundPlayerTestTags.soundButton(Dracula.DRACULA.id))
             .performClick()
 
-        verify { soundPlayer.play(Dracula.I_AM) }
+        verify { soundPlayer.play(Dracula.DRACULA) }
     }
 
     @Test
