@@ -120,7 +120,7 @@ lint-ios:
 # ─────────────────────────────────────────────────────────────────────────────
 
 # Run all tests
-test: test-android test-shared
+test: test-android test-shared test-ios
 
 # Run Android unit tests
 test-android:
