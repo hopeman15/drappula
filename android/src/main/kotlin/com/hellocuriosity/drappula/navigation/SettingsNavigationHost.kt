@@ -5,18 +5,25 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.hellocuriosity.drappula.ui.screens.AttributionScreen
 import com.hellocuriosity.drappula.ui.screens.SettingsScreen
 
 @Composable
-fun SettingsNavigationHost(modifier: Modifier = Modifier) {
+fun SettingsNavigationHost(
+    modifier: Modifier = Modifier,
+    onShowBottomBar: (Boolean) -> Unit = {},
+) {
     var destinationIndex by rememberSaveable { mutableIntStateOf(Destination.LIST) }
+
+    LaunchedEffect(destinationIndex) {
+        onShowBottomBar(destinationIndex == Destination.LIST)
+    }
 
     AnimatedContent(
         targetState = destinationIndex,

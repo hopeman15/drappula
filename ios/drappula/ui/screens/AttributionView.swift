@@ -57,6 +57,7 @@ struct AttributionView: View {
             }
         }
         .navigationBarHidden(true)
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 

@@ -29,6 +29,7 @@ import com.hellocuriosity.drappula.ui.theme.toColor
 @Composable
 fun DashboardScreen(soundPlayerViewModel: SoundPlayerViewModel) {
     var selectedTab by rememberSaveable { mutableStateOf(Tab.AUDIO) }
+    var showBottomBar by rememberSaveable { mutableStateOf(true) }
 
     Box(
         modifier =
@@ -39,10 +40,12 @@ fun DashboardScreen(soundPlayerViewModel: SoundPlayerViewModel) {
         Scaffold(
             containerColor = Color.Transparent,
             bottomBar = {
-                DashboardNavigationBar(
-                    selectedTab = selectedTab,
-                    onTabSelected = { selectedTab = it },
-                )
+                if (showBottomBar) {
+                    DashboardNavigationBar(
+                        selectedTab = selectedTab,
+                        onTabSelected = { selectedTab = it },
+                    )
+                }
             },
         ) { paddingValues ->
             when (selectedTab) {
@@ -57,6 +60,7 @@ fun DashboardScreen(soundPlayerViewModel: SoundPlayerViewModel) {
                 Tab.SETTINGS -> {
                     SettingsNavigationHost(
                         modifier = Modifier.padding(paddingValues),
+                        onShowBottomBar = { showBottomBar = it },
                     )
                 }
             }
