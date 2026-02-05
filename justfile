@@ -66,6 +66,10 @@ build-shared:
 build-ios:
     ./gradlew :shared:linkDebugFrameworkIosSimulatorArm64 :shared:linkDebugFrameworkIosArm64
 
+# Build iOS simulator framework only
+build-ios-simulator:
+    ./gradlew :shared:linkDebugFrameworkIosSimulatorArm64
+
 # Build iOS native app
 build-ios-native:
     xcodebuild -project ios/drappula.xcodeproj -scheme drappula -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -configuration Debug build
