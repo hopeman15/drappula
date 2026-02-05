@@ -7,27 +7,27 @@ class DraculaThemeTest : BaseThemeTest() {
     override val name: String = "Dracula"
     override val darkColors: ThemeColor =
         ThemeColor(
-            primary = "2d1b4e",
-            secondary = "4a1c2e",
-            background = "2d1b4e",
-            surface = "4a1c2e",
+            primary = "0d0d0d",
+            secondary = "d32f2f",
+            background = "0d0d0d",
+            surface = "d32f2f",
             onPrimary = "f0e6d3",
             onBackground = "f0e6d3",
             onSurface = "f0e6d3",
-            gradientStart = "2d1b4e",
-            gradientEnd = "4a1c2e",
+            gradientStart = "0d0d0d",
+            gradientEnd = "d32f2f",
         )
     override val lightColors: ThemeColor =
         ThemeColor(
-            primary = "2d1b4e",
-            secondary = "4a1c2e",
-            background = "2d1b4e",
-            surface = "4a1c2e",
+            primary = "0d0d0d",
+            secondary = "d32f2f",
+            background = "0d0d0d",
+            surface = "d32f2f",
             onPrimary = "f0e6d3",
             onBackground = "f0e6d3",
             onSurface = "f0e6d3",
-            gradientStart = "2d1b4e",
-            gradientEnd = "4a1c2e",
+            gradientStart = "0d0d0d",
+            gradientEnd = "d32f2f",
         )
     override val typography: Typography = Typography.Default
 

@@ -1,8 +1,8 @@
 package com.hellocuriosity.drappula.themes
 
 object DraculaTheme : Theme {
-    private const val DEEP_PURPLE = "2d1b4e"
-    private const val BURGUNDY = "4a1c2e"
+    private const val DARK_BLACK = "0d0d0d"
+    private const val BLOOD_RED = "d32f2f"
     private const val BONE_WHITE = "f0e6d3"
 
     override val name: String = "Dracula"
@@ -11,27 +11,27 @@ object DraculaTheme : Theme {
 
     override val darkColors: ThemeColor =
         ThemeColor(
-            primary = DEEP_PURPLE,
-            secondary = BURGUNDY,
-            background = DEEP_PURPLE,
-            surface = BURGUNDY,
+            primary = DARK_BLACK,
+            secondary = BLOOD_RED,
+            background = DARK_BLACK,
+            surface = BLOOD_RED,
             onPrimary = BONE_WHITE,
             onBackground = BONE_WHITE,
             onSurface = BONE_WHITE,
-            gradientStart = DEEP_PURPLE,
-            gradientEnd = BURGUNDY,
+            gradientStart = DARK_BLACK,
+            gradientEnd = BLOOD_RED,
         )
 
     override val lightColors: ThemeColor =
         ThemeColor(
-            primary = DEEP_PURPLE,
-            secondary = BURGUNDY,
-            background = DEEP_PURPLE,
-            surface = BURGUNDY,
+            primary = DARK_BLACK,
+            secondary = BLOOD_RED,
+            background = DARK_BLACK,
+            surface = BLOOD_RED,
             onPrimary = BONE_WHITE,
             onBackground = BONE_WHITE,
             onSurface = BONE_WHITE,
-            gradientStart = DEEP_PURPLE,
-            gradientEnd = BURGUNDY,
+            gradientStart = DARK_BLACK,
+            gradientEnd = BLOOD_RED,
         )
 }
