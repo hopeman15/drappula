@@ -47,7 +47,7 @@ jobs:
           java-version: '19'
           cache: 'gradle'
       - name: Build iOS Framework
-        run: just build-ios
+        run: just build-ios-simulator
       - name: Boot simulator
         run: |
           UDID=$(xcrun simctl list devices available -j | jq -r ".devices[] | .[] | select(.name == \"$IOS_SIMULATOR\") | .udid" | head -1)
