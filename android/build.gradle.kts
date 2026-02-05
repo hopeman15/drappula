@@ -13,24 +13,52 @@ android {
         applicationId = "com.hellocuriosity.drappula"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = System.getenv("GITHUB_RUN_NUMBER")?.toInt() ?: 1
+        versionName = System.getenv("VERSION") ?: "local"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures {
-        compose = true
+    signingConfigs {
+        create("release") {
+            storeFile = rootProject.file("keystore/drappula.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD")
+            keyAlias = "drappula"
+            keyPassword = System.getenv("KEY_PASSWORD")
+        }
     }
 
     buildTypes {
+        debug {
+            enableUnitTestCoverage = true
+        }
         release {
             isMinifyEnabled = true
+            isDebuggable = false
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
+    }
+
+    flavorDimensions.addAll(listOf("all"))
+    productFlavors {
+        create("production") {
+            dimension = "all"
+        }
+        create("staging") {
+            dimension = "all"
+            versionNameSuffix = "-staging"
+            applicationIdSuffix = ".staging"
+            isDefault = true
+        }
+    }
+
+    buildFeatures {
+        compose = true
     }
 
     compileOptions {
