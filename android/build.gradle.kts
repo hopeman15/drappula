@@ -67,6 +67,7 @@ dependencies {
 
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.animation)
     implementation(libs.androidx.compose.animation.core)
