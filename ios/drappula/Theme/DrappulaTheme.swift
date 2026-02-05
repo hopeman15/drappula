@@ -88,12 +88,8 @@ struct DrappulaTypography {
 
 private extension FontWeight {
     var fontSuffix: String {
-        switch self {
-        case .normal: return "Regular"
-        case .medium: return "Medium"
-        case .bold: return "Bold"
-        default: return "Regular"
-        }
+        // Only Cinzel-Bold font is available
+        return "Bold"
     }
 }
 
