@@ -62,7 +62,7 @@ jobs:
     env:
       KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
       KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-      PLAY_PUBLISH_PASSWORD: ${{ secrets.PLAY_PUBLISH_PASSWORD }}
+      KEY_STORE_GPG: ${{ secrets.KEY_STORE_GPG }}
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -76,7 +76,7 @@ jobs:
           cache: 'gradle'
       - name: Decrypt Keystore
         run: |
-          ./scripts/decrypt.sh keystore/drappula.jks.gpg keystore/drappula.jks ${{ secrets.PLAY_PUBLISH_PASSWORD }}
+          ./scripts/decrypt.sh keystore/drappula.jks.gpg keystore/drappula.jks ${{ secrets.KEY_STORE_GPG }}
       - name: Assemble
         run: just flavor=Production build_type=Release assemble-android
       - name: Bundle
