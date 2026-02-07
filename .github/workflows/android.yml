@@ -77,8 +77,6 @@ jobs:
       - name: Decrypt Keystore
         run: ./scripts/decrypt.sh keystore/drappula.jks.gpg keystore/drappula.jks ${{ secrets.PLAY_PUBLISH_PASSWORD }}
       - name: Assemble
-        run: just assemble-android
+        run: just assemble-android flavor=Production build_type=Release
       - name: Bundle
-        run: just bundle-android
-      - name: Bundle Release
-        run: just bundle-release
+        run: just bundle-android flavor=Production build_type=Release
