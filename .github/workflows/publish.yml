@@ -35,4 +35,4 @@ jobs:
       - name: Set Version
         run: echo "VERSION=$(git tag --sort=committerdate | tail -1)" >> $GITHUB_ENV
       - name: Publishing
-        run: just clean bundle-release publish
+        run: just flavor=Production build_type=Release clean bundle publish
