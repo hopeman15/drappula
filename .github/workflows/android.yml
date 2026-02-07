@@ -75,7 +75,8 @@ jobs:
           java-version: '19'
           cache: 'gradle'
       - name: Decrypt Keystore
-        run: ./scripts/decrypt.sh keystore/drappula.jks.gpg keystore/drappula.jks ${{ secrets.PLAY_PUBLISH_PASSWORD }}
+        run: |
+          ./scripts/decrypt.sh keystore/drappula.jks.gpg keystore/drappula.jks ${{ secrets.PLAY_PUBLISH_PASSWORD }}
       - name: Assemble
         run: just flavor=Production build_type=Release assemble-android
       - name: Bundle
