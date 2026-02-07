@@ -19,7 +19,8 @@ captures
 node_modules/
 settings.local.json
 
-keystore
+# Keystore (decrypted versions - encrypted .gpg files are committed)
+keystore/drappula.jks
 
 # Publishing credentials (decrypted versions - encrypted .gpg files are committed)
 play-publish-credentials.json
