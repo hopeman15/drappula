@@ -1,8 +1,11 @@
+import com.github.triplet.gradle.androidpublisher.ReleaseStatus
+import com.github.triplet.gradle.androidpublisher.ResolutionStrategy
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.playPublish)
 }
 
 android {
@@ -13,8 +16,8 @@ android {
         applicationId = "com.hellocuriosity.drappula"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = System.getenv("GITHUB_RUN_NUMBER")?.toInt() ?: 1
+        versionName = System.getenv("VERSION") ?: "local"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -23,13 +26,48 @@ android {
         compose = true
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = rootProject.file("keystore/drappula.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD")
+            keyAlias = "drappula"
+            keyPassword = System.getenv("KEY_PASSWORD")
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
+            isDebuggable = false
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+    }
+
+    play {
+        serviceAccountCredentials.set(rootProject.file("play-publish-credentials.json"))
+        releaseStatus.set(ReleaseStatus.COMPLETED)
+        resolutionStrategy.set(ResolutionStrategy.IGNORE)
+        defaultToAppBundles.set(true)
+
+        enabled.set(true)
+        track.set("alpha")
+        artifactDir.set(file("build/outputs/bundle/productionRelease"))
+    }
+
+    flavorDimensions.addAll(listOf("all"))
+    productFlavors {
+        create("production") {
+            dimension = "all"
+        }
+        create("staging") {
+            dimension = "all"
+            versionNameSuffix = "-staging"
+            applicationIdSuffix = ".staging"
         }
     }
 
