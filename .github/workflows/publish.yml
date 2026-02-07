@@ -1,0 +1,38 @@
+name: Publishing 🚢
+
+on:
+  push:
+    tags:
+      - '*'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Play Store Publish
+    runs-on: ubuntu-latest
+    env:
+      BUILD_TYPE: Release
+      KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+      KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+      PLAY_PUBLISH_PASSWORD: ${{ secrets.PLAY_PUBLISH_PASSWORD }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Install just
+        uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3.0.0
+      - name: Set up JDK
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
+        with:
+          distribution: 'temurin'
+          java-version: '19'
+          cache: 'gradle'
+      - name: Set Version
+        run: echo "VERSION=$(git tag --sort=committerdate | tail -1)" >> $GITHUB_ENV
+      - name: Publishing
+        run: just clean bundle-release publish
