@@ -1,5 +1,5 @@
-# Default build type
 build_type := "Debug"
+flavor := "Staging"
 
 # iOS simulator for testing - override with IOS_SIMULATOR env var
 # Use 'xcrun simctl list devices available' to see options
@@ -33,19 +33,19 @@ asset-sync:
 
 # Assemble all modules
 assemble:
-    ./gradlew assemble{{build_type}}
+    ./gradlew assemble{{flavor}}{{build_type}}
 
 # Assemble Android app
 assemble-android:
-    ./gradlew :android:assemble{{build_type}}
+    ./gradlew :android:assemble{{flavor}}{{build_type}}
 
 # Bundle all modules
 bundle:
-    ./gradlew bundle{{build_type}}
+    ./gradlew bundle{{flavor}}{{build_type}}
 
 # Bundle Android app
 bundle-android:
-    ./gradlew :android:bundle{{build_type}}
+    ./gradlew :android:bundle{{flavor}}{{build_type}}
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Build
@@ -56,7 +56,7 @@ build: build-android build-ios
 
 # Build Android app
 build-android:
-    ./gradlew :android:build{{build_type}}
+    ./gradlew :android:build{{flavor}}{{build_type}}
 
 # Build shared module
 build-shared:
@@ -105,11 +105,11 @@ format:
 lint: lint-other lint-android lint-ios lint-shared
 
 lint-other:
-    ./gradlew lintKotlin detekt lint{{build_type}}
+    ./gradlew lintKotlin detekt lint{{flavor}}{{build_type}}
 
 # Lint Android module
 lint-android:
-    ./gradlew :android:lintKotlin :android:detekt :android:lint{{build_type}}
+    ./gradlew :android:lintKotlin :android:detekt :android:lint{{flavor}}{{build_type}}
 
 # Lint shared module (no Android Lint with com.android.kotlin.multiplatform.library)
 lint-shared:
@@ -128,7 +128,7 @@ test: test-android test-shared test-ios
 
 # Run Android unit tests
 test-android:
-    ./gradlew :android:test{{build_type}}UnitTest
+    ./gradlew :android:test{{flavor}}{{build_type}}UnitTest
 
 # Run all shared module tests
 test-shared: test-shared-android test-shared-ios
@@ -201,3 +201,15 @@ ci-ios: lint-ios report-ios build-ios build-ios-native
 
 # Run all CI workflows
 ci: ci-android ci-shared ci-ios
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Publishing & Release
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Publish to Play Store (requires PLAY_PUBLISH_PASSWORD env var)
+publish:
+    ./scripts/publish.sh {{flavor}} Release ${PLAY_PUBLISH_PASSWORD}
+
+# Interactive local signing
+signing:
+    ./scripts/signing.sh {{flavor}} Release
