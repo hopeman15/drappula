@@ -14,6 +14,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid) apply false
     alias(libs.plugins.kotlinter)
     alias(libs.plugins.kover)
+    alias(libs.plugins.playPublish) apply false
 }
 
 allprojects {

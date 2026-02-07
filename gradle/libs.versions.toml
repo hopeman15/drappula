@@ -24,6 +24,7 @@ kover = "0.9.5"
 mockk = "1.14.9"
 robolectric = "4.16.1"
 turbine = "1.2.1"
+play-publish = "4.0.0"
 
 [libraries]
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "android-annotation" }
@@ -89,3 +90,4 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+playPublish = { id = "com.github.triplet.play", version.ref = "play-publish" }
