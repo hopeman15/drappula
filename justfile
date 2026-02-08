@@ -206,9 +206,9 @@ ci: ci-android ci-shared ci-ios
 # Publishing & Release
 # ─────────────────────────────────────────────────────────────────────────────
 
-# Publish to Play Store (requires PLAY_PUBLISH_PASSWORD env var)
+# Publish to Play Store (requires KEY_STORE_GPG and PLAY_PUBLISH_PASSWORD env vars)
 publish:
-    ./scripts/publish.sh {{flavor}} Release ${PLAY_PUBLISH_PASSWORD}
+    ./scripts/publish.sh {{flavor}} Release ${KEY_STORE_GPG} ${PLAY_PUBLISH_PASSWORD}
 
 # Interactive local signing
 signing:

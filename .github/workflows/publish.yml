@@ -20,6 +20,7 @@ jobs:
       BUILD_TYPE: Release
       KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
       KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+      KEY_STORE_GPG: ${{ secrets.KEY_STORE_GPG }}
       PLAY_PUBLISH_PASSWORD: ${{ secrets.PLAY_PUBLISH_PASSWORD }}
     steps:
       - name: Checkout
@@ -34,8 +35,5 @@ jobs:
           cache: 'gradle'
       - name: Set Version
         run: echo "VERSION=$(git tag --sort=committerdate | tail -1)" >> $GITHUB_ENV
-      - name: Decrypt Keystore
-        run: |
-          ./scripts/decrypt.sh keystore/drappula.jks.gpg keystore/drappula.jks ${{ secrets.PLAY_PUBLISH_PASSWORD }}
       - name: Publishing
         run: just flavor=Production build_type=Release clean bundle publish
