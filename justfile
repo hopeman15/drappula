@@ -5,6 +5,12 @@ flavor := "Staging"
 # Use 'xcrun simctl list devices available' to see options
 ios_simulator := env("IOS_SIMULATOR", "iPhone 17")
 
+# iOS signing - set via environment variables or .env file
+team_id := env("TEAM_ID", "")
+provisioning_profile_name := env("PROVISIONING_PROFILE_NAME", "")
+marketing_version := env("MARKETING_VERSION", "1.0")
+build_number := env("BUILD_NUMBER", "1")
+
 # Default recipe - runs all quality gates
 all: clean validate-renovate format lint test report assemble
 
@@ -73,6 +79,16 @@ build-ios-simulator:
 # Build iOS native app
 build-ios-native:
     xcodebuild -project ios/drappula.xcodeproj -scheme drappula -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -configuration Debug build
+
+# Archive iOS app for distribution (requires TEAM_ID, PROVISIONING_PROFILE_NAME, MARKETING_VERSION, BUILD_NUMBER env vars)
+archive-ios:
+    ./gradlew :shared:linkReleaseFrameworkIosArm64
+    xcodebuild -project ios/drappula.xcodeproj -scheme drappula -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -archivePath build/ios/drappula.xcarchive MARKETING_VERSION={{marketing_version}} CURRENT_PROJECT_VERSION={{build_number}} DEVELOPMENT_TEAM={{team_id}} PROVISIONING_PROFILE_SPECIFIER="{{provisioning_profile_name}}" archive
+
+# Export iOS archive to IPA (requires TEAM_ID and PROVISIONING_PROFILE_NAME env vars)
+export-ios:
+    ./scripts/generate-export-options.sh
+    xcodebuild -exportArchive -archivePath build/ios/drappula.xcarchive -exportPath build/ios/output -exportOptionsPlist build/ios/ExportOptions.plist
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Clean
@@ -209,6 +225,10 @@ ci: ci-android ci-shared ci-ios
 # Publish to Play Store (requires KEY_STORE_GPG and PLAY_PUBLISH_PASSWORD env vars)
 publish:
     ./scripts/publish.sh {{flavor}} Release ${KEY_STORE_GPG} ${PLAY_PUBLISH_PASSWORD}
+
+# Publish iOS app to TestFlight (requires ASC_KEY_ID, ASC_ISSUER_ID, and API key file)
+publish-ios:
+    ./scripts/publish-ios.sh
 
 # Interactive local signing
 signing:

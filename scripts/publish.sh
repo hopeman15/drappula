@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -o pipefail
+set -eo pipefail
 
 FLAVOR="${1-Production}"
 BUILD_TYPE="${2-Release}"
