@@ -4,7 +4,6 @@ set -o pipefail
 
 FLAVOR="${1-Production}"
 BUILD_TYPE="${2-Release}"
-KEY_STORE_GPG=$3
 PLAY_PUBLISH_PASSWORD=$4
 
 echo "Publishing App for ${FLAVOR} ${BUILD_TYPE}"
@@ -17,22 +16,10 @@ if [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working tree 
   exit 1
 fi
 
-# Verify decrypting passwords
-if [[ -z "${KEY_STORE_GPG}" ]]; then
-  echo "No keystore GPG password given. Abort"
-  exit 1
-fi
-
 if [[ -z "${PLAY_PUBLISH_PASSWORD}" ]]; then
   echo "No Play publish password given. Abort"
   exit 1
 fi
-
-# Decrypt keystore
-echo "Decrypting keystore"
-mkdir -p "${REPO_DIR}/keystore"
-./scripts/decrypt.sh keystore/drappula.jks.gpg \
-    keystore/drappula.jks ${KEY_STORE_GPG}
 
 # Decrypt Play Console service account credentials
 echo "Decrypting Play Console credentials"

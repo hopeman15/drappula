@@ -19,6 +19,10 @@ captures
 node_modules/
 settings.local.json
 
+# Envs
+.env
+.envrc
+
 # Keystore (decrypted versions - encrypted .gpg files are committed)
 keystore/drappula.jks
 

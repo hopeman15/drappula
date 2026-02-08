@@ -33,6 +33,9 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
           cache: 'gradle'
+      - name: Decrypt Keystore
+        run: |
+          ./scripts/decrypt.sh keystore/drappula.jks.gpg keystore/drappula.jks ${{ secrets.KEY_STORE_GPG }}
       - name: Set Version
         run: echo "VERSION=$(git tag --sort=committerdate | tail -1)" >> $GITHUB_ENV
       - name: Publishing
