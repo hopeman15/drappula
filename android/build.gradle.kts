@@ -55,7 +55,7 @@ android {
         defaultToAppBundles.set(true)
 
         enabled.set(true)
-        track.set("alpha")
+        track.set("beta")
         artifactDir.set(file("build/outputs/bundle/productionRelease"))
     }
 
