@@ -1,30 +1,39 @@
+# Android
+captures
+.externalNativeBuild
+.cxx
+keystore/drappula.jks
+play-publish-credentials.json
+
+# Envs
+.env
+.envrc
+
+# Gradle
 *.iml
 .kotlin
 .gradle
 **/build/
-xcuserdata
 !src/**/build/
 local.properties
+node_modules/
+settings.local.json
+
+# IntelliJ
 .idea
-.DS_Store
-captures
-.externalNativeBuild
-.cxx
+
+# iOS
+xcuserdata
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
 !*.xcodeproj/project.xcworkspace/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
-node_modules/
-settings.local.json
+build/ios/
+*.xcarchive
+*.ipa
+private_keys/
 
-# Envs
-.env
-.envrc
-
-# Keystore (decrypted versions - encrypted .gpg files are committed)
-keystore/drappula.jks
-
-# Publishing credentials (decrypted versions - encrypted .gpg files are committed)
-play-publish-credentials.json
+# mac
+.DS_Store
