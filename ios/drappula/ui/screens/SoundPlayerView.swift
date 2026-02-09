@@ -6,10 +6,6 @@ struct SoundPlayerView: View {
     @ObservedObject var viewModel: SoundPlayerViewModel
     @Environment(\.drappulaTheme) private var theme
 
-    private let columns = [
-        GridItem(.adaptive(minimum: 120))
-    ]
-
     private var sounds: [Sound] {
         SoundProvider().soundFor(category: category).compactMap { $0 as? Sound }
     }
@@ -23,7 +19,7 @@ struct SoundPlayerView: View {
                     .foregroundColor(theme.colors.onBackground)
                     .padding(.vertical, 24)
 
-                LazyVGrid(columns: columns, spacing: 8) {
+                FlowLayout(spacing: 8) {
                     ForEach(sounds, id: \.id) { sound in
                         SoundButton(
                             sound: sound,
