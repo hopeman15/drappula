@@ -22,6 +22,16 @@
         }
       }
     },
+    "Classic Film" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Classic Film"
+          }
+        }
+      }
+    },
     "Settings" : {
       "localizations" : {
         "en" : {
