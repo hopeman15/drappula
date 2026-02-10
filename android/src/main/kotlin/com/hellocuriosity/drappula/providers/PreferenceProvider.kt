@@ -1,7 +1,7 @@
 package com.hellocuriosity.drappula.providers
 
 import android.content.Context
-import android.content.SharedPreferences
+import androidx.core.content.edit
 
 class PreferenceProvider(
     context: Context,
@@ -15,12 +15,5 @@ class PreferenceProvider(
 
     var isClassicEnabled: Boolean
         get() = prefs.getBoolean(IS_CLASSIC_ENABLED, false)
-        set(value) = prefs.putBoolean(IS_CLASSIC_ENABLED, value)
-}
-
-private fun SharedPreferences.putBoolean(
-    key: String,
-    value: Boolean,
-) {
-    edit().putBoolean(key, value).apply()
+        set(value) = prefs.edit { putBoolean(IS_CLASSIC_ENABLED, value) }
 }
