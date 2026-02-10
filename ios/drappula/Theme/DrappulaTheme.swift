@@ -36,6 +36,15 @@ struct DrappulaThemeValues {
     static func forColorScheme(_ colorScheme: ColorScheme) -> DrappulaThemeValues {
         colorScheme == .dark ? .dark : .light
     }
+
+    static func from(theme: Theme, colorScheme: ColorScheme) -> DrappulaThemeValues {
+        let themeColors = colorScheme == .dark ? theme.darkColors : theme.lightColors
+        return DrappulaThemeValues(
+            colors: DrappulaColors(themeColors: themeColors),
+            typography: DrappulaTypography(typography: theme.typography),
+            gradients: DrappulaGradients(themeColors: themeColors)
+        )
+    }
 }
 
 // MARK: - Colors
@@ -115,19 +124,27 @@ struct DrappulaGradients {
 
 struct DrappulaThemeModifier: ViewModifier {
     @Environment(\.colorScheme) private var colorScheme
+    let theme: Theme?
 
     func body(content: Content) -> some View {
-        let theme = DrappulaThemeValues.forColorScheme(colorScheme)
+        let themeValues = resolveTheme()
         content
-            .environment(\.drappulaTheme, theme)
-            .tint(theme.colors.onBackground)
+            .environment(\.drappulaTheme, themeValues)
+            .tint(themeValues.colors.onBackground)
             .onAppear {
-                configureTabBarAppearance(theme: theme)
+                configureTabBarAppearance(theme: themeValues)
             }
             .onChange(of: colorScheme) { _, _ in
-                let updatedTheme = DrappulaThemeValues.forColorScheme(colorScheme)
+                let updatedTheme = resolveTheme()
                 configureTabBarAppearance(theme: updatedTheme)
             }
+    }
+
+    private func resolveTheme() -> DrappulaThemeValues {
+        if let theme {
+            return DrappulaThemeValues.from(theme: theme, colorScheme: colorScheme)
+        }
+        return DrappulaThemeValues.forColorScheme(colorScheme)
     }
 
     private func configureTabBarAppearance(theme: DrappulaThemeValues) {
@@ -150,7 +167,7 @@ struct DrappulaThemeModifier: ViewModifier {
 }
 
 extension View {
-    func drappulaTheme() -> some View {
-        modifier(DrappulaThemeModifier())
+    func drappulaTheme(theme: Theme? = nil) -> some View {
+        modifier(DrappulaThemeModifier(theme: theme))
     }
 }
