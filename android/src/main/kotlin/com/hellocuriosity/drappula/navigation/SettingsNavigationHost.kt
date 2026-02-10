@@ -18,6 +18,8 @@ import com.hellocuriosity.drappula.ui.screens.SettingsScreen
 fun SettingsNavigationHost(
     modifier: Modifier = Modifier,
     onShowBottomBar: (Boolean) -> Unit = {},
+    isClassicEnabled: Boolean = false,
+    onClassicToggle: (Boolean) -> Unit = {},
 ) {
     var destinationIndex by rememberSaveable { mutableIntStateOf(Destination.LIST) }
 
@@ -40,6 +42,8 @@ fun SettingsNavigationHost(
             Destination.LIST -> {
                 SettingsScreen(
                     onNavigateToAttribution = { destinationIndex = Destination.ATTRIBUTION },
+                    isClassicEnabled = isClassicEnabled,
+                    onClassicToggle = onClassicToggle,
                     modifier = modifier,
                 )
             }

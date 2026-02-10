@@ -6,15 +6,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Brush
-import com.hellocuriosity.drappula.themes.DraculaTheme
+import com.hellocuriosity.drappula.themes.Theme
 import com.hellocuriosity.drappula.themes.ThemeColor
+import com.hellocuriosity.drappula.themes.DraculaTheme as SharedDraculaTheme
 
 @Composable
 fun DrappulaTheme(
     isDarkTheme: Boolean = isSystemInDarkTheme(),
+    theme: Theme = SharedDraculaTheme,
     content: @Composable () -> Unit,
 ) {
-    val themeColors = if (isDarkTheme) DraculaTheme.darkColors else DraculaTheme.lightColors
+    val themeColors = if (isDarkTheme) theme.darkColors else theme.lightColors
     val colorScheme = themeColors.toColorScheme(isDarkTheme)
 
     CompositionLocalProvider(

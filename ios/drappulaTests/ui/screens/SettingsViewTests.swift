@@ -1,3 +1,4 @@
+import SwiftUI
 import Testing
 @testable import Drappula
 
@@ -5,12 +6,12 @@ import Testing
 struct SettingsViewTests {
     @Test
     func settingsViewCanBeInitialized() async {
-        let _ = SettingsView()
+        let _ = SettingsView(isClassicEnabled: .constant(false))
     }
 
     @Test
     func settingsViewCanBeInitializedWithTheme() async {
-        let _ = SettingsView()
+        let _ = SettingsView(isClassicEnabled: .constant(false))
             .drappulaTheme()
     }
 }

@@ -5,6 +5,7 @@
     <string name="attribution_open_source">Open source</string>
 
     <string name="settings_title">Settings</string>
+    <string name="settings_classic">Classic Film</string>
     <string name="settings_attribution">@string/attribution_title</string>
 
     <string name="tab_audio">Audio</string>

@@ -3,6 +3,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = SoundPlayerViewModel.create()
+    @AppStorage("isClassicEnabled") private var isClassicEnabled = false
 
     var body: some View {
         TabView {
@@ -14,12 +15,14 @@ struct ContentView: View {
                 Label("Audio", systemImage: "speaker.wave.2")
             }
 
-            SettingsView()
+            SettingsView(
+                isClassicEnabled: $isClassicEnabled
+            )
             .tabItem {
                 Label("Settings", systemImage: "gear")
             }
         }
-        .drappulaTheme()
+        .drappulaTheme(theme: isClassicEnabled ? ClassicTheme.shared : nil)
     }
 }
 

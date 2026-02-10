@@ -27,7 +27,11 @@ import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 import com.hellocuriosity.drappula.ui.theme.toColor
 
 @Composable
-fun DashboardScreen(soundPlayerViewModel: SoundPlayerViewModel) {
+fun DashboardScreen(
+    soundPlayerViewModel: SoundPlayerViewModel,
+    isClassicEnabled: Boolean = false,
+    onClassicToggle: (Boolean) -> Unit = {},
+) {
     var selectedTab by rememberSaveable { mutableStateOf(Tab.AUDIO) }
     var showBottomBar by rememberSaveable { mutableStateOf(true) }
 
@@ -61,6 +65,8 @@ fun DashboardScreen(soundPlayerViewModel: SoundPlayerViewModel) {
                     SettingsNavigationHost(
                         modifier = Modifier.padding(paddingValues),
                         onShowBottomBar = { showBottomBar = it },
+                        isClassicEnabled = isClassicEnabled,
+                        onClassicToggle = onClassicToggle,
                     )
                 }
             }

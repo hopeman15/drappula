@@ -3,6 +3,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.drappulaTheme) private var theme
+    @Binding var isClassicEnabled: Bool
 
     var body: some View {
         NavigationStack {
@@ -17,6 +18,23 @@ struct SettingsView: View {
                             .fontWeight(.bold)
                             .foregroundColor(theme.colors.onBackground)
                             .padding(.vertical, 24)
+
+                        Divider()
+                            .background(theme.colors.onBackground.opacity(0.2))
+
+                        HStack {
+                            Text("Classic Film")
+                                .font(theme.typography.body)
+                                .foregroundColor(theme.colors.onBackground)
+
+                            Spacer()
+
+                            Toggle("", isOn: $isClassicEnabled)
+                                .labelsHidden()
+                                .tint(theme.colors.onBackground.opacity(0.3))
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
 
                         Divider()
                             .background(theme.colors.onBackground.opacity(0.2))
@@ -37,7 +55,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(isClassicEnabled: .constant(false))
             .drappulaTheme()
     }
 }
