@@ -7,6 +7,7 @@ import com.hellocuriosity.drappula.MockApplication
 import com.hellocuriosity.drappula.coroutines.CoroutinesComposeTest
 import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.screens.AttributionTestTags
+import com.hellocuriosity.drappula.ui.screens.FeedbackTestTags
 import com.hellocuriosity.drappula.ui.screens.SettingsTestTags
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 import io.mockk.mockk
@@ -69,6 +70,55 @@ class SettingsNavigationHostTest : CoroutinesComposeTest() {
         // Navigate back
         composeTestRule
             .onNodeWithTag(AttributionTestTags.BACK_BUTTON)
+            .performClick()
+
+        composeTestRule.waitForIdle()
+
+        // Verify we're back on Settings screen
+        composeTestRule
+            .onNodeWithTag(SettingsTestTags.SCREEN)
+            .assertExists()
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testNavigateToFeedbackScreen() {
+        composeTestRule.setContent {
+            DrappulaTheme {
+                SettingsNavigationHost(feedbackViewModel = feedbackViewModel)
+            }
+        }
+
+        composeTestRule
+            .onNodeWithTag(SettingsTestTags.FEEDBACK_ITEM)
+            .performClick()
+
+        composeTestRule.waitForIdle()
+
+        composeTestRule
+            .onNodeWithTag(FeedbackTestTags.SCREEN)
+            .assertExists()
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testNavigateBackFromFeedbackScreen() {
+        composeTestRule.setContent {
+            DrappulaTheme {
+                SettingsNavigationHost(feedbackViewModel = feedbackViewModel)
+            }
+        }
+
+        // Navigate to Feedback screen
+        composeTestRule
+            .onNodeWithTag(SettingsTestTags.FEEDBACK_ITEM)
+            .performClick()
+
+        composeTestRule.waitForIdle()
+
+        // Navigate back
+        composeTestRule
+            .onNodeWithTag(FeedbackTestTags.BACK_BUTTON)
             .performClick()
 
         composeTestRule.waitForIdle()
