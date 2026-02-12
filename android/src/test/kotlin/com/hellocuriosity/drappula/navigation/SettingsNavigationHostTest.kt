@@ -10,13 +10,18 @@ import com.hellocuriosity.drappula.ui.screens.AttributionTestTags
 import com.hellocuriosity.drappula.ui.screens.FeedbackTestTags
 import com.hellocuriosity.drappula.ui.screens.SettingsTestTags
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
+import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.Test
 import org.robolectric.annotation.Config
 
 @Config(application = MockApplication::class)
 class SettingsNavigationHostTest : CoroutinesComposeTest() {
-    private val feedbackViewModel: FeedbackViewModel = mockk(relaxed = true)
+    private val feedbackViewModel: FeedbackViewModel =
+        mockk(relaxed = true) {
+            every { state } returns MutableStateFlow(FeedbackViewModel.State())
+        }
 
     @Test
     fun testInitialStateShowsSettingsScreen() {
