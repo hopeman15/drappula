@@ -45,6 +45,13 @@ struct SettingsView: View {
 
                         Divider()
                             .background(theme.colors.onBackground.opacity(0.2))
+
+                        NavigationLink(destination: FeedbackView()) {
+                            SettingsItem(title: "Submit Feedback", theme: theme)
+                        }
+
+                        Divider()
+                            .background(theme.colors.onBackground.opacity(0.2))
                     }
                 }
             }

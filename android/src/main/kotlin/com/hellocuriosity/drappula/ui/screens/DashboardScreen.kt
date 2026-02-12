@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import com.hellocuriosity.drappula.models.Category
 import com.hellocuriosity.drappula.navigation.SettingsNavigationHost
 import com.hellocuriosity.drappula.navigation.Tab
+import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 import com.hellocuriosity.drappula.ui.theme.toColor
@@ -29,6 +30,7 @@ import com.hellocuriosity.drappula.ui.theme.toColor
 @Composable
 fun DashboardScreen(
     soundPlayerViewModel: SoundPlayerViewModel,
+    feedbackViewModel: FeedbackViewModel,
     isClassicEnabled: Boolean = false,
     onClassicToggle: (Boolean) -> Unit = {},
 ) {
@@ -67,6 +69,7 @@ fun DashboardScreen(
                         onShowBottomBar = { showBottomBar = it },
                         isClassicEnabled = isClassicEnabled,
                         onClassicToggle = onClassicToggle,
+                        feedbackViewModel = feedbackViewModel,
                     )
                 }
             }

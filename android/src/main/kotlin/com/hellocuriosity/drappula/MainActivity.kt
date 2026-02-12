@@ -12,6 +12,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.hellocuriosity.drappula.themes.ClassicTheme
 import com.hellocuriosity.drappula.themes.DraculaTheme
 import com.hellocuriosity.drappula.ui.common.viewModelBuilder
+import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.screens.DashboardScreen
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
@@ -23,6 +24,10 @@ class MainActivity : ComponentActivity() {
 
     private val viewModel: SoundPlayerViewModel by viewModelBuilder {
         SoundPlayerViewModel.viewModel(component = component)
+    }
+
+    private val feedbackViewModel: FeedbackViewModel by viewModelBuilder {
+        FeedbackViewModel.viewModel(component = component)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +45,7 @@ class MainActivity : ComponentActivity() {
             DrappulaTheme(theme = theme) {
                 DashboardScreen(
                     soundPlayerViewModel = viewModel,
+                    feedbackViewModel = feedbackViewModel,
                     isClassicEnabled = isClassicEnabled,
                     onClassicToggle = {
                         isClassicEnabled = it

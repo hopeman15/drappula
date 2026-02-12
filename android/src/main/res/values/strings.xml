@@ -7,7 +7,21 @@
     <string name="settings_title">Settings</string>
     <string name="settings_classic">Classic Film</string>
     <string name="settings_attribution">@string/attribution_title</string>
+    <string name="settings_feedback">Submit Feedback</string>
 
     <string name="tab_audio">Audio</string>
     <string name="tab_settings">Settings</string>
+
+    <string name="feedback_title">Feedback</string>
+    <string name="feedback_type_enhancement">Enhancement</string>
+    <string name="feedback_type_feature">Feature Request</string>
+    <string name="feedback_type_fix">Fix</string>
+    <string name="feedback_type_other">Other</string>
+    <string name="feedback_title_hint">Title</string>
+    <string name="feedback_message_hint">Message</string>
+    <string name="feedback_submit_btn">Submit</string>
+    <string name="feedback_thanks">Thanks for your feedback</string>
+    <string name="feedback_error_message">Oh no, something happened during the upload. Would you like to retry?</string>
+    <string name="feedback_error_cancel">Cancel</string>
+    <string name="feedback_error_retry">Retry</string>
 </resources>

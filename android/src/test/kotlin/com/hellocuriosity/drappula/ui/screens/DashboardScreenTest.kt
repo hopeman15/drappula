@@ -9,6 +9,7 @@ import com.hellocuriosity.drappula.MockApplication
 import com.hellocuriosity.drappula.SoundPlayer
 import com.hellocuriosity.drappula.coroutines.CoroutinesComposeTest
 import com.hellocuriosity.drappula.navigation.Tab
+import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.soundplayer.DefaultSoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
@@ -19,6 +20,7 @@ import org.robolectric.annotation.Config
 @Config(application = MockApplication::class)
 class DashboardScreenTest : CoroutinesComposeTest() {
     private val soundPlayer: SoundPlayer = mockk(relaxed = true)
+    private val feedbackViewModel: FeedbackViewModel = mockk(relaxed = true)
 
     private val viewModel: SoundPlayerViewModel by lazy {
         DefaultSoundPlayerViewModel(
@@ -31,7 +33,10 @@ class DashboardScreenTest : CoroutinesComposeTest() {
     fun testDashboardScreenDisplaysNavigationBar() {
         composeTestRule.setContent {
             DrappulaTheme {
-                DashboardScreen(soundPlayerViewModel = viewModel)
+                DashboardScreen(
+                    soundPlayerViewModel = viewModel,
+                    feedbackViewModel = feedbackViewModel,
+                )
             }
         }
 
@@ -45,7 +50,10 @@ class DashboardScreenTest : CoroutinesComposeTest() {
     fun testAllTabsAreDisplayed() {
         composeTestRule.setContent {
             DrappulaTheme {
-                DashboardScreen(soundPlayerViewModel = viewModel)
+                DashboardScreen(
+                    soundPlayerViewModel = viewModel,
+                    feedbackViewModel = feedbackViewModel,
+                )
             }
         }
 
@@ -61,7 +69,10 @@ class DashboardScreenTest : CoroutinesComposeTest() {
     fun testAudioTabIsSelectedByDefault() {
         composeTestRule.setContent {
             DrappulaTheme {
-                DashboardScreen(soundPlayerViewModel = viewModel)
+                DashboardScreen(
+                    soundPlayerViewModel = viewModel,
+                    feedbackViewModel = feedbackViewModel,
+                )
             }
         }
 
@@ -78,7 +89,10 @@ class DashboardScreenTest : CoroutinesComposeTest() {
     fun testSoundPlayerScreenDisplayedByDefault() {
         composeTestRule.setContent {
             DrappulaTheme {
-                DashboardScreen(soundPlayerViewModel = viewModel)
+                DashboardScreen(
+                    soundPlayerViewModel = viewModel,
+                    feedbackViewModel = feedbackViewModel,
+                )
             }
         }
 
@@ -92,7 +106,10 @@ class DashboardScreenTest : CoroutinesComposeTest() {
     fun testClickingSettingsTabShowsSettingsScreen() {
         composeTestRule.setContent {
             DrappulaTheme {
-                DashboardScreen(soundPlayerViewModel = viewModel)
+                DashboardScreen(
+                    soundPlayerViewModel = viewModel,
+                    feedbackViewModel = feedbackViewModel,
+                )
             }
         }
 
@@ -114,7 +131,10 @@ class DashboardScreenTest : CoroutinesComposeTest() {
     fun testClickingAudioTabShowsSoundPlayerScreen() {
         composeTestRule.setContent {
             DrappulaTheme {
-                DashboardScreen(soundPlayerViewModel = viewModel)
+                DashboardScreen(
+                    soundPlayerViewModel = viewModel,
+                    feedbackViewModel = feedbackViewModel,
+                )
             }
         }
 

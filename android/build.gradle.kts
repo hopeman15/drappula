@@ -1,6 +1,14 @@
 import com.github.triplet.gradle.androidpublisher.ReleaseStatus
 import com.github.triplet.gradle.androidpublisher.ResolutionStrategy
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
+
+val localProperties = Properties().apply {
+    rootProject.file("local.properties").takeIf { it.exists() }?.inputStream()?.use { load(it) }
+}
+
+fun localProperty(key: String): String =
+    localProperties.getProperty(key) ?: System.getenv(key) ?: ""
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -20,9 +28,13 @@ android {
         versionName = System.getenv("VERSION") ?: "local"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "SLACK_BOT_TOKEN", "\"${localProperty("SLACK_BOT_TOKEN")}\"")
+        buildConfigField("String", "SLACK_CHANNEL_ID", "\"${localProperty("SLACK_CHANNEL_ID")}\"")
     }
 
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 
