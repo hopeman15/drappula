@@ -46,14 +46,18 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
           cache: 'gradle'
-      - name: Build iOS Framework
-        run: just build-ios-simulator
       - name: Boot simulator
         run: |
           UDID=$(xcrun simctl list devices available -j | jq -r ".devices[] | .[] | select(.name == \"$IOS_SIMULATOR\") | .udid" | head -1)
           xcrun simctl boot "$UDID" || true
-          xcrun simctl bootstatus "$UDID" -b
+          echo "SIMULATOR_UDID=$UDID" >> $GITHUB_ENV
+      - name: Build iOS Framework
+        run: just build-ios-simulator
+      - name: Wait for simulator
+        run: xcrun simctl bootstatus "$SIMULATOR_UDID" -b
       - name: Test
+        env:
+          OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED: "YES"
         run: just report-ios
       - name: Report
         uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
