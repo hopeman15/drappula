@@ -5,19 +5,29 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.hellocuriosity.drappula.MockApplication
 import com.hellocuriosity.drappula.coroutines.CoroutinesComposeTest
+import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.screens.AttributionTestTags
+import com.hellocuriosity.drappula.ui.screens.FeedbackTestTags
 import com.hellocuriosity.drappula.ui.screens.SettingsTestTags
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
+import io.mockk.every
+import io.mockk.mockk
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.Test
 import org.robolectric.annotation.Config
 
 @Config(application = MockApplication::class)
 class SettingsNavigationHostTest : CoroutinesComposeTest() {
+    private val feedbackViewModel: FeedbackViewModel =
+        mockk(relaxed = true) {
+            every { state } returns MutableStateFlow(FeedbackViewModel.State())
+        }
+
     @Test
     fun testInitialStateShowsSettingsScreen() {
         composeTestRule.setContent {
             DrappulaTheme {
-                SettingsNavigationHost()
+                SettingsNavigationHost(feedbackViewModel = feedbackViewModel)
             }
         }
 
@@ -31,7 +41,7 @@ class SettingsNavigationHostTest : CoroutinesComposeTest() {
     fun testNavigateToAttributionScreen() {
         composeTestRule.setContent {
             DrappulaTheme {
-                SettingsNavigationHost()
+                SettingsNavigationHost(feedbackViewModel = feedbackViewModel)
             }
         }
 
@@ -51,7 +61,7 @@ class SettingsNavigationHostTest : CoroutinesComposeTest() {
     fun testNavigateBackFromAttributionScreen() {
         composeTestRule.setContent {
             DrappulaTheme {
-                SettingsNavigationHost()
+                SettingsNavigationHost(feedbackViewModel = feedbackViewModel)
             }
         }
 
@@ -65,6 +75,55 @@ class SettingsNavigationHostTest : CoroutinesComposeTest() {
         // Navigate back
         composeTestRule
             .onNodeWithTag(AttributionTestTags.BACK_BUTTON)
+            .performClick()
+
+        composeTestRule.waitForIdle()
+
+        // Verify we're back on Settings screen
+        composeTestRule
+            .onNodeWithTag(SettingsTestTags.SCREEN)
+            .assertExists()
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testNavigateToFeedbackScreen() {
+        composeTestRule.setContent {
+            DrappulaTheme {
+                SettingsNavigationHost(feedbackViewModel = feedbackViewModel)
+            }
+        }
+
+        composeTestRule
+            .onNodeWithTag(SettingsTestTags.FEEDBACK_ITEM)
+            .performClick()
+
+        composeTestRule.waitForIdle()
+
+        composeTestRule
+            .onNodeWithTag(FeedbackTestTags.SCREEN)
+            .assertExists()
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testNavigateBackFromFeedbackScreen() {
+        composeTestRule.setContent {
+            DrappulaTheme {
+                SettingsNavigationHost(feedbackViewModel = feedbackViewModel)
+            }
+        }
+
+        // Navigate to Feedback screen
+        composeTestRule
+            .onNodeWithTag(SettingsTestTags.FEEDBACK_ITEM)
+            .performClick()
+
+        composeTestRule.waitForIdle()
+
+        // Navigate back
+        composeTestRule
+            .onNodeWithTag(FeedbackTestTags.BACK_BUTTON)
             .performClick()
 
         composeTestRule.waitForIdle()

@@ -23,6 +23,7 @@ settings.local.json
 .idea
 
 # iOS
+Secrets.plist
 xcuserdata
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj

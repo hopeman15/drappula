@@ -29,6 +29,7 @@ import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 fun SettingsScreen(
     modifier: Modifier = Modifier,
     onNavigateToAttribution: () -> Unit = {},
+    onNavigateToFeedback: () -> Unit = {},
     isClassicEnabled: Boolean = false,
     onClassicToggle: (Boolean) -> Unit = {},
 ) {
@@ -67,6 +68,14 @@ fun SettingsScreen(
             title = stringResource(R.string.settings_attribution),
             onClick = onNavigateToAttribution,
             modifier = Modifier.testTag(SettingsTestTags.ATTRIBUTION_ITEM),
+        )
+
+        HorizontalDivider(color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f))
+
+        SettingsItem(
+            title = stringResource(R.string.settings_feedback),
+            onClick = onNavigateToFeedback,
+            modifier = Modifier.testTag(SettingsTestTags.FEEDBACK_ITEM),
         )
 
         HorizontalDivider(color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f))
@@ -112,6 +121,7 @@ object SettingsTestTags {
     const val TITLE = "TITLE"
     const val CLASSIC_TOGGLE = "CLASSIC_TOGGLE"
     const val ATTRIBUTION_ITEM = "ATTRIBUTION_ITEM"
+    const val FEEDBACK_ITEM = "FEEDBACK_ITEM"
 }
 
 @Preview

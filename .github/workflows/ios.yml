@@ -76,6 +76,11 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
           cache: 'gradle'
+      - name: Create Secrets.plist
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+        run: scripts/create-secrets-plist.sh
       - name: Build iOS Framework
         run: just build-ios
       - name: Build iOS App

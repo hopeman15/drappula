@@ -11,7 +11,9 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.screens.AttributionScreen
+import com.hellocuriosity.drappula.ui.screens.FeedbackScreen
 import com.hellocuriosity.drappula.ui.screens.SettingsScreen
 
 @Composable
@@ -20,6 +22,7 @@ fun SettingsNavigationHost(
     onShowBottomBar: (Boolean) -> Unit = {},
     isClassicEnabled: Boolean = false,
     onClassicToggle: (Boolean) -> Unit = {},
+    feedbackViewModel: FeedbackViewModel,
 ) {
     var destinationIndex by rememberSaveable { mutableIntStateOf(Destination.LIST) }
 
@@ -30,7 +33,7 @@ fun SettingsNavigationHost(
     AnimatedContent(
         targetState = destinationIndex,
         transitionSpec = {
-            if (targetState == Destination.ATTRIBUTION) {
+            if (targetState > initialState) {
                 slideInHorizontally { it } togetherWith slideOutHorizontally { -it }
             } else {
                 slideInHorizontally { -it } togetherWith slideOutHorizontally { it }
@@ -42,6 +45,7 @@ fun SettingsNavigationHost(
             Destination.LIST -> {
                 SettingsScreen(
                     onNavigateToAttribution = { destinationIndex = Destination.ATTRIBUTION },
+                    onNavigateToFeedback = { destinationIndex = Destination.FEEDBACK },
                     isClassicEnabled = isClassicEnabled,
                     onClassicToggle = onClassicToggle,
                     modifier = modifier,
@@ -54,6 +58,14 @@ fun SettingsNavigationHost(
                     modifier = modifier,
                 )
             }
+
+            Destination.FEEDBACK -> {
+                FeedbackScreen(
+                    viewModel = feedbackViewModel,
+                    onNavigateBack = { destinationIndex = Destination.LIST },
+                    modifier = modifier,
+                )
+            }
         }
     }
 }
@@ -61,4 +73,5 @@ fun SettingsNavigationHost(
 private object Destination {
     const val LIST = 0
     const val ATTRIBUTION = 1
+    const val FEEDBACK = 2
 }
