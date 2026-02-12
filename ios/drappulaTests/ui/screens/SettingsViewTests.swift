@@ -14,4 +14,10 @@ struct SettingsViewTests {
         let _ = SettingsView(isClassicEnabled: .constant(false))
             .drappulaTheme()
     }
+
+    @Test
+    func settingsViewCanBeInitializedWithClassicEnabled() async {
+        let _ = SettingsView(isClassicEnabled: .constant(true))
+            .drappulaTheme()
+    }
 }
