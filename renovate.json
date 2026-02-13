@@ -24,6 +24,12 @@
       ]
     },
     {
+      "matchPackageNames": [
+        "org.jetbrains.kotlinx:kotlinx-datetime"
+      ],
+      "allowedVersions": "!/.*-compat$/"
+    },
+    {
       "groupName": "Android Test",
       "matchPackageNames": [
         "/androidx.test*/"
