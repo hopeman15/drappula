@@ -19,7 +19,8 @@
       "groupName": "Android Gradle Plugin",
       "matchPackageNames": [
         "/com.android.library/",
-        "/com.android.application/"
+        "/com.android.application/",
+        "/com.android.kotlin.multiplatform.library/"
       ]
     },
     {
