@@ -98,6 +98,12 @@ jobs:
           mkdir -p private_keys
           echo -n "${{ secrets.ASC_API_KEY_P8 }}" > "private_keys/AuthKey_${ASC_KEY_ID}.p8"
 
+      - name: Create Secrets.plist
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+        run: scripts/create-secrets-plist.sh
+
       - name: Archive
         run: just archive-ios
 
