@@ -26,7 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.hellocuriosity.drappula.R
-import com.hellocuriosity.drappula.provider.CategoryProvider
+import com.hellocuriosity.drappula.providers.CategoryProvider
 import com.hellocuriosity.drappula.ui.components.AttributionItem
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 

@@ -1,4 +1,4 @@
-package com.hellocuriosity.drappula.provider
+package com.hellocuriosity.drappula.providers
 
 import com.hellocuriosity.drappula.models.Category
 import com.hellocuriosity.drappula.models.Dracula

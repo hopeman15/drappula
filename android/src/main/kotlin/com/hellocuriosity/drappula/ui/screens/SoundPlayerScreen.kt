@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.hellocuriosity.drappula.models.Category
-import com.hellocuriosity.drappula.provider.SoundProvider
+import com.hellocuriosity.drappula.providers.SoundProvider
 import com.hellocuriosity.drappula.ui.components.SoundButton
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme

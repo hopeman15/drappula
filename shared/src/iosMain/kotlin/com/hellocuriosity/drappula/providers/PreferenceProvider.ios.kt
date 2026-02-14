@@ -1,4 +1,4 @@
-package com.hellocuriosity.drappula.provider
+package com.hellocuriosity.drappula.providers
 
 import platform.Foundation.NSUserDefaults
 

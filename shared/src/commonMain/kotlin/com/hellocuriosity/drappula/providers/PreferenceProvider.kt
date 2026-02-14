@@ -1,4 +1,4 @@
-package com.hellocuriosity.drappula.provider
+package com.hellocuriosity.drappula.providers
 
 expect class PreferenceProvider {
     var isClassicEnabled: Boolean

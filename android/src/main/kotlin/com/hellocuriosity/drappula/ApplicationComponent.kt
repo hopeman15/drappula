@@ -6,7 +6,7 @@ import com.hellocuriosity.drappula.data.network.NetworkModule
 import com.hellocuriosity.drappula.data.network.converters.FeedbackConverter
 import com.hellocuriosity.drappula.data.repository.SlackCloud
 import com.hellocuriosity.drappula.data.repository.SlackRepository
-import com.hellocuriosity.drappula.provider.PreferenceProvider
+import com.hellocuriosity.drappula.providers.PreferenceProvider
 
 class ApplicationComponent(
     val applicationContext: Context,

@@ -7,7 +7,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.hellocuriosity.drappula.MockApplication
 import com.hellocuriosity.drappula.coroutines.CoroutinesComposeTest
-import com.hellocuriosity.drappula.provider.CategoryProvider
+import com.hellocuriosity.drappula.providers.CategoryProvider
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 import org.junit.Test
 import org.robolectric.annotation.Config
