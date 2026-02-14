@@ -19,8 +19,15 @@
       "groupName": "Android Gradle Plugin",
       "matchPackageNames": [
         "/com.android.library/",
-        "/com.android.application/"
+        "/com.android.application/",
+        "/com.android.kotlin.multiplatform.library/"
       ]
+    },
+    {
+      "matchPackageNames": [
+        "org.jetbrains.kotlinx:kotlinx-datetime"
+      ],
+      "allowedVersions": "!/.*-compat$/"
     },
     {
       "groupName": "Android Test",
