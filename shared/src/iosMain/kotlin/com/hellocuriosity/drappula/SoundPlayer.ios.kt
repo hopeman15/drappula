@@ -1,8 +1,8 @@
 package com.hellocuriosity.drappula
 
 import com.hellocuriosity.drappula.models.Sound
-import com.hellocuriosity.drappula.provider.AudioPlayer
-import com.hellocuriosity.drappula.provider.ResourceBundle
+import com.hellocuriosity.drappula.providers.AudioPlayer
+import com.hellocuriosity.drappula.providers.ResourceBundle
 
 actual class SoundPlayer(
     private val bundle: ResourceBundle,

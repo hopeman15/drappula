@@ -1,4 +1,4 @@
-package com.hellocuriosity.drappula.provider
+package com.hellocuriosity.drappula.providers
 
 import android.content.Context
 import androidx.core.content.edit

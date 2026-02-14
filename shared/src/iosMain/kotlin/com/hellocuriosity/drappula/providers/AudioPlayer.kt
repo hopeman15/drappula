@@ -1,4 +1,4 @@
-package com.hellocuriosity.drappula.provider
+package com.hellocuriosity.drappula.providers
 
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.AVFAudio.AVAudioPlayer

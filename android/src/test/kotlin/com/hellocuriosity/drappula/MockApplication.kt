@@ -1,7 +1,7 @@
 package com.hellocuriosity.drappula
 
 import com.hellocuriosity.drappula.data.repository.SlackRepository
-import com.hellocuriosity.drappula.provider.PreferenceProvider
+import com.hellocuriosity.drappula.providers.PreferenceProvider
 import io.mockk.every
 import io.mockk.mockk
 
