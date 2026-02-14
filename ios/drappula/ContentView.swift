@@ -3,7 +3,9 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = SoundPlayerViewModel.create()
-    @AppStorage("isClassicEnabled") private var isClassicEnabled = false
+    @State private var isClassicEnabled = false
+
+    private let preferenceProvider = PreferenceProvider()
 
     var body: some View {
         TabView {
@@ -23,6 +25,12 @@ struct ContentView: View {
             }
         }
         .drappulaTheme(theme: isClassicEnabled ? ClassicTheme.shared : nil)
+        .onAppear {
+            isClassicEnabled = preferenceProvider.isClassicEnabled
+        }
+        .onChange(of: isClassicEnabled) { newValue in
+            preferenceProvider.isClassicEnabled = newValue
+        }
     }
 }
 

@@ -1,9 +1,9 @@
-package com.hellocuriosity.drappula.providers
+package com.hellocuriosity.drappula.provider
 
 import android.content.Context
 import androidx.core.content.edit
 
-class PreferenceProvider(
+actual class PreferenceProvider(
     context: Context,
 ) {
     companion object {
@@ -13,7 +13,7 @@ class PreferenceProvider(
 
     private val prefs = context.getSharedPreferences(DRAPPULA_PREFERENCES, Context.MODE_PRIVATE)
 
-    var isClassicEnabled: Boolean
+    actual var isClassicEnabled: Boolean
         get() = prefs.getBoolean(IS_CLASSIC_ENABLED, false)
         set(value) = prefs.edit { putBoolean(IS_CLASSIC_ENABLED, value) }
 }

@@ -34,6 +34,7 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
+            implementation(libs.androidx.core.ktx)
             implementation(libs.ktor.client.okhttp)
         }
         val androidHostTest by getting {
