@@ -4,6 +4,7 @@ captures
 .cxx
 keystore/drappula.jks
 play-publish-credentials.json
+google-services.json
 
 # Envs
 .env
@@ -23,6 +24,7 @@ settings.local.json
 .idea
 
 # iOS
+GoogleService-Info.plist
 Secrets.plist
 xcuserdata
 *.xcodeproj/*
