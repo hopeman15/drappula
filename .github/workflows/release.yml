@@ -24,7 +24,7 @@ jobs:
       - name: Version Bump
         uses: hopeman15/verselicious@ee7da8adfe74e4e24ded07450f564697c13ca3e3 # v0.1.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.RELEASE_TOKEN }}
           major_label: 'major :1st_place_medal:'
           minor_label: 'minor :2nd_place_medal:'
           patch_label: 'patch :3rd_place_medal:'
