@@ -25,8 +25,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Install just
-        uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3.0.0
       - name: Set up JDK
         uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
         with:
@@ -39,7 +37,7 @@ jobs:
       - name: Set Version
         run: echo "VERSION=$(git tag --sort=committerdate | tail -1)" >> $GITHUB_ENV
       - name: Publishing
-        run: just flavor=Production build_type=Release clean bundle publish
+        run: make FLAVOR=Production BUILD_TYPE=Release clean bundle publish
 
   publish-ios:
     name: TestFlight Publish
@@ -52,8 +50,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Install just
-        uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3.0.0
       - name: Select Xcode 26
         run: sudo xcode-select -s /Applications/Xcode_26.2.app
       - name: Set up JDK
@@ -105,13 +101,13 @@ jobs:
         run: scripts/create-secrets-plist.sh
 
       - name: Archive
-        run: just archive-ios
+        run: make archive-ios
 
       - name: Export IPA
-        run: just export-ios
+        run: make export-ios
 
       - name: Upload to TestFlight
-        run: just publish-ios
+        run: make publish-ios
 
       - name: Clean up
         if: ${{ always() }}

@@ -22,8 +22,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Install just
-        uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3.0.0
       - name: Set up JDK
         uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
         with:
@@ -31,7 +29,7 @@ jobs:
           java-version: '19'
           cache: 'gradle'
       - name: Linting
-        run: just lint-android
+        run: make lint-android
 
   test:
     name: Test & Report
@@ -39,8 +37,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Install just
-        uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3.0.0
       - name: Set up JDK
         uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
         with:
@@ -48,7 +44,7 @@ jobs:
           java-version: '19'
           cache: 'gradle'
       - name: Test
-        run: just report-android
+        run: make report-android
       - name: Report
         uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         with:
@@ -68,8 +64,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Install just
-        uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3.0.0
       - name: Set up JDK
         uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
         with:
@@ -80,6 +74,6 @@ jobs:
         run: |
           ./scripts/decrypt.sh keystore/drappula.jks.gpg keystore/drappula.jks ${{ secrets.KEY_STORE_GPG }}
       - name: Assemble
-        run: just flavor=Production build_type=Release assemble-android
+        run: make FLAVOR=Production BUILD_TYPE=Release assemble-android
       - name: Bundle
-        run: just flavor=Production build_type=Release bundle-android
+        run: make FLAVOR=Production BUILD_TYPE=Release bundle-android
