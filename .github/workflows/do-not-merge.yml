@@ -6,11 +6,11 @@ on:
 
 jobs:
   do-not-merge:
-    if: ${{ contains(github.event.*.labels.*.name, '⛔️ DO NOT MERGE ⛔️') }}
     name: Prevent Merging
     runs-on: ubuntu-latest
     steps:
       - name: Check for label
+        if: ${{ contains(github.event.pull_request.labels.*.name, '⛔️ DO NOT MERGE ⛔️') }}
         run: |
           echo "Pull request is labeled as 'do not merge'"
           echo "This workflow fails so that the pull request cannot be merged"
