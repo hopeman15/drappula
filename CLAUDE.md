@@ -24,29 +24,24 @@ Drappula is a Kotlin Multiplatform (KMP) "Vampire Sound Machine" app targeting A
 ## Package Naming
 - Base package: `com.hellocuriosity.drappula`
 
-## Build Commands (using just)
-This project uses [just](https://github.com/casey/just) as a command runner.
+## Build Commands (using make)
+This project uses `make` as its command runner.
 
 ### Common Commands
-- `just all` - Run all quality gates (clean, format, lint, test, report, assemble)
-- `just build` - Build all platforms
-- `just format` - Format all Kotlin code
-- `just lint` - Run all linters (Kotlinter, Detekt, Android Lint)
-- `just test` - Run all tests
-- `just report` - Generate code coverage reports
-- `just clean` - Clean build outputs
+- `make all` - Run all quality gates (clean, format, lint, test, report, assemble)
+- `make build` - Build all platforms
+- `make format` - Format all Kotlin code
+- `make lint` - Run all linters (Kotlinter, Detekt, Android Lint)
+- `make test` - Run all tests
+- `make report` - Generate code coverage reports
+- `make clean` - Clean build outputs
 
 ### Platform-Specific
-- `just build-android` - Build Android app
-- `just build-ios` - Build iOS framework
-- `just test-android` - Run Android tests
-- `just test-shared` - Run shared module tests
-- `just ci` - Run full CI pipeline locally
-
-### Direct Gradle (if just not available)
-- `./gradlew build` - Build all modules
-- `./gradlew formatKotlin` - Auto-format Kotlin code
-- `./gradlew detekt lintKotlin` - Run static analysis
+- `make build-android` - Build Android app
+- `make build-ios` - Build iOS framework
+- `make test-android` - Run Android tests
+- `make test-shared` - Run shared module tests
+- `make ci` - Run full CI pipeline locally
 
 ---
 
@@ -72,8 +67,8 @@ actual fun getPlatformName(): String = "iOS"
 Place shared dependencies in `commonMain.dependencies` block in `shared/build.gradle.kts`.
 
 ## Code Quality
-- Run `just format` before committing
-- Run `just lint` to check for code smells (runs Kotlinter, Detekt, and Android Lint)
+- Run `make format` before committing
+- Run `make lint` to check for code smells (runs Kotlinter, Detekt, and Android Lint)
 - Follow Kotlinter formatting rules
 - Follow Detekt rules defined in `detekt/detekt.yml`
 - Use JVM target 19 for Android
