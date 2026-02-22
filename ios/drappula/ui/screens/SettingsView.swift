@@ -12,7 +12,7 @@ struct SettingsView: View {
                     .ignoresSafeArea()
 
                 ScrollView {
-                    VStack(spacing: 0) {
+                    VStack {
                         Text("Settings")
                             .font(theme.typography.display)
                             .fontWeight(.bold)
@@ -53,6 +53,7 @@ struct SettingsView: View {
                         Divider()
                             .background(theme.colors.onBackground.opacity(0.2))
                     }
+                    .padding()
                 }
             }
             .navigationBarHidden(true)
