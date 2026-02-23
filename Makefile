@@ -1,9 +1,10 @@
 # Variables - use ?= so environment variables and command-line overrides take precedence
 BUILD_TYPE ?= Debug
 FLAVOR ?= Staging
+IOS_FLAVOR ?= Staging
+IOS_SCHEME = Drappula ($(IOS_FLAVOR))
 
 # iOS simulator for testing - override with IOS_SIMULATOR env var
-# Use 'xcrun simctl list devices available' to see options
 IOS_SIMULATOR ?= iPhone 17
 
 # iOS signing - set via environment variables or .env file
@@ -79,13 +80,13 @@ build-ios-simulator:
 
 # Build iOS native app
 build-ios-native:
-	xcodebuild -project ios/drappula.xcodeproj -scheme drappula -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -configuration Debug build
+	xcodebuild -project ios/drappula.xcodeproj -scheme '$(IOS_SCHEME)' -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -configuration $(IOS_FLAVOR)Debug build
 .PHONY: build-ios-native
 
 # Archive iOS app for distribution (requires TEAM_ID, PROVISIONING_PROFILE_NAME, MARKETING_VERSION, BUILD_NUMBER env vars)
 archive-ios:
 	./gradlew :shared:linkReleaseFrameworkIosArm64
-	xcodebuild -project ios/drappula.xcodeproj -scheme drappula -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -archivePath build/ios/drappula.xcarchive MARKETING_VERSION=$(MARKETING_VERSION) CURRENT_PROJECT_VERSION=$(BUILD_NUMBER) DEVELOPMENT_TEAM=$(TEAM_ID) PROVISIONING_PROFILE_SPECIFIER="$(PROVISIONING_PROFILE_NAME)" archive
+	xcodebuild -project ios/drappula.xcodeproj -scheme '$(IOS_SCHEME)' -configuration $(IOS_FLAVOR)Release -sdk iphoneos -destination 'generic/platform=iOS' -archivePath build/ios/drappula.xcarchive MARKETING_VERSION=$(MARKETING_VERSION) CURRENT_PROJECT_VERSION=$(BUILD_NUMBER) DEVELOPMENT_TEAM=$(TEAM_ID) PROVISIONING_PROFILE_SPECIFIER="$(PROVISIONING_PROFILE_NAME)" archive
 .PHONY: archive-ios
 
 # Export iOS archive to IPA (requires TEAM_ID and PROVISIONING_PROFILE_NAME env vars)
@@ -105,7 +106,7 @@ clean:
 
 # Clean iOS build
 clean-ios:
-	xcodebuild -project ios/drappula.xcodeproj -scheme drappula clean
+	xcodebuild -project ios/drappula.xcodeproj -scheme '$(IOS_SCHEME)' clean
 .PHONY: clean-ios
 
 # Clean all builds
@@ -179,7 +180,7 @@ test-shared-ios:
 test-ios:
 	rm -rf build/ios/results.xcresult
 	mkdir -p build/ios
-	xcodebuild -project ios/drappula.xcodeproj -scheme drappula -sdk iphonesimulator -destination 'platform=iOS Simulator,name=$(IOS_SIMULATOR)' -enableCodeCoverage YES -resultBundlePath build/ios/results.xcresult test
+	xcodebuild -project ios/drappula.xcodeproj -scheme '$(IOS_SCHEME)' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=$(IOS_SIMULATOR)' -enableCodeCoverage YES -resultBundlePath build/ios/results.xcresult test
 .PHONY: test-ios
 
 # ─────────────────────────────────────────────────────────────────────────────
