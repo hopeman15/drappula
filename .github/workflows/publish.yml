@@ -101,7 +101,7 @@ jobs:
         run: scripts/create-secrets-plist.sh
 
       - name: Archive
-        run: make archive-ios
+        run: make IOS_FLAVOR=Production archive-ios
 
       - name: Export IPA
         run: make export-ios
