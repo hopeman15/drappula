@@ -72,6 +72,12 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
           cache: 'gradle'
+      - name: Decrypt GoogleService-Info.plist (Production)
+        run: |
+          ./scripts/decrypt.sh ios/drappula/Firebase/Production/GoogleService-Info.plist.gpg ios/drappula/Firebase/Production/GoogleService-Info.plist ${{ secrets.FIREBASE_GPG }}
+      - name: Decrypt GoogleService-Info.plist (Staging)
+        run: |
+          ./scripts/decrypt.sh ios/drappula/Firebase/Staging/GoogleService-Info.plist.gpg ios/drappula/Firebase/Staging/GoogleService-Info.plist ${{ secrets.FIREBASE_GPG }}
       - name: Create Secrets.plist
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

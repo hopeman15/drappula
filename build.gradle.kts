@@ -15,6 +15,9 @@ plugins {
     alias(libs.plugins.kotlinter)
     alias(libs.plugins.kover)
     alias(libs.plugins.playPublish) apply false
+    alias(libs.plugins.googleServices) apply false
+    alias(libs.plugins.firebaseCrashlytics) apply false
+    alias(libs.plugins.firebasePerf) apply false
 }
 
 allprojects {

@@ -28,6 +28,10 @@ robolectric = "4.16.1"
 serialization = "1.10.0"
 turbine = "1.2.1"
 play-publish = "4.0.0"
+firebaseBom = "34.9.0"
+googleServices = "4.4.4"
+firebaseCrashlyticsPlugin = "3.0.6"
+firebasePerfPlugin = "2.0.2"
 
 [libraries]
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "android-annotation" }
@@ -85,6 +89,11 @@ robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectr
 robolectric-annotations = { module = "org.robolectric:annotations", version.ref = "robolectric" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-perf = { module = "com.google.firebase:firebase-perf" }
+
 curiosity-test-utils = { module = "io.github.hellocuriosity:test-utils", version.ref = "curiosity" }
 androidx-compose-ui-test = { module = "androidx.compose.ui:ui-test" }
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
@@ -105,3 +114,6 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 playPublish = { id = "com.github.triplet.play", version.ref = "play-publish" }
+googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+firebaseCrashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsPlugin" }
+firebasePerf = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerfPlugin" }

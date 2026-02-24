@@ -2,6 +2,7 @@
 captures
 .externalNativeBuild
 .cxx
+google-services.json
 keystore/drappula.jks
 play-publish-credentials.json
 google-services.json

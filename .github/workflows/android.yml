@@ -59,6 +59,7 @@ jobs:
       KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
       KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
       KEY_STORE_GPG: ${{ secrets.KEY_STORE_GPG }}
+      FIREBASE_GPG: ${{ secrets.FIREBASE_GPG }}
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
     steps:
@@ -73,6 +74,9 @@ jobs:
       - name: Decrypt Keystore
         run: |
           ./scripts/decrypt.sh keystore/drappula.jks.gpg keystore/drappula.jks ${{ secrets.KEY_STORE_GPG }}
+      - name: Decrypt google-services.json
+        run: |
+          ./scripts/decrypt.sh android/google-services.json.gpg android/google-services.json ${{ secrets.FIREBASE_GPG }}
       - name: Assemble
         run: make FLAVOR=Production BUILD_TYPE=Release assemble-android
       - name: Bundle

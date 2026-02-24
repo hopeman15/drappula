@@ -21,6 +21,7 @@ jobs:
       KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
       KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
       KEY_STORE_GPG: ${{ secrets.KEY_STORE_GPG }}
+      FIREBASE_GPG: ${{ secrets.FIREBASE_GPG }}
       PLAY_PUBLISH_PASSWORD: ${{ secrets.PLAY_PUBLISH_PASSWORD }}
     steps:
       - name: Checkout
@@ -34,6 +35,9 @@ jobs:
       - name: Decrypt Keystore
         run: |
           ./scripts/decrypt.sh keystore/drappula.jks.gpg keystore/drappula.jks ${{ secrets.KEY_STORE_GPG }}
+      - name: Decrypt google-services.json
+        run: |
+          ./scripts/decrypt.sh android/google-services.json.gpg android/google-services.json ${{ secrets.FIREBASE_GPG }}
       - name: Set Version
         run: echo "VERSION=$(git tag --sort=committerdate | tail -1)" >> $GITHUB_ENV
       - name: Publishing
@@ -93,6 +97,10 @@ jobs:
         run: |
           mkdir -p private_keys
           echo -n "${{ secrets.ASC_API_KEY_P8 }}" > "private_keys/AuthKey_${ASC_KEY_ID}.p8"
+
+      - name: Decrypt GoogleService-Info.plist (Production)
+        run: |
+          ./scripts/decrypt.sh ios/drappula/Firebase/Production/GoogleService-Info.plist.gpg ios/drappula/Firebase/Production/GoogleService-Info.plist ${{ secrets.FIREBASE_GPG }}
 
       - name: Create Secrets.plist
         env:
