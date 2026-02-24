@@ -11,6 +11,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.hellocuriosity.drappula.consent.ConsentState
 import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.screens.AttributionScreen
 import com.hellocuriosity.drappula.ui.screens.FeedbackScreen
@@ -22,6 +23,8 @@ fun SettingsNavigationHost(
     onShowBottomBar: (Boolean) -> Unit = {},
     isClassicEnabled: Boolean = false,
     onClassicToggle: (Boolean) -> Unit = {},
+    consentState: ConsentState = ConsentState(),
+    onConsentChange: (ConsentState) -> Unit = {},
     feedbackViewModel: FeedbackViewModel,
 ) {
     var destinationIndex by rememberSaveable { mutableIntStateOf(Destination.LIST) }
@@ -48,6 +51,8 @@ fun SettingsNavigationHost(
                     onNavigateToFeedback = { destinationIndex = Destination.FEEDBACK },
                     isClassicEnabled = isClassicEnabled,
                     onClassicToggle = onClassicToggle,
+                    consentState = consentState,
+                    onConsentChange = onConsentChange,
                     modifier = modifier,
                 )
             }

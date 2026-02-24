@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import com.hellocuriosity.drappula.consent.ConsentState
 import com.hellocuriosity.drappula.models.Category
 import com.hellocuriosity.drappula.navigation.SettingsNavigationHost
 import com.hellocuriosity.drappula.navigation.Tab
@@ -33,6 +34,8 @@ fun DashboardScreen(
     feedbackViewModel: FeedbackViewModel,
     isClassicEnabled: Boolean = false,
     onClassicToggle: (Boolean) -> Unit = {},
+    consentState: ConsentState = ConsentState(),
+    onConsentChange: (ConsentState) -> Unit = {},
 ) {
     var selectedTab by rememberSaveable { mutableStateOf(Tab.AUDIO) }
     var showBottomBar by rememberSaveable { mutableStateOf(true) }
@@ -69,6 +72,8 @@ fun DashboardScreen(
                         onShowBottomBar = { showBottomBar = it },
                         isClassicEnabled = isClassicEnabled,
                         onClassicToggle = onClassicToggle,
+                        consentState = consentState,
+                        onConsentChange = onConsentChange,
                         feedbackViewModel = feedbackViewModel,
                     )
                 }

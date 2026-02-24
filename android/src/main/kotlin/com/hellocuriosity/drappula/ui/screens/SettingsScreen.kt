@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hellocuriosity.drappula.R
+import com.hellocuriosity.drappula.consent.ConsentState
 import com.hellocuriosity.drappula.ui.components.SettingsItem
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 
@@ -32,6 +33,8 @@ fun SettingsScreen(
     onNavigateToFeedback: () -> Unit = {},
     isClassicEnabled: Boolean = false,
     onClassicToggle: (Boolean) -> Unit = {},
+    consentState: ConsentState = ConsentState(),
+    onConsentChange: (ConsentState) -> Unit = {},
 ) {
     Column(
         modifier =
@@ -79,7 +82,50 @@ fun SettingsScreen(
         )
 
         HorizontalDivider(color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f))
+
+        PrivacySettingsSection(
+            consentState = consentState,
+            onConsentChange = onConsentChange,
+        )
     }
+}
+
+@Composable
+private fun PrivacySettingsSection(
+    consentState: ConsentState,
+    onConsentChange: (ConsentState) -> Unit,
+) {
+    Text(
+        text = "Privacy",
+        style = MaterialTheme.typography.titleMedium,
+        color = MaterialTheme.colorScheme.onBackground,
+        modifier =
+            Modifier
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .testTag(SettingsTestTags.PRIVACY_HEADER),
+    )
+
+    SettingsToggleItem(
+        title = "Analytics & Performance",
+        checked = consentState.analytics,
+        onCheckedChange = { enabled ->
+            onConsentChange(consentState.copy(analytics = enabled))
+        },
+        modifier = Modifier.testTag(SettingsTestTags.ANALYTICS_TOGGLE),
+    )
+
+    HorizontalDivider(color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f))
+
+    SettingsToggleItem(
+        title = "Crash Reporting",
+        checked = consentState.crashReporting,
+        onCheckedChange = { enabled ->
+            onConsentChange(consentState.copy(crashReporting = enabled))
+        },
+        modifier = Modifier.testTag(SettingsTestTags.CRASH_REPORTING_TOGGLE),
+    )
+
+    HorizontalDivider(color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f))
 }
 
 @Composable
@@ -122,6 +168,9 @@ object SettingsTestTags {
     const val CLASSIC_TOGGLE = "CLASSIC_TOGGLE"
     const val ATTRIBUTION_ITEM = "ATTRIBUTION_ITEM"
     const val FEEDBACK_ITEM = "FEEDBACK_ITEM"
+    const val PRIVACY_HEADER = "PRIVACY_HEADER"
+    const val ANALYTICS_TOGGLE = "ANALYTICS_TOGGLE"
+    const val CRASH_REPORTING_TOGGLE = "CRASH_REPORTING_TOGGLE"
 }
 
 @Preview

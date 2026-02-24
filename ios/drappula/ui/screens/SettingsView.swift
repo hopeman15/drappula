@@ -52,6 +52,70 @@ struct SettingsView: View {
 
                         Divider()
                             .background(theme.colors.onBackground.opacity(0.2))
+
+                        Text("Privacy")
+                            .font(theme.typography.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(theme.colors.onBackground)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+
+                        HStack {
+                            Text("Analytics & Performance")
+                                .font(theme.typography.body)
+                                .foregroundColor(theme.colors.onBackground)
+
+                            Spacer()
+
+                            Toggle("", isOn: Binding(
+                                get: { ConsentManagerIOS.shared.consentState.analytics },
+                                set: { enabled in
+                                    let current = ConsentManagerIOS.shared.consentState
+                                    ConsentManagerIOS.shared.updateConsent(
+                                        ConsentStateIOS(
+                                            analytics: enabled,
+                                            crashReporting: current.crashReporting
+                                        )
+                                    )
+                                }
+                            ))
+                            .labelsHidden()
+                            .tint(theme.colors.onBackground.opacity(0.3))
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+
+                        Divider()
+                            .background(theme.colors.onBackground.opacity(0.2))
+
+                        HStack {
+                            Text("Crash Reporting")
+                                .font(theme.typography.body)
+                                .foregroundColor(theme.colors.onBackground)
+
+                            Spacer()
+
+                            Toggle("", isOn: Binding(
+                                get: { ConsentManagerIOS.shared.consentState.crashReporting },
+                                set: { enabled in
+                                    let current = ConsentManagerIOS.shared.consentState
+                                    ConsentManagerIOS.shared.updateConsent(
+                                        ConsentStateIOS(
+                                            analytics: current.analytics,
+                                            crashReporting: enabled
+                                        )
+                                    )
+                                }
+                            ))
+                            .labelsHidden()
+                            .tint(theme.colors.onBackground.opacity(0.3))
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+
+                        Divider()
+                            .background(theme.colors.onBackground.opacity(0.2))
                     }
                     .padding()
                 }
