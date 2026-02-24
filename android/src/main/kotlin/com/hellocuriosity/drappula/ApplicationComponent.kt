@@ -1,6 +1,7 @@
 package com.hellocuriosity.drappula
 
 import android.content.Context
+import com.hellocuriosity.drappula.consent.ConsentManager
 import com.hellocuriosity.drappula.data.network.HttpEngineFactory
 import com.hellocuriosity.drappula.data.network.NetworkModule
 import com.hellocuriosity.drappula.data.network.converters.FeedbackConverter
@@ -12,6 +13,7 @@ class ApplicationComponent(
     val applicationContext: Context,
 ) {
     val dispatchers: CoroutineDispatchers by lazy { CoroutineDispatchers.default }
+    val consentManager: ConsentManager by lazy { ConsentManager(applicationContext) }
     val preferenceProvider: PreferenceProvider by lazy { PreferenceProvider(applicationContext) }
 
     val slackRepository: SlackRepository by lazy {

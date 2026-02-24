@@ -24,6 +24,10 @@
 		27B6D4092F33EB7300E85E5C /* 02_am.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27B6D3E92F33EB7300E85E5C /* 02_am.mp3 */; };
 		27B6D40A2F33EB7300E85E5C /* 12_the.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27B6D3F32F33EB7300E85E5C /* 12_the.mp3 */; };
 		27B6D40B2F33EB7300E85E5C /* 01_i.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27B6D3E82F33EB7300E85E5C /* 01_i.mp3 */; };
+		27E713FE2F3FDD1800A3DD9C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 27E713FD2F3FDD1800A3DD9C /* FirebaseAnalytics */; };
+		27E714002F3FDD1800A3DD9C /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 27E713FF2F3FDD1800A3DD9C /* FirebaseCore */; };
+		27E714022F3FDD1800A3DD9C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 27E714012F3FDD1800A3DD9C /* FirebaseCrashlytics */; };
+		27E714042F3FDD1800A3DD9C /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 27E714032F3FDD1800A3DD9C /* FirebasePerformance */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +66,10 @@
 		A482470CA822AE529623E74F /* Exceptions for "drappula" folder in "Drappula" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Firebase/Production/GoogleService-Info.plist,
+				Firebase/Production/GoogleService-Info.plist.gpg,
+				Firebase/Staging/GoogleService-Info.plist,
+				Firebase/Staging/GoogleService-Info.plist.gpg,
 				Info.plist,
 			);
 			target = 9E4313F59CF1574A568093D3 /* Drappula */;
@@ -94,6 +102,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27E714022F3FDD1800A3DD9C /* FirebaseCrashlytics in Frameworks */,
+				27E714002F3FDD1800A3DD9C /* FirebaseCore in Frameworks */,
+				27E714042F3FDD1800A3DD9C /* FirebasePerformance in Frameworks */,
+				27E713FE2F3FDD1800A3DD9C /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +183,7 @@
 				AB7C29CA324EF660F72C3E13 /* Sources */,
 				1143B0DAB8AD975F165597C7 /* Frameworks */,
 				95620193BFE9126D9CF06C23 /* Resources */,
+				A1B2C3D4E5F6A7B8C9D0F1A3 /* Copy Firebase Config */,
 			);
 			buildRules = (
 			);
@@ -181,6 +194,10 @@
 			);
 			name = Drappula;
 			packageProductDependencies = (
+				27E713FD2F3FDD1800A3DD9C /* FirebaseAnalytics */,
+				27E713FF2F3FDD1800A3DD9C /* FirebaseCore */,
+				27E714012F3FDD1800A3DD9C /* FirebaseCrashlytics */,
+				27E714032F3FDD1800A3DD9C /* FirebasePerformance */,
 			);
 			productName = Drappula;
 			productReference = 90CE39122609CA37718CC2D8 /* Drappula.app */;
@@ -237,6 +254,9 @@
 			);
 			mainGroup = 7FE6191B4F238DE24BF8F7F3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				27E713FC2F3FDD1800A3DD9C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D6B000D2CB2DE90163074B94 /* Products */;
 			projectDirPath = "";
@@ -301,6 +321,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\nif [[ \"$CONFIGURATION\" == *Debug* ]]; then\n  export KOTLIN_FRAMEWORK_BUILD_TYPE=debug\nelse\n  export KOTLIN_FRAMEWORK_BUILD_TYPE=release\nfi\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+		};
+		A1B2C3D4E5F6A7B8C9D0F1A3 /* Copy Firebase Config */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/drappula/Firebase/Production/GoogleService-Info.plist",
+				"$(SRCROOT)/drappula/Firebase/Staging/GoogleService-Info.plist",
+			);
+			name = "Copy Firebase Config";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME).app/GoogleService-Info.plist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$CONFIGURATION\" == Production* ]]; then\n  FLAVOR=\"Production\"\nelse\n  FLAVOR=\"Staging\"\nfi\ncp \"${SRCROOT}/drappula/Firebase/${FLAVOR}/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -814,6 +855,40 @@
 			defaultConfigurationName = ProductionRelease;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		27E713FC2F3FDD1800A3DD9C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		27E713FD2F3FDD1800A3DD9C /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27E713FC2F3FDD1800A3DD9C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		27E713FF2F3FDD1800A3DD9C /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27E713FC2F3FDD1800A3DD9C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		27E714012F3FDD1800A3DD9C /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27E713FC2F3FDD1800A3DD9C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		27E714032F3FDD1800A3DD9C /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27E713FC2F3FDD1800A3DD9C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 56D4B065E5B0FE8995F34C3C /* Project object */;
 }

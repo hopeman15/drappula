@@ -14,6 +14,9 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.playPublish)
+    alias(libs.plugins.googleServices)
+    alias(libs.plugins.firebaseCrashlytics)
+    alias(libs.plugins.firebasePerf)
 }
 
 android {
@@ -25,12 +28,13 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = System.getenv("GITHUB_RUN_NUMBER")?.toInt() ?: 1
-        versionName = System.getenv("VERSION") ?: "local"
+        versionName = System.getenv("VERSION") ?: "0.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "SLACK_BOT_TOKEN", "\"${localProperty("SLACK_BOT_TOKEN")}\"")
         buildConfigField("String", "SLACK_CHANNEL_ID", "\"${localProperty("SLACK_CHANNEL_ID")}\"")
+        buildConfigField("String", "PRIVACY_POLICY_URL", "\"${localProperty("PRIVACY_POLICY_URL")}\"")
     }
 
     buildFeatures {
@@ -137,6 +141,11 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.kotlinx.coroutines.core)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.perf)
 
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)

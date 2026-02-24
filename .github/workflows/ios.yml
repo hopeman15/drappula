@@ -42,6 +42,9 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
           cache: 'gradle'
+      - name: Decrypt GoogleService-Info.plist (Production)
+        run: |
+          ./scripts/decrypt.sh ios/drappula/Firebase/Production/GoogleService-Info.plist.gpg ios/drappula/Firebase/Production/GoogleService-Info.plist ${{ secrets.FIREBASE_GPG }}
       - name: Boot simulator
         run: |
           UDID=$(xcrun simctl list devices available -j | jq -r ".devices[] | .[] | select(.name == \"$IOS_SIMULATOR\") | .udid" | head -1)
@@ -52,7 +55,7 @@ jobs:
       - name: Wait for simulator
         run: xcrun simctl bootstatus "$SIMULATOR_UDID" -b
       - name: Test
-        run: make report-ios
+        run: make IOS_FLAVOR=Production report-ios
       - name: Report
         uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         with:
@@ -72,12 +75,16 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
           cache: 'gradle'
+      - name: Decrypt GoogleService-Info.plist (Production)
+        run: |
+          ./scripts/decrypt.sh ios/drappula/Firebase/Production/GoogleService-Info.plist.gpg ios/drappula/Firebase/Production/GoogleService-Info.plist ${{ secrets.FIREBASE_GPG }}
       - name: Create Secrets.plist
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+          PRIVACY_POLICY_URL: ${{ vars.PRIVACY_POLICY_URL }}
         run: scripts/create-secrets-plist.sh
       - name: Build iOS Framework
         run: make build-ios
       - name: Build iOS App
-        run: make build-ios-native
+        run: make IOS_FLAVOR=Production build-ios-native
