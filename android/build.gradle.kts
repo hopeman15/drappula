@@ -34,6 +34,7 @@ android {
 
         buildConfigField("String", "SLACK_BOT_TOKEN", "\"${localProperty("SLACK_BOT_TOKEN")}\"")
         buildConfigField("String", "SLACK_CHANNEL_ID", "\"${localProperty("SLACK_CHANNEL_ID")}\"")
+        buildConfigField("String", "PRIVACY_POLICY_URL", "\"${localProperty("PRIVACY_POLICY_URL")}\"")
     }
 
     buildFeatures {

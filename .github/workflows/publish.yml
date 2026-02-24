@@ -23,6 +23,7 @@ jobs:
       KEY_STORE_GPG: ${{ secrets.KEY_STORE_GPG }}
       FIREBASE_GPG: ${{ secrets.FIREBASE_GPG }}
       PLAY_PUBLISH_PASSWORD: ${{ secrets.PLAY_PUBLISH_PASSWORD }}
+      PRIVACY_POLICY_URL: ${{ vars.PRIVACY_POLICY_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -106,6 +107,7 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+          PRIVACY_POLICY_URL: ${{ vars.PRIVACY_POLICY_URL }}
         run: scripts/create-secrets-plist.sh
 
       - name: Archive

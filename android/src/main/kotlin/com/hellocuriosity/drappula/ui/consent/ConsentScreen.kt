@@ -28,8 +28,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.hellocuriosity.drappula.BuildConfig
 import com.hellocuriosity.drappula.consent.ConsentState
-import com.hellocuriosity.drappula.consent.PRIVACY_POLICY_URL
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 
 @Composable
@@ -164,7 +164,7 @@ private fun ConsentFooter() {
     val uriHandler = LocalUriHandler.current
 
     TextButton(
-        onClick = { uriHandler.openUri(PRIVACY_POLICY_URL) },
+        onClick = { uriHandler.openUri(BuildConfig.PRIVACY_POLICY_URL) },
     ) {
         Text(
             text = "Privacy Policy",

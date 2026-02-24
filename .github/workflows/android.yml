@@ -62,6 +62,7 @@ jobs:
       FIREBASE_GPG: ${{ secrets.FIREBASE_GPG }}
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+      PRIVACY_POLICY_URL: ${{ vars.PRIVACY_POLICY_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2

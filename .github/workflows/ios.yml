@@ -75,13 +75,11 @@ jobs:
       - name: Decrypt GoogleService-Info.plist (Production)
         run: |
           ./scripts/decrypt.sh ios/drappula/Firebase/Production/GoogleService-Info.plist.gpg ios/drappula/Firebase/Production/GoogleService-Info.plist ${{ secrets.FIREBASE_GPG }}
-      - name: Decrypt GoogleService-Info.plist (Staging)
-        run: |
-          ./scripts/decrypt.sh ios/drappula/Firebase/Staging/GoogleService-Info.plist.gpg ios/drappula/Firebase/Staging/GoogleService-Info.plist ${{ secrets.FIREBASE_GPG }}
       - name: Create Secrets.plist
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+          PRIVACY_POLICY_URL: ${{ vars.PRIVACY_POLICY_URL }}
         run: scripts/create-secrets-plist.sh
       - name: Build iOS Framework
         run: make build-ios
