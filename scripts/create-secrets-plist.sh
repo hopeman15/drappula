@@ -3,7 +3,7 @@ set -euo pipefail
 
 SLACK_BOT_TOKEN="${SLACK_BOT_TOKEN:?SLACK_BOT_TOKEN is required}"
 SLACK_CHANNEL_ID="${SLACK_CHANNEL_ID:?SLACK_CHANNEL_ID is required}"
-PRIVACY_POLICY_URL="${PRIVACY_POLICY_URL:-https://sites.google.com/view/drappula/home}"
+PRIVACY_POLICY_URL="${PRIVACY_POLICY_URL:?PRIVACY_POLICY_URL is required}"
 
 cat > ios/drappula/Secrets.plist << EOF
 <?xml version="1.0" encoding="UTF-8"?>

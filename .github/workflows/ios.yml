@@ -45,9 +45,6 @@ jobs:
       - name: Decrypt GoogleService-Info.plist (Production)
         run: |
           ./scripts/decrypt.sh ios/drappula/Firebase/Production/GoogleService-Info.plist.gpg ios/drappula/Firebase/Production/GoogleService-Info.plist ${{ secrets.FIREBASE_GPG }}
-      - name: Decrypt GoogleService-Info.plist (Staging)
-        run: |
-          ./scripts/decrypt.sh ios/drappula/Firebase/Staging/GoogleService-Info.plist.gpg ios/drappula/Firebase/Staging/GoogleService-Info.plist ${{ secrets.FIREBASE_GPG }}
       - name: Boot simulator
         run: |
           UDID=$(xcrun simctl list devices available -j | jq -r ".devices[] | .[] | select(.name == \"$IOS_SIMULATOR\") | .udid" | head -1)
