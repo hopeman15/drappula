@@ -28,6 +28,9 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
           cache: 'gradle'
+      - name: Decrypt google-services.json
+        run: |
+          ./scripts/decrypt.sh android/google-services.json.gpg android/google-services.json ${{ secrets.FIREBASE_GPG }}
       - name: Linting
         run: make lint-android
 
@@ -43,6 +46,9 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
           cache: 'gradle'
+      - name: Decrypt google-services.json
+        run: |
+          ./scripts/decrypt.sh android/google-services.json.gpg android/google-services.json ${{ secrets.FIREBASE_GPG }}
       - name: Test
         run: make report-android
       - name: Report
