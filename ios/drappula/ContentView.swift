@@ -3,34 +3,36 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = SoundPlayerViewModel.create()
-    @State private var isClassicEnabled = false
-
-    private let preferenceProvider = PreferenceProvider()
+    @AppStorage("isClassicEnabled") private var isClassicEnabled = false
+    @State private var hasResponded = ConsentManagerIOS.shared.hasUserResponded()
 
     var body: some View {
-        TabView {
-            SoundPlayerView(
-                category: shared.Category.dracula,
-                viewModel: viewModel
-            )
-            .tabItem {
-                Label("Audio", systemImage: "speaker.wave.2")
-            }
+        Group {
+            if hasResponded {
+                TabView {
+                    SoundPlayerView(
+                        category: shared.Category.dracula,
+                        viewModel: viewModel
+                    )
+                    .tabItem {
+                        Label("Audio", systemImage: "speaker.wave.2")
+                    }
 
-            SettingsView(
-                isClassicEnabled: $isClassicEnabled
-            )
-            .tabItem {
-                Label("Settings", systemImage: "gear")
+                    SettingsView(
+                        isClassicEnabled: $isClassicEnabled
+                    )
+                    .tabItem {
+                        Label("Settings", systemImage: "gear")
+                    }
+                }
+            } else {
+                ConsentView { state in
+                    ConsentManagerIOS.shared.updateConsent(state)
+                    hasResponded = true
+                }
             }
         }
         .drappulaTheme(theme: isClassicEnabled ? ClassicTheme.shared : nil)
-        .onAppear {
-            isClassicEnabled = preferenceProvider.isClassicEnabled
-        }
-        .onChange(of: isClassicEnabled) { newValue in
-            preferenceProvider.isClassicEnabled = newValue
-        }
     }
 }
 

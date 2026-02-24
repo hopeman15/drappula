@@ -1,7 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "%lld/%lld" : {
+
+    },
+    "Accept All" : {
+
+    },
+    "Analytics & Performance" : {
 
     },
     "Attribution" : {
@@ -45,7 +54,17 @@
         }
       }
     },
+    "Continue with Selected" : {
+
+    },
+    "Crash Reporting" : {
+
+    },
+    "Decline All" : {
+
+    },
     "Enhancement" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -56,6 +75,7 @@
       }
     },
     "Feature Request" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -76,6 +96,7 @@
       }
     },
     "Fix" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -97,6 +118,7 @@
       }
     },
     "Other" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -105,6 +127,12 @@
           }
         }
       }
+    },
+    "Privacy" : {
+
+    },
+    "Privacy Policy" : {
+
     },
     "Retry" : {
       "localizations" : {
@@ -137,6 +165,7 @@
       }
     },
     "Submit Feedback" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -147,6 +176,7 @@
       }
     },
     "Title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -175,6 +205,12 @@
           }
         }
       }
+    },
+    "You can change these settings at any time in Settings > Privacy." : {
+
+    },
+    "Your Privacy" : {
+
     }
   },
   "version" : "1.0"
