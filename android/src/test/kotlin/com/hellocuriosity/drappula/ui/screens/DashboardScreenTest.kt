@@ -9,6 +9,7 @@ import com.hellocuriosity.drappula.MockApplication
 import com.hellocuriosity.drappula.SoundPlayer
 import com.hellocuriosity.drappula.coroutines.CoroutinesComposeTest
 import com.hellocuriosity.drappula.navigation.Tab
+import com.hellocuriosity.drappula.reporting.ReportHandler
 import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.soundplayer.DefaultSoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
@@ -22,10 +23,13 @@ class DashboardScreenTest : CoroutinesComposeTest() {
     private val soundPlayer: SoundPlayer = mockk(relaxed = true)
     private val feedbackViewModel: FeedbackViewModel = mockk(relaxed = true)
 
+    private val reportHandler: ReportHandler = mockk(relaxed = true)
+
     private val viewModel: SoundPlayerViewModel by lazy {
         DefaultSoundPlayerViewModel(
             soundPlayer = soundPlayer,
             dispatchers = dispatchers,
+            reportHandler = reportHandler,
         )
     }
 

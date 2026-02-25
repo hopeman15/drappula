@@ -36,6 +36,8 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.androidx.core.ktx)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.firebase.analytics.versioned)
+            implementation(libs.firebase.crashlytics.versioned)
         }
         val androidHostTest by getting {
             dependencies {

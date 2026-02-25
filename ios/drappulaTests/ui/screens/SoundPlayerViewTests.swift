@@ -7,7 +7,7 @@ struct SoundPlayerViewTests {
     @Test
     func soundPlayerViewCanBeInitializedWithDraculaCategory() async {
         let mockPlayer = MockSoundPlayer()
-        let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer)
+        let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer, reportHandler: MockReportHandlerFactory.create())
 
         let _ = SoundPlayerView(
             category: shared.Category.dracula,
@@ -18,7 +18,7 @@ struct SoundPlayerViewTests {
     @Test
     func soundPlayerViewUsesProvidedViewModel() async {
         let mockPlayer = MockSoundPlayer()
-        let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer)
+        let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer, reportHandler: MockReportHandlerFactory.create())
 
         let _ = SoundPlayerView(
             category: shared.Category.dracula,

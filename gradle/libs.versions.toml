@@ -28,7 +28,9 @@ robolectric = "4.16.1"
 serialization = "1.10.0"
 turbine = "1.2.1"
 play-publish = "4.0.0"
+firebaseAnalytics = "23.0.0"
 firebaseBom = "34.9.0"
+firebaseCrashlytics = "20.0.4"
 googleServices = "4.4.4"
 firebaseCrashlyticsPlugin = "3.0.6"
 firebasePerfPlugin = "2.0.2"
@@ -91,7 +93,9 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-analytics-versioned = { module = "com.google.firebase:firebase-analytics", version.ref = "firebaseAnalytics" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-crashlytics-versioned = { module = "com.google.firebase:firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 firebase-perf = { module = "com.google.firebase:firebase-perf" }
 
 curiosity-test-utils = { module = "io.github.hellocuriosity:test-utils", version.ref = "curiosity" }

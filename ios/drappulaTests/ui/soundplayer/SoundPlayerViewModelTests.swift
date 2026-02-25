@@ -7,7 +7,7 @@ struct SoundPlayerViewModelTests {
     @Test
     func initialStateIsNotPlaying() async {
         let mockPlayer = MockSoundPlayer()
-        let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer)
+        let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer, reportHandler: MockReportHandlerFactory.create())
 
         #expect(viewModel.state.isPlaying == false)
     }
@@ -15,7 +15,7 @@ struct SoundPlayerViewModelTests {
     @Test
     func playSoundCallsSoundPlayer() async {
         let mockPlayer = MockSoundPlayer()
-        let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer)
+        let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer, reportHandler: MockReportHandlerFactory.create())
 
         viewModel.playSound(Dracula.i)
 
@@ -26,7 +26,7 @@ struct SoundPlayerViewModelTests {
     @Test
     func playSoundWithDraculaCallsSoundPlayer() async {
         let mockPlayer = MockSoundPlayer()
-        let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer)
+        let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer, reportHandler: MockReportHandlerFactory.create())
 
         viewModel.playSound(Dracula.dracula)
 
@@ -37,7 +37,7 @@ struct SoundPlayerViewModelTests {
     @Test
     func playSoundSetsStateBackToNotPlaying() async {
         let mockPlayer = MockSoundPlayer()
-        let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer)
+        let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer, reportHandler: MockReportHandlerFactory.create())
 
         viewModel.playSound(Dracula.i)
 

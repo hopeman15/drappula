@@ -6,6 +6,7 @@ import com.hellocuriosity.drappula.ApplicationComponent
 import com.hellocuriosity.drappula.CoroutineDispatchers
 import com.hellocuriosity.drappula.data.repository.SlackRepository
 import com.hellocuriosity.drappula.models.Feedback
+import com.hellocuriosity.drappula.reporting.ReportHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -33,6 +34,7 @@ abstract class FeedbackViewModel : ViewModel() {
             DefaultFeedbackViewModel(
                 repository = component.slackRepository,
                 dispatchers = component.dispatchers,
+                reportHandler = component.reportHandler,
             )
     }
 }
@@ -40,6 +42,7 @@ abstract class FeedbackViewModel : ViewModel() {
 class DefaultFeedbackViewModel(
     private val repository: SlackRepository,
     private val dispatchers: CoroutineDispatchers,
+    private val reportHandler: ReportHandler,
 ) : FeedbackViewModel() {
     private val loadingState = MutableStateFlow(false)
     private val feedback = MutableStateFlow(Feedback())
@@ -69,6 +72,7 @@ class DefaultFeedbackViewModel(
             }.onFailure { throwable ->
                 loadingState.value = false
                 errorState.value = throwable
+                reportHandler.reportException(throwable)
             }
         }
     }

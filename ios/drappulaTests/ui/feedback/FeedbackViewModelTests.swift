@@ -6,7 +6,7 @@ import shared
 struct FeedbackViewModelTests {
     @Test
     func initialStateHasDefaultValues() async {
-        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create())
+        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create(), reportHandler: MockReportHandlerFactory.create())
 
         #expect(viewModel.selectedType == .enhancement)
         #expect(viewModel.title == "")
@@ -18,7 +18,7 @@ struct FeedbackViewModelTests {
 
     @Test
     func isCompleteReturnsFalseWhenTitleIsEmpty() async {
-        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create())
+        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create(), reportHandler: MockReportHandlerFactory.create())
         viewModel.message = "Some message"
 
         #expect(viewModel.isComplete == false)
@@ -26,7 +26,7 @@ struct FeedbackViewModelTests {
 
     @Test
     func isCompleteReturnsFalseWhenMessageIsEmpty() async {
-        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create())
+        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create(), reportHandler: MockReportHandlerFactory.create())
         viewModel.title = "Some title"
 
         #expect(viewModel.isComplete == false)
@@ -34,7 +34,7 @@ struct FeedbackViewModelTests {
 
     @Test
     func isCompleteReturnsFalseWhenTitleIsWhitespace() async {
-        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create())
+        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create(), reportHandler: MockReportHandlerFactory.create())
         viewModel.title = "   "
         viewModel.message = "Some message"
 
@@ -43,7 +43,7 @@ struct FeedbackViewModelTests {
 
     @Test
     func isCompleteReturnsFalseWhenMessageIsWhitespace() async {
-        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create())
+        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create(), reportHandler: MockReportHandlerFactory.create())
         viewModel.title = "Some title"
         viewModel.message = "   "
 
@@ -52,7 +52,7 @@ struct FeedbackViewModelTests {
 
     @Test
     func isCompleteReturnsTrueWhenTitleAndMessageAreSet() async {
-        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create())
+        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create(), reportHandler: MockReportHandlerFactory.create())
         viewModel.title = "Some title"
         viewModel.message = "Some message"
 
@@ -61,7 +61,7 @@ struct FeedbackViewModelTests {
 
     @Test
     func clearErrorSetsErrorToNil() async {
-        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create())
+        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create(), reportHandler: MockReportHandlerFactory.create())
         viewModel.error = NSError(domain: "test", code: 1)
 
         viewModel.clearError()
@@ -71,7 +71,7 @@ struct FeedbackViewModelTests {
 
     @Test
     func selectedTypeCanBeChanged() async {
-        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create())
+        let viewModel = FeedbackViewModel(repository: SlackRepositoryFactory.create(), reportHandler: MockReportHandlerFactory.create())
 
         viewModel.selectedType = .fix
 

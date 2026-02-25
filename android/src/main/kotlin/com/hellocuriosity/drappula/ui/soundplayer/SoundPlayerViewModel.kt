@@ -7,6 +7,8 @@ import com.hellocuriosity.drappula.ApplicationComponent
 import com.hellocuriosity.drappula.CoroutineDispatchers
 import com.hellocuriosity.drappula.SoundPlayer
 import com.hellocuriosity.drappula.models.Sound
+import com.hellocuriosity.drappula.reporting.ReportHandler
+import com.hellocuriosity.drappula.reporting.SoundEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,6 +32,7 @@ abstract class SoundPlayerViewModel : ViewModel() {
             return DefaultSoundPlayerViewModel(
                 soundPlayer = soundPlayer,
                 dispatchers = component.dispatchers,
+                reportHandler = component.reportHandler,
             )
         }
     }
@@ -38,6 +41,7 @@ abstract class SoundPlayerViewModel : ViewModel() {
 class DefaultSoundPlayerViewModel(
     private val soundPlayer: SoundPlayer,
     private val dispatchers: CoroutineDispatchers,
+    private val reportHandler: ReportHandler,
 ) : SoundPlayerViewModel() {
     private val _state = MutableStateFlow(State())
     override val state: StateFlow<State> = _state.asStateFlow()
@@ -49,8 +53,10 @@ class DefaultSoundPlayerViewModel(
                 _state.update { it.copy(isPlaying = true, error = null) }
                 soundPlayer.play(sound)
                 _state.update { it.copy(isPlaying = false) }
+                reportHandler.logEvent(SoundEvent.Play(sound))
             } catch (e: Exception) {
                 _state.update { it.copy(isPlaying = false, error = e) }
+                reportHandler.reportException(e)
             }
         }
     }
