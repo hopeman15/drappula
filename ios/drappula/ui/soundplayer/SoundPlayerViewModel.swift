@@ -31,15 +31,18 @@ class SoundPlayerViewModel: ObservableObject {
     @Published private(set) var state = State()
 
     private let soundPlayer: SoundPlayerProtocol
+    private let reportHandler: ReportHandler
 
-    init(soundPlayer: SoundPlayerProtocol) {
+    init(soundPlayer: SoundPlayerProtocol, reportHandler: ReportHandler) {
         self.soundPlayer = soundPlayer
+        self.reportHandler = reportHandler
     }
 
     func playSound(_ sound: Sound) {
         state = State(isPlaying: true)
         soundPlayer.play(sound: sound)
         state = State(isPlaying: false)
+        reportHandler.logEvent(event: SoundEvent.Play(sound: sound))
     }
 
     deinit {
@@ -50,6 +53,10 @@ class SoundPlayerViewModel: ObservableObject {
         let bundle = NSBundleWrapper()
         let audioPlayer = AVAudioPlayerWrapper()
         let soundPlayer = SoundPlayer(bundle: bundle, audioPlayer: audioPlayer)
-        return SoundPlayerViewModel(soundPlayer: SoundPlayerWrapper(soundPlayer: soundPlayer))
+        let reportHandler = ReportHandlerFactory.create()
+        return SoundPlayerViewModel(
+            soundPlayer: SoundPlayerWrapper(soundPlayer: soundPlayer),
+            reportHandler: reportHandler
+        )
     }
 }

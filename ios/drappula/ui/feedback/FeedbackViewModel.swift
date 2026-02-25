@@ -18,14 +18,16 @@ class FeedbackViewModel: ObservableObject {
     @Published var error: Error?
 
     private let repository: SlackRepository
+    private let reportHandler: ReportHandler
 
     var isComplete: Bool {
         !title.trimmingCharacters(in: .whitespaces).isEmpty &&
             !message.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
-    init(repository: SlackRepository) {
+    init(repository: SlackRepository, reportHandler: ReportHandler) {
         self.repository = repository
+        self.reportHandler = reportHandler
     }
 
     static func create() -> FeedbackViewModel {
@@ -35,7 +37,8 @@ class FeedbackViewModel: ObservableObject {
         let converter = FeedbackConverter(channelId: channelId, platform: "iOS")
         let cloud = SlackCloud(service: networkModule.service, feedbackConverter: converter)
         let repository = SlackRepository(cloud: cloud, instantProvider: SystemInstantTimeProvider())
-        return FeedbackViewModel(repository: repository)
+        let reportHandler = ReportHandlerFactory.create()
+        return FeedbackViewModel(repository: repository, reportHandler: reportHandler)
     }
 
     private static func secretValue(forKey key: String) -> String {
@@ -64,6 +67,7 @@ class FeedbackViewModel: ObservableObject {
                 self?.isLoading = false
                 if let error = error {
                     self?.error = error
+                    self?.reportHandler.reportException(exception: KotlinThrowable(message: error.localizedDescription))
                 } else {
                     self?.isSubmitted = true
                 }
