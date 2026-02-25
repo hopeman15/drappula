@@ -4,6 +4,8 @@ import app.cash.turbine.test
 import com.hellocuriosity.drappula.SoundPlayer
 import com.hellocuriosity.drappula.coroutines.CoroutinesTestCase
 import com.hellocuriosity.drappula.models.Dracula
+import com.hellocuriosity.drappula.reporting.ReportHandler
+import com.hellocuriosity.drappula.reporting.SoundEvent
 import com.hellocuriosity.drappula.ui.simulateCleared
 import io.mockk.confirmVerified
 import io.mockk.every
@@ -23,17 +25,19 @@ import kotlin.test.assertTrue
 @OptIn(ExperimentalCoroutinesApi::class)
 class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatcher()) {
     private val soundPlayer: SoundPlayer = mockk()
+    private val reportHandler: ReportHandler = mockk(relaxed = true)
 
     private val viewModel: SoundPlayerViewModel by lazy {
         DefaultSoundPlayerViewModel(
             soundPlayer = soundPlayer,
             dispatchers = dispatchers,
+            reportHandler = reportHandler,
         )
     }
 
     @After
     fun teardown() {
-        confirmVerified(soundPlayer)
+        confirmVerified(soundPlayer, reportHandler)
     }
 
     @Test
@@ -72,6 +76,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
             }
 
             verify { soundPlayer.play(sound) }
+            verify { reportHandler.logEvent(SoundEvent.Play(sound)) }
         }
 
     @Test
@@ -90,6 +95,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
             }
 
             verify { soundPlayer.play(sound) }
+            verify { reportHandler.logEvent(SoundEvent.Play(sound)) }
         }
 
     @Test
@@ -114,6 +120,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
             }
 
             verify { soundPlayer.play(sound) }
+            verify { reportHandler.reportException(exception) }
         }
 
     @Test
@@ -147,6 +154,8 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
             }
 
             verify(exactly = 2) { soundPlayer.play(sound) }
+            verify { reportHandler.reportException(exception) }
+            verify { reportHandler.logEvent(SoundEvent.Play(sound)) }
         }
 
     @Test

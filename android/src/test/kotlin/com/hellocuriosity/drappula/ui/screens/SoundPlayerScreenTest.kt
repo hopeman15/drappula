@@ -10,6 +10,7 @@ import com.hellocuriosity.drappula.SoundPlayer
 import com.hellocuriosity.drappula.coroutines.CoroutinesComposeTest
 import com.hellocuriosity.drappula.models.Category
 import com.hellocuriosity.drappula.models.Dracula
+import com.hellocuriosity.drappula.reporting.ReportHandler
 import com.hellocuriosity.drappula.ui.soundplayer.DefaultSoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
@@ -22,10 +23,13 @@ import org.robolectric.annotation.Config
 class SoundPlayerScreenTest : CoroutinesComposeTest() {
     private val soundPlayer: SoundPlayer = mockk(relaxed = true)
 
+    private val reportHandler: ReportHandler = mockk(relaxed = true)
+
     private val viewModel: SoundPlayerViewModel by lazy {
         DefaultSoundPlayerViewModel(
             soundPlayer = soundPlayer,
             dispatchers = dispatchers,
+            reportHandler = reportHandler,
         )
     }
 

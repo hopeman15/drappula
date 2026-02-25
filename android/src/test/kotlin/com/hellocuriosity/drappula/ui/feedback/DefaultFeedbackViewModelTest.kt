@@ -4,10 +4,12 @@ import app.cash.turbine.test
 import com.hellocuriosity.drappula.coroutines.CoroutinesTestCase
 import com.hellocuriosity.drappula.data.repository.SlackRepository
 import com.hellocuriosity.drappula.models.Feedback
+import com.hellocuriosity.drappula.reporting.ReportHandler
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.confirmVerified
 import io.mockk.mockk
+import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.After
@@ -21,17 +23,19 @@ import kotlin.test.assertTrue
 @OptIn(ExperimentalCoroutinesApi::class)
 class DefaultFeedbackViewModelTest : CoroutinesTestCase(StandardTestDispatcher()) {
     private val repository: SlackRepository = mockk()
+    private val reportHandler: ReportHandler = mockk(relaxed = true)
 
     private val viewModel by lazy {
         DefaultFeedbackViewModel(
             repository = repository,
             dispatchers = dispatchers,
+            reportHandler = reportHandler,
         )
     }
 
     @After
     fun teardown() {
-        confirmVerified(repository)
+        confirmVerified(repository, reportHandler)
     }
 
     @Test
@@ -96,6 +100,7 @@ class DefaultFeedbackViewModelTest : CoroutinesTestCase(StandardTestDispatcher()
             }
 
             coVerify { repository.uploadFeedback(eq(Feedback())) }
+            verify { reportHandler.reportException(exception) }
         }
 
     @Test
@@ -119,5 +124,6 @@ class DefaultFeedbackViewModelTest : CoroutinesTestCase(StandardTestDispatcher()
             }
 
             coVerify { repository.uploadFeedback(eq(Feedback())) }
+            verify { reportHandler.reportException(exception) }
         }
 }
