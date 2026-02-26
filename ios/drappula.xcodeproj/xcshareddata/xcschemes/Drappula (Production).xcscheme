@@ -27,6 +27,8 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldAutocreateTestPlan = "YES">
       <Testables>
          <TestableReference
@@ -41,6 +43,15 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "9E4313F59CF1574A568093D3"
+            BuildableName = "Drappula.app"
+            BlueprintName = "Drappula"
+            ReferencedContainer = "container:drappula.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
    </TestAction>
    <LaunchAction
       buildConfiguration = "ProductionDebug"
