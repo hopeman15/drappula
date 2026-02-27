@@ -7,27 +7,38 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.hellocuriosity.drappula.MockApplication
 import com.hellocuriosity.drappula.SoundPlayer
+import com.hellocuriosity.drappula.SoundSequencer
 import com.hellocuriosity.drappula.coroutines.CoroutinesComposeTest
+import com.hellocuriosity.drappula.data.SoundSequenceRepository
 import com.hellocuriosity.drappula.navigation.Tab
 import com.hellocuriosity.drappula.reporting.ReportHandler
+import com.hellocuriosity.drappula.ui.createsequence.CreateSequenceViewModel
 import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.soundplayer.DefaultSoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
+import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Test
 import org.robolectric.annotation.Config
 
 @Config(application = MockApplication::class)
 class DashboardScreenTest : CoroutinesComposeTest() {
     private val soundPlayer: SoundPlayer = mockk(relaxed = true)
+    private val soundSequencer: SoundSequencer = mockk(relaxed = true)
+    private val soundSequenceRepository: SoundSequenceRepository = mockk()
     private val feedbackViewModel: FeedbackViewModel = mockk(relaxed = true)
+    private val createSequenceViewModel: CreateSequenceViewModel = mockk(relaxed = true)
 
     private val reportHandler: ReportHandler = mockk(relaxed = true)
 
     private val viewModel: SoundPlayerViewModel by lazy {
+        every { soundSequenceRepository.observeAll() } returns flowOf(emptyList())
         DefaultSoundPlayerViewModel(
             soundPlayer = soundPlayer,
+            soundSequencer = soundSequencer,
+            soundSequenceRepository = soundSequenceRepository,
             dispatchers = dispatchers,
             reportHandler = reportHandler,
         )
@@ -40,6 +51,7 @@ class DashboardScreenTest : CoroutinesComposeTest() {
                 DashboardScreen(
                     soundPlayerViewModel = viewModel,
                     feedbackViewModel = feedbackViewModel,
+                    createSequenceViewModel = createSequenceViewModel,
                 )
             }
         }
@@ -57,6 +69,7 @@ class DashboardScreenTest : CoroutinesComposeTest() {
                 DashboardScreen(
                     soundPlayerViewModel = viewModel,
                     feedbackViewModel = feedbackViewModel,
+                    createSequenceViewModel = createSequenceViewModel,
                 )
             }
         }
@@ -76,6 +89,7 @@ class DashboardScreenTest : CoroutinesComposeTest() {
                 DashboardScreen(
                     soundPlayerViewModel = viewModel,
                     feedbackViewModel = feedbackViewModel,
+                    createSequenceViewModel = createSequenceViewModel,
                 )
             }
         }
@@ -96,6 +110,7 @@ class DashboardScreenTest : CoroutinesComposeTest() {
                 DashboardScreen(
                     soundPlayerViewModel = viewModel,
                     feedbackViewModel = feedbackViewModel,
+                    createSequenceViewModel = createSequenceViewModel,
                 )
             }
         }
@@ -113,6 +128,7 @@ class DashboardScreenTest : CoroutinesComposeTest() {
                 DashboardScreen(
                     soundPlayerViewModel = viewModel,
                     feedbackViewModel = feedbackViewModel,
+                    createSequenceViewModel = createSequenceViewModel,
                 )
             }
         }
@@ -138,6 +154,7 @@ class DashboardScreenTest : CoroutinesComposeTest() {
                 DashboardScreen(
                     soundPlayerViewModel = viewModel,
                     feedbackViewModel = feedbackViewModel,
+                    createSequenceViewModel = createSequenceViewModel,
                 )
             }
         }

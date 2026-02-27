@@ -1,0 +1,47 @@
+CREATE TABLE SoundSequenceEntity (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    name TEXT NOT NULL,
+    created_at INTEGER NOT NULL
+);
+
+CREATE TABLE SoundSequenceItemEntity (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    sequence_id INTEGER NOT NULL,
+    sound_id TEXT NOT NULL,
+    position INTEGER NOT NULL,
+    FOREIGN KEY (sequence_id) REFERENCES SoundSequenceEntity(id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_sequence_items ON SoundSequenceItemEntity(sequence_id, position);
+
+selectAllSequences:
+SELECT * FROM SoundSequenceEntity
+ORDER BY created_at DESC;
+
+selectSequenceById:
+SELECT * FROM SoundSequenceEntity
+WHERE id = ?;
+
+selectItemsBySequenceId:
+SELECT * FROM SoundSequenceItemEntity
+WHERE sequence_id = ?
+ORDER BY position ASC;
+
+insertSequence:
+INSERT INTO SoundSequenceEntity(name, created_at)
+VALUES (?, ?);
+
+lastInsertId:
+SELECT last_insert_rowid();
+
+insertItem:
+INSERT INTO SoundSequenceItemEntity(sequence_id, sound_id, position)
+VALUES (?, ?, ?);
+
+deleteSequence:
+DELETE FROM SoundSequenceEntity
+WHERE id = ?;
+
+deleteItemsBySequenceId:
+DELETE FROM SoundSequenceItemEntity
+WHERE sequence_id = ?;

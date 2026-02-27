@@ -15,6 +15,7 @@ import com.hellocuriosity.drappula.themes.DraculaTheme
 import com.hellocuriosity.drappula.ui.common.viewModelBuilder
 import com.hellocuriosity.drappula.ui.consent.ConsentScreen
 import com.hellocuriosity.drappula.ui.consent.DefaultConsentViewModel
+import com.hellocuriosity.drappula.ui.createsequence.CreateSequenceViewModel
 import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.screens.DashboardScreen
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
@@ -31,6 +32,10 @@ class MainActivity : ComponentActivity() {
 
     private val feedbackViewModel: FeedbackViewModel by viewModelBuilder {
         FeedbackViewModel.viewModel(component = component)
+    }
+
+    private val createSequenceViewModel: CreateSequenceViewModel by viewModelBuilder {
+        CreateSequenceViewModel.viewModel(component = component)
     }
 
     private val consentViewModel: DefaultConsentViewModel by viewModelBuilder {
@@ -57,6 +62,7 @@ class MainActivity : ComponentActivity() {
                     DashboardScreen(
                         soundPlayerViewModel = viewModel,
                         feedbackViewModel = feedbackViewModel,
+                        createSequenceViewModel = createSequenceViewModel,
                         isClassicEnabled = isClassicEnabled,
                         onClassicToggle = {
                             isClassicEnabled = it

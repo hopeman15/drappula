@@ -8,6 +8,7 @@
     <string name="settings_classic">Classic Film</string>
     <string name="settings_attribution">@string/attribution_title</string>
     <string name="settings_feedback">Submit Feedback</string>
+    <string name="settings_create_sequence">Create Sequence</string>
 
     <string name="tab_audio">Audio</string>
     <string name="tab_settings">Settings</string>

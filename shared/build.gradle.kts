@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -38,6 +39,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.firebase.analytics.versioned)
             implementation(libs.firebase.crashlytics.versioned)
+            implementation(libs.sqldelight.android.driver)
         }
         val androidHostTest by getting {
             dependencies {
@@ -51,6 +53,7 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.sqldelight.coroutines.extensions)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -59,6 +62,15 @@ kotlin {
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.sqldelight.native.driver)
+        }
+    }
+}
+
+sqldelight {
+    databases {
+        create("DrappulaDatabase") {
+            packageName.set("com.hellocuriosity.drappula.db")
         }
     }
 }

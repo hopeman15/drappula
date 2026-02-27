@@ -43,6 +43,7 @@ class SoundPlayerTest {
         every { mediaPlayer.stop() } just Runs
         every { mediaPlayer.reset() } just Runs
         every { mediaPlayer.setDataSource(any<FileDescriptor>(), any(), any()) } just Runs
+        every { mediaPlayer.setOnCompletionListener(any()) } just Runs
         every { mediaPlayer.prepare() } just Runs
         every { mediaPlayer.start() } just Runs
         every { mediaPlayer.release() } just Runs
@@ -69,6 +70,7 @@ class SoundPlayerTest {
             assetFileDescriptor.length
             mediaPlayer.setDataSource(fileDescriptor, 0L, 1000L)
             assetFileDescriptor.close()
+            mediaPlayer.setOnCompletionListener(null)
             mediaPlayer.prepare()
             mediaPlayer.start()
         }
@@ -92,6 +94,7 @@ class SoundPlayerTest {
             assetFileDescriptor.length
             mediaPlayer.setDataSource(fileDescriptor, 0L, 1000L)
             assetFileDescriptor.close()
+            mediaPlayer.setOnCompletionListener(null)
             mediaPlayer.prepare()
             mediaPlayer.start()
         }

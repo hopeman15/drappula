@@ -8,7 +8,10 @@ actual class SoundPlayer(
     private val bundle: ResourceBundle,
     private val audioPlayer: AudioPlayer,
 ) {
-    actual fun play(sound: Sound) {
+    actual fun play(
+        sound: Sound,
+        onCompletion: (() -> Unit)?,
+    ) {
         stop()
 
         val category = sound.category.name.lowercase()
@@ -16,7 +19,7 @@ actual class SoundPlayer(
 
         audioPlayer.load(url)
         audioPlayer.prepareToPlay()
-        audioPlayer.play()
+        audioPlayer.play(onCompletion)
     }
 
     actual fun stop() {

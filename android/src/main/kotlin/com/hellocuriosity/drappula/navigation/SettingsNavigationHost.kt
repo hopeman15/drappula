@@ -12,8 +12,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.hellocuriosity.drappula.consent.ConsentState
+import com.hellocuriosity.drappula.ui.createsequence.CreateSequenceViewModel
 import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.screens.AttributionScreen
+import com.hellocuriosity.drappula.ui.screens.CreateSequenceScreen
 import com.hellocuriosity.drappula.ui.screens.FeedbackScreen
 import com.hellocuriosity.drappula.ui.screens.SettingsScreen
 
@@ -26,6 +28,7 @@ fun SettingsNavigationHost(
     consentState: ConsentState = ConsentState(),
     onConsentChange: (ConsentState) -> Unit = {},
     feedbackViewModel: FeedbackViewModel,
+    createSequenceViewModel: CreateSequenceViewModel,
 ) {
     var destinationIndex by rememberSaveable { mutableIntStateOf(Destination.LIST) }
 
@@ -49,6 +52,7 @@ fun SettingsNavigationHost(
                 SettingsScreen(
                     onNavigateToAttribution = { destinationIndex = Destination.ATTRIBUTION },
                     onNavigateToFeedback = { destinationIndex = Destination.FEEDBACK },
+                    onNavigateToCreateSequence = { destinationIndex = Destination.CREATE_SEQUENCE },
                     isClassicEnabled = isClassicEnabled,
                     onClassicToggle = onClassicToggle,
                     consentState = consentState,
@@ -71,6 +75,14 @@ fun SettingsNavigationHost(
                     modifier = modifier,
                 )
             }
+
+            Destination.CREATE_SEQUENCE -> {
+                CreateSequenceScreen(
+                    viewModel = createSequenceViewModel,
+                    onBack = { destinationIndex = Destination.LIST },
+                    modifier = modifier,
+                )
+            }
         }
     }
 }
@@ -79,4 +91,5 @@ private object Destination {
     const val LIST = 0
     const val ATTRIBUTION = 1
     const val FEEDBACK = 2
+    const val CREATE_SEQUENCE = 3
 }

@@ -9,13 +9,21 @@ actual class SoundPlayer(
     private val context: Context,
     private val mediaPlayer: MediaPlayer,
 ) {
-    actual fun play(sound: Sound) {
+    actual fun play(
+        sound: Sound,
+        onCompletion: (() -> Unit)?,
+    ) {
         stop()
 
         val assetPath = "audio/${sound.category.name.lowercase()}/${sound.fileName}"
         val afd: AssetFileDescriptor = context.assets.openFd(assetPath)
         mediaPlayer.setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
         afd.close()
+
+        onCompletion?.let { callback ->
+            mediaPlayer.setOnCompletionListener { callback() }
+        } ?: mediaPlayer.setOnCompletionListener(null)
+
         mediaPlayer.prepare()
         mediaPlayer.start()
     }

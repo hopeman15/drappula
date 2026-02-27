@@ -2,7 +2,9 @@ package com.hellocuriosity.drappula.ui.soundplayer
 
 import app.cash.turbine.test
 import com.hellocuriosity.drappula.SoundPlayer
+import com.hellocuriosity.drappula.SoundSequencer
 import com.hellocuriosity.drappula.coroutines.CoroutinesTestCase
+import com.hellocuriosity.drappula.data.SoundSequenceRepository
 import com.hellocuriosity.drappula.models.Dracula
 import com.hellocuriosity.drappula.reporting.ReportHandler
 import com.hellocuriosity.drappula.reporting.SoundEvent
@@ -14,6 +16,7 @@ import io.mockk.mockk
 import io.mockk.runs
 import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.After
 import org.junit.Test
@@ -25,11 +28,16 @@ import kotlin.test.assertTrue
 @OptIn(ExperimentalCoroutinesApi::class)
 class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatcher()) {
     private val soundPlayer: SoundPlayer = mockk()
+    private val soundSequencer: SoundSequencer = mockk(relaxed = true)
+    private val soundSequenceRepository: SoundSequenceRepository = mockk()
     private val reportHandler: ReportHandler = mockk(relaxed = true)
 
     private val viewModel: SoundPlayerViewModel by lazy {
+        every { soundSequenceRepository.observeAll() } returns flowOf(emptyList())
         DefaultSoundPlayerViewModel(
             soundPlayer = soundPlayer,
+            soundSequencer = soundSequencer,
+            soundSequenceRepository = soundSequenceRepository,
             dispatchers = dispatchers,
             reportHandler = reportHandler,
         )
@@ -54,7 +62,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
     fun testPlaySoundUpdatesStateToPlayingThenNotPlaying() =
         runBlockingTest {
             val sound = Dracula.I
-            every { soundPlayer.play(sound) } just runs
+            every { soundPlayer.play(sound, any()) } just runs
 
             viewModel.state.test {
                 // Initial state
@@ -75,7 +83,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
                 assertNull(finishedState.error)
             }
 
-            verify { soundPlayer.play(sound) }
+            verify { soundPlayer.play(sound, any()) }
             verify { reportHandler.logEvent(SoundEvent.Play(sound)) }
         }
 
@@ -83,7 +91,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
     fun testPlaySoundWithDraculaSoundPlaysCorrectly() =
         runBlockingTest {
             val sound = Dracula.DRACULA
-            every { soundPlayer.play(sound) } just runs
+            every { soundPlayer.play(sound, any()) } just runs
 
             viewModel.state.test {
                 assertFalse(awaitItem().isPlaying)
@@ -94,7 +102,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
                 assertFalse(awaitItem().isPlaying)
             }
 
-            verify { soundPlayer.play(sound) }
+            verify { soundPlayer.play(sound, any()) }
             verify { reportHandler.logEvent(SoundEvent.Play(sound)) }
         }
 
@@ -103,7 +111,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
         runBlockingTest {
             val sound = Dracula.I
             val exception = RuntimeException("Audio playback failed")
-            every { soundPlayer.play(sound) } throws exception
+            every { soundPlayer.play(sound, any()) } throws exception
 
             viewModel.state.test {
                 assertFalse(awaitItem().isPlaying)
@@ -119,7 +127,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
                 assertEquals(exception, errorState.error)
             }
 
-            verify { soundPlayer.play(sound) }
+            verify { soundPlayer.play(sound, any()) }
             verify { reportHandler.reportException(exception) }
         }
 
@@ -130,7 +138,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
             val exception = RuntimeException("First failure")
 
             // First call throws, second succeeds
-            every { soundPlayer.play(sound) } throws exception andThen Unit
+            every { soundPlayer.play(sound, any()) } throws exception andThen Unit
 
             viewModel.state.test {
                 assertFalse(awaitItem().isPlaying)
@@ -153,7 +161,7 @@ class DefaultSoundPlayerViewModelTest : CoroutinesTestCase(StandardTestDispatche
                 assertNull(finishedState.error)
             }
 
-            verify(exactly = 2) { soundPlayer.play(sound) }
+            verify(exactly = 2) { soundPlayer.play(sound, any()) }
             verify { reportHandler.reportException(exception) }
             verify { reportHandler.logEvent(SoundEvent.Play(sound)) }
         }

@@ -20,7 +20,7 @@ class FakeAudioPlayer : AudioPlayer {
         return true
     }
 
-    override fun play(): Boolean {
+    override fun play(onCompletion: (() -> Unit)?): Boolean {
         playCalled = true
         return true
     }

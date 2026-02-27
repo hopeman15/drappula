@@ -23,6 +23,7 @@ import com.hellocuriosity.drappula.consent.ConsentState
 import com.hellocuriosity.drappula.models.Category
 import com.hellocuriosity.drappula.navigation.SettingsNavigationHost
 import com.hellocuriosity.drappula.navigation.Tab
+import com.hellocuriosity.drappula.ui.createsequence.CreateSequenceViewModel
 import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
@@ -32,6 +33,7 @@ import com.hellocuriosity.drappula.ui.theme.toColor
 fun DashboardScreen(
     soundPlayerViewModel: SoundPlayerViewModel,
     feedbackViewModel: FeedbackViewModel,
+    createSequenceViewModel: CreateSequenceViewModel,
     isClassicEnabled: Boolean = false,
     onClassicToggle: (Boolean) -> Unit = {},
     consentState: ConsentState = ConsentState(),
@@ -75,6 +77,7 @@ fun DashboardScreen(
                         consentState = consentState,
                         onConsentChange = onConsentChange,
                         feedbackViewModel = feedbackViewModel,
+                        createSequenceViewModel = createSequenceViewModel,
                     )
                 }
             }

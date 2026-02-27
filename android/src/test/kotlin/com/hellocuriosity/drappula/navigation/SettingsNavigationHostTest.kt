@@ -5,6 +5,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.hellocuriosity.drappula.MockApplication
 import com.hellocuriosity.drappula.coroutines.CoroutinesComposeTest
+import com.hellocuriosity.drappula.ui.createsequence.CreateSequenceViewModel
 import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.screens.AttributionTestTags
 import com.hellocuriosity.drappula.ui.screens.FeedbackTestTags
@@ -23,11 +24,16 @@ class SettingsNavigationHostTest : CoroutinesComposeTest() {
             every { state } returns MutableStateFlow(FeedbackViewModel.State())
         }
 
+    private val createSequenceViewModel: CreateSequenceViewModel = mockk(relaxed = true)
+
     @Test
     fun testInitialStateShowsSettingsScreen() {
         composeTestRule.setContent {
             DrappulaTheme {
-                SettingsNavigationHost(feedbackViewModel = feedbackViewModel)
+                SettingsNavigationHost(
+                    feedbackViewModel = feedbackViewModel,
+                    createSequenceViewModel = createSequenceViewModel,
+                )
             }
         }
 
@@ -41,7 +47,10 @@ class SettingsNavigationHostTest : CoroutinesComposeTest() {
     fun testNavigateToAttributionScreen() {
         composeTestRule.setContent {
             DrappulaTheme {
-                SettingsNavigationHost(feedbackViewModel = feedbackViewModel)
+                SettingsNavigationHost(
+                    feedbackViewModel = feedbackViewModel,
+                    createSequenceViewModel = createSequenceViewModel,
+                )
             }
         }
 
@@ -61,7 +70,10 @@ class SettingsNavigationHostTest : CoroutinesComposeTest() {
     fun testNavigateBackFromAttributionScreen() {
         composeTestRule.setContent {
             DrappulaTheme {
-                SettingsNavigationHost(feedbackViewModel = feedbackViewModel)
+                SettingsNavigationHost(
+                    feedbackViewModel = feedbackViewModel,
+                    createSequenceViewModel = createSequenceViewModel,
+                )
             }
         }
 
@@ -90,7 +102,10 @@ class SettingsNavigationHostTest : CoroutinesComposeTest() {
     fun testNavigateToFeedbackScreen() {
         composeTestRule.setContent {
             DrappulaTheme {
-                SettingsNavigationHost(feedbackViewModel = feedbackViewModel)
+                SettingsNavigationHost(
+                    feedbackViewModel = feedbackViewModel,
+                    createSequenceViewModel = createSequenceViewModel,
+                )
             }
         }
 
@@ -110,7 +125,10 @@ class SettingsNavigationHostTest : CoroutinesComposeTest() {
     fun testNavigateBackFromFeedbackScreen() {
         composeTestRule.setContent {
             DrappulaTheme {
-                SettingsNavigationHost(feedbackViewModel = feedbackViewModel)
+                SettingsNavigationHost(
+                    feedbackViewModel = feedbackViewModel,
+                    createSequenceViewModel = createSequenceViewModel,
+                )
             }
         }
 
