@@ -8,6 +8,7 @@ import com.hellocuriosity.drappula.coroutines.CoroutinesComposeTest
 import com.hellocuriosity.drappula.ui.createsequence.CreateSequenceViewModel
 import com.hellocuriosity.drappula.ui.feedback.FeedbackViewModel
 import com.hellocuriosity.drappula.ui.screens.AttributionTestTags
+import com.hellocuriosity.drappula.ui.screens.CreateSequenceTestTags
 import com.hellocuriosity.drappula.ui.screens.FeedbackTestTags
 import com.hellocuriosity.drappula.ui.screens.SettingsTestTags
 import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
@@ -24,7 +25,10 @@ class SettingsNavigationHostTest : CoroutinesComposeTest() {
             every { state } returns MutableStateFlow(FeedbackViewModel.State())
         }
 
-    private val createSequenceViewModel: CreateSequenceViewModel = mockk(relaxed = true)
+    private val createSequenceViewModel: CreateSequenceViewModel =
+        mockk(relaxed = true) {
+            every { state } returns MutableStateFlow(CreateSequenceViewModel.State())
+        }
 
     @Test
     fun testInitialStateShowsSettingsScreen() {
@@ -142,6 +146,61 @@ class SettingsNavigationHostTest : CoroutinesComposeTest() {
         // Navigate back
         composeTestRule
             .onNodeWithTag(FeedbackTestTags.BACK_BUTTON)
+            .performClick()
+
+        composeTestRule.waitForIdle()
+
+        // Verify we're back on Settings screen
+        composeTestRule
+            .onNodeWithTag(SettingsTestTags.SCREEN)
+            .assertExists()
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testNavigateToCreateSequenceScreen() {
+        composeTestRule.setContent {
+            DrappulaTheme {
+                SettingsNavigationHost(
+                    feedbackViewModel = feedbackViewModel,
+                    createSequenceViewModel = createSequenceViewModel,
+                )
+            }
+        }
+
+        composeTestRule
+            .onNodeWithTag(SettingsTestTags.CREATE_SEQUENCE_ITEM)
+            .performClick()
+
+        composeTestRule.waitForIdle()
+
+        composeTestRule
+            .onNodeWithTag(CreateSequenceTestTags.SCREEN)
+            .assertExists()
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testNavigateBackFromCreateSequenceScreen() {
+        composeTestRule.setContent {
+            DrappulaTheme {
+                SettingsNavigationHost(
+                    feedbackViewModel = feedbackViewModel,
+                    createSequenceViewModel = createSequenceViewModel,
+                )
+            }
+        }
+
+        // Navigate to Create Sequence screen
+        composeTestRule
+            .onNodeWithTag(SettingsTestTags.CREATE_SEQUENCE_ITEM)
+            .performClick()
+
+        composeTestRule.waitForIdle()
+
+        // Navigate back
+        composeTestRule
+            .onNodeWithTag(CreateSequenceTestTags.BACK_BUTTON)
             .performClick()
 
         composeTestRule.waitForIdle()

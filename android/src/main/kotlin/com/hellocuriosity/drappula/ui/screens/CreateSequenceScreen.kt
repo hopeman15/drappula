@@ -20,8 +20,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -84,36 +82,19 @@ fun CreateSequenceScreen(
                     .testTag(CreateSequenceTestTags.TITLE),
         )
 
-        OutlinedTextField(
-            value = state.sequenceName,
-            onValueChange = viewModel::setName,
-            label = { Text("Sequence Name") },
-            singleLine = true,
-            colors =
-                OutlinedTextFieldDefaults.colors(
-                    focusedTextColor = MaterialTheme.colorScheme.onBackground,
-                    unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
-                    focusedBorderColor = MaterialTheme.colorScheme.onBackground,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
-                    focusedLabelColor = MaterialTheme.colorScheme.onBackground,
-                    unfocusedLabelColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
-                ),
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .testTag(CreateSequenceTestTags.NAME_FIELD),
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
         if (state.selectedSounds.isNotEmpty()) {
             Text(
-                text = "Selected Sounds",
-                style = MaterialTheme.typography.titleMedium,
+                text = state.sequenceName,
+                style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.padding(horizontal = 16.dp),
+                modifier =
+                    Modifier
+                        .padding(horizontal = 16.dp)
+                        .align(Alignment.CenterHorizontally)
+                        .testTag(CreateSequenceTestTags.SEQUENCE_NAME),
             )
+
+            Spacer(modifier = Modifier.height(8.dp))
 
             FlowRow(
                 modifier =
@@ -164,7 +145,7 @@ fun CreateSequenceScreen(
 
         Button(
             onClick = viewModel::save,
-            enabled = state.sequenceName.isNotBlank() && state.selectedSounds.isNotEmpty() && !state.isSaving,
+            enabled = state.selectedSounds.isNotEmpty() && !state.isSaving,
             colors =
                 ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.surface,
@@ -185,7 +166,7 @@ object CreateSequenceTestTags {
     const val SCREEN = "CreateSequenceScreen"
     const val BACK_BUTTON = "CreateSequenceBackButton"
     const val TITLE = "CreateSequenceTitle"
-    const val NAME_FIELD = "CreateSequenceNameField"
+    const val SEQUENCE_NAME = "CreateSequenceSequenceName"
     const val SELECTED_SOUNDS_ROW = "CreateSequenceSelectedSoundsRow"
     const val SOUND_BUTTONS_ROW = "CreateSequenceSoundButtonsRow"
     const val SAVE_BUTTON = "CreateSequenceSaveButton"

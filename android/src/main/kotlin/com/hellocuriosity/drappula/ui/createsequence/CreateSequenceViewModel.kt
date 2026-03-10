@@ -15,19 +15,19 @@ import kotlinx.coroutines.launch
 abstract class CreateSequenceViewModel : ViewModel() {
     data class State(
         val selectedSounds: List<Sound> = emptyList(),
-        val sequenceName: String = "",
         val isSaving: Boolean = false,
         val savedSuccessfully: Boolean = false,
         val error: Throwable? = null,
-    )
+    ) {
+        val sequenceName: String
+            get() = selectedSounds.joinToString(" ") { it.displayName }
+    }
 
     abstract val state: StateFlow<State>
 
     abstract fun addSound(sound: Sound)
 
     abstract fun removeSound(index: Int)
-
-    abstract fun setName(name: String)
 
     abstract fun save()
 
@@ -63,20 +63,16 @@ class DefaultCreateSequenceViewModel(
         }
     }
 
-    override fun setName(name: String) {
-        _state.update { it.copy(sequenceName = name) }
-    }
-
     @Suppress("TooGenericExceptionCaught")
     override fun save() {
         val currentState = _state.value
-        if (currentState.sequenceName.isBlank() || currentState.selectedSounds.isEmpty()) return
+        if (currentState.selectedSounds.isEmpty()) return
 
         viewModelScope.launch(dispatchers.io) {
             _state.update { it.copy(isSaving = true, error = null) }
             try {
                 soundSequenceRepository.create(
-                    name = currentState.sequenceName.trim(),
+                    name = currentState.sequenceName,
                     sounds = currentState.selectedSounds,
                 )
                 _state.update { it.copy(isSaving = false, savedSuccessfully = true) }

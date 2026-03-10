@@ -32,12 +32,12 @@ fun SelectedSoundChip(
     ) {
         Text(
             text = sound.displayName,
-            style = MaterialTheme.typography.labelMedium,
+            style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.onSurface,
         )
         Text(
             text = " \u00D7",
-            style = MaterialTheme.typography.labelMedium,
+            style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
         )
     }

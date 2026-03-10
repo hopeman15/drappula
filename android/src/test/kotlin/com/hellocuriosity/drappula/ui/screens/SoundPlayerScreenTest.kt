@@ -12,6 +12,7 @@ import com.hellocuriosity.drappula.coroutines.CoroutinesComposeTest
 import com.hellocuriosity.drappula.data.SoundSequenceRepository
 import com.hellocuriosity.drappula.models.Category
 import com.hellocuriosity.drappula.models.Dracula
+import com.hellocuriosity.drappula.models.SoundSequence
 import com.hellocuriosity.drappula.reporting.ReportHandler
 import com.hellocuriosity.drappula.ui.soundplayer.DefaultSoundPlayerViewModel
 import com.hellocuriosity.drappula.ui.soundplayer.SoundPlayerViewModel
@@ -19,6 +20,7 @@ import com.hellocuriosity.drappula.ui.theme.DrappulaTheme
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Test
 import org.robolectric.annotation.Config
@@ -142,5 +144,72 @@ class SoundPlayerScreenTest : CoroutinesComposeTest() {
             .performClick()
 
         verify { soundPlayer.play(Dracula.DRACULA) }
+    }
+
+    @Test
+    fun testSequencesSectionHiddenWhenEmpty() {
+        composeTestRule.setContent {
+            DrappulaTheme {
+                SoundPlayerScreen(
+                    category = Category.DRACULA,
+                    viewModel = viewModel,
+                )
+            }
+        }
+
+        composeTestRule
+            .onNodeWithTag(SoundPlayerTestTags.SEQUENCES_TITLE)
+            .assertDoesNotExist()
+
+        composeTestRule
+            .onNodeWithTag(SoundPlayerTestTags.SEQUENCES_FLOW_ROW)
+            .assertDoesNotExist()
+    }
+
+    @Test
+    fun testSequencesSectionDisplayedWhenSequencesExist() {
+        val sequences =
+            listOf(
+                SoundSequence(
+                    id = 1L,
+                    name = "I am Dracula",
+                    sounds = listOf(Dracula.I, Dracula.AM, Dracula.DRACULA),
+                ),
+            )
+        every { soundSequenceRepository.observeAll() } returns MutableStateFlow(sequences)
+        val vm =
+            DefaultSoundPlayerViewModel(
+                soundPlayer = soundPlayer,
+                soundSequencer = soundSequencer,
+                soundSequenceRepository = soundSequenceRepository,
+                dispatchers = dispatchers,
+                reportHandler = reportHandler,
+            )
+
+        composeTestRule.setContent {
+            DrappulaTheme {
+                SoundPlayerScreen(
+                    category = Category.DRACULA,
+                    viewModel = vm,
+                )
+            }
+        }
+
+        composeTestRule
+            .onNodeWithTag(SoundPlayerTestTags.SEQUENCES_TITLE)
+            .assertExists()
+            .assertIsDisplayed()
+            .assertTextEquals("My Sequences")
+
+        composeTestRule
+            .onNodeWithTag(SoundPlayerTestTags.SEQUENCES_FLOW_ROW)
+            .assertExists()
+            .assertIsDisplayed()
+
+        composeTestRule
+            .onNodeWithTag(SoundPlayerTestTags.sequenceButton(1L))
+            .assertExists()
+            .assertIsDisplayed()
+            .assertTextEquals("I am Dracula")
     }
 }

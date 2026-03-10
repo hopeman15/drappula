@@ -62,4 +62,34 @@ class SettingsScreenTest : CoroutinesComposeTest() {
 
         assertTrue(navigatedToAttribution)
     }
+
+    @Test
+    fun testCreateSequenceItemIsDisplayed() {
+        composeTestRule.setContent {
+            DrappulaTheme {
+                SettingsScreen()
+            }
+        }
+
+        composeTestRule
+            .onNodeWithTag(SettingsTestTags.CREATE_SEQUENCE_ITEM)
+            .assertExists()
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testCreateSequenceItemClickTriggersCallback() {
+        var navigatedToCreateSequence = false
+        composeTestRule.setContent {
+            DrappulaTheme {
+                SettingsScreen(onNavigateToCreateSequence = { navigatedToCreateSequence = true })
+            }
+        }
+
+        composeTestRule
+            .onNodeWithTag(SettingsTestTags.CREATE_SEQUENCE_ITEM)
+            .performClick()
+
+        assertTrue(navigatedToCreateSequence)
+    }
 }
