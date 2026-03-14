@@ -54,7 +54,7 @@ class SlackRepositoryTest {
                         ),
                     feedbackConverter = FeedbackConverter(channelId = "test-channel", platform = "test"),
                 ) {
-                    override suspend fun postFeedback(value: Feedback): Feedback? {
+                    override suspend fun postFeedback(value: Feedback): Feedback {
                         capturedFeedback = value
                         return value
                     }
@@ -67,6 +67,6 @@ class SlackRepositoryTest {
 
             assertNotNull(result)
             assertNotNull(capturedFeedback)
-            assertEquals(fixedInstant, capturedFeedback?.created)
+            assertEquals(fixedInstant, capturedFeedback.created)
         }
 }
