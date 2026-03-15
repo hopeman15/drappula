@@ -19,7 +19,7 @@ class ReportHandlerTest {
         ReportHandler(
             analytics = analytics,
             crashlytics = crashlytics,
-            bundle = bundle,
+            bundleProvider = { bundle },
         )
 
     @After

@@ -7,9 +7,10 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 actual class ReportHandler(
     private val analytics: FirebaseAnalytics,
     private val crashlytics: FirebaseCrashlytics,
-    private val bundle: Bundle = Bundle(),
+    private val bundleProvider: () -> Bundle = ::Bundle,
 ) {
     actual fun logEvent(event: AnalyticsEvent) {
+        val bundle = bundleProvider()
         event.extras?.forEach {
             bundle.putString(it.key, it.value)
         }
