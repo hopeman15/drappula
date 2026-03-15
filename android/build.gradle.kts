@@ -77,13 +77,14 @@ android {
 
     flavorDimensions.addAll(listOf("all"))
     productFlavors {
-        create("production") {
-            dimension = "all"
-        }
         create("staging") {
+            isDefault = true
             dimension = "all"
             versionNameSuffix = "-staging"
             applicationIdSuffix = ".staging"
+        }
+        create("production") {
+            dimension = "all"
         }
     }
 
