@@ -21,14 +21,12 @@ class SlackService(
                 headers {
                     append(HttpHeaders.AcceptLanguage, LANGUAGE)
                     append(HttpHeaders.Authorization, "Bearer $token")
-                    append(HttpHeaders.ContentType, APPLICATION_FORM)
                 }
                 contentType(ContentType.Application.Json)
                 setBody(apiSlackMessage)
             }.body()
 
     companion object {
-        private const val APPLICATION_FORM = "application/x-www-form-urlencoded"
         private const val LANGUAGE = "en-US"
         private const val URL: String = "https://slack.com/api/chat.postMessage"
     }
