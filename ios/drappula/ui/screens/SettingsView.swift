@@ -4,6 +4,7 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.drappulaTheme) private var theme
     @Binding var isClassicEnabled: Bool
+    private let consentManager = ConsentManager()
 
     var body: some View {
         NavigationStack {
@@ -69,15 +70,15 @@ struct SettingsView: View {
                             Spacer()
 
                             Toggle("", isOn: Binding(
-                                get: { ConsentManagerIOS.shared.consentState.analytics },
+                                get: { consentManager.getConsentState().analytics },
                                 set: { enabled in
-                                    let current = ConsentManagerIOS.shared.consentState
-                                    ConsentManagerIOS.shared.updateConsent(
-                                        ConsentStateIOS(
-                                            analytics: enabled,
-                                            crashReporting: current.crashReporting
-                                        )
+                                    let current = consentManager.getConsentState()
+                                    let newState = ConsentState(
+                                        analytics: enabled,
+                                        crashReporting: current.crashReporting
                                     )
+                                    consentManager.updateConsent(state: newState)
+                                    FirebaseConsentApplier.apply(newState)
                                 }
                             ))
                             .labelsHidden()
@@ -97,15 +98,15 @@ struct SettingsView: View {
                             Spacer()
 
                             Toggle("", isOn: Binding(
-                                get: { ConsentManagerIOS.shared.consentState.crashReporting },
+                                get: { consentManager.getConsentState().crashReporting },
                                 set: { enabled in
-                                    let current = ConsentManagerIOS.shared.consentState
-                                    ConsentManagerIOS.shared.updateConsent(
-                                        ConsentStateIOS(
-                                            analytics: current.analytics,
-                                            crashReporting: enabled
-                                        )
+                                    let current = consentManager.getConsentState()
+                                    let newState = ConsentState(
+                                        analytics: current.analytics,
+                                        crashReporting: enabled
                                     )
+                                    consentManager.updateConsent(state: newState)
+                                    FirebaseConsentApplier.apply(newState)
                                 }
                             ))
                             .labelsHidden()

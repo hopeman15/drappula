@@ -4,7 +4,8 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var viewModel = SoundPlayerViewModel.create()
     @AppStorage("isClassicEnabled") private var isClassicEnabled = false
-    @State private var hasResponded = ConsentManagerIOS.shared.hasUserResponded()
+    private let consentManager = ConsentManager()
+    @State private var hasResponded = ConsentManager().hasUserResponded()
 
     var body: some View {
         Group {
@@ -27,7 +28,8 @@ struct ContentView: View {
                 }
             } else {
                 ConsentView { state in
-                    ConsentManagerIOS.shared.updateConsent(state)
+                    consentManager.updateConsent(state: state)
+                    FirebaseConsentApplier.apply(state)
                     hasResponded = true
                 }
             }

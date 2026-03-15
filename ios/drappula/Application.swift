@@ -1,4 +1,5 @@
 import FirebaseCore
+import shared
 import SwiftUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -8,9 +9,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     ) -> Bool {
         FirebaseApp.configure()
 
-        let consentManager = ConsentManagerIOS.shared
+        let consentManager = ConsentManager()
         if consentManager.hasUserResponded() {
-            consentManager.applyToFirebase(consentManager.consentState)
+            FirebaseConsentApplier.apply(consentManager.getConsentState())
         }
         return true
     }
