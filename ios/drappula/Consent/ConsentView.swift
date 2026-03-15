@@ -3,7 +3,7 @@ import shared
 import SwiftUI
 
 struct ConsentView: View {
-    let onConsentGiven: (ConsentStateIOS) -> Void
+    let onConsentGiven: (ConsentState) -> Void
 
     @Environment(\.drappulaTheme) private var theme
     @State private var analyticsEnabled = false
@@ -52,7 +52,7 @@ struct ConsentView: View {
 
                 Button(
                     action: {
-                        onConsentGiven(ConsentStateIOS(analytics: true, crashReporting: true))
+                        onConsentGiven(ConsentState(analytics: true, crashReporting: true))
                     },
                     label: {
                         Text("Accept All")
@@ -65,7 +65,7 @@ struct ConsentView: View {
 
                 Button(
                     action: {
-                        onConsentGiven(ConsentStateIOS(
+                        onConsentGiven(ConsentState(
                             analytics: analyticsEnabled,
                             crashReporting: crashReportingEnabled
                         ))
@@ -81,7 +81,7 @@ struct ConsentView: View {
 
                 Button(
                     action: {
-                        onConsentGiven(ConsentStateIOS(analytics: false, crashReporting: false))
+                        onConsentGiven(ConsentState(analytics: false, crashReporting: false))
                     },
                     label: {
                         Text("Decline All")
