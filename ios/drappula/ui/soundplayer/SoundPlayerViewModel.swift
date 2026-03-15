@@ -2,7 +2,7 @@ import Foundation
 import shared
 
 protocol SoundPlayerProtocol {
-    func play(sound: Sound)
+    func play(sound: Sound) throws
     func releaseSoundPlayer()
 }
 
@@ -13,7 +13,7 @@ class SoundPlayerWrapper: SoundPlayerProtocol {
         self.soundPlayer = soundPlayer
     }
 
-    func play(sound: Sound) {
+    func play(sound: Sound) throws {
         soundPlayer.play(sound: sound)
     }
 
@@ -26,6 +26,12 @@ class SoundPlayerWrapper: SoundPlayerProtocol {
 class SoundPlayerViewModel: ObservableObject {
     struct State: Equatable {
         var isPlaying: Bool = false
+        var error: Error? = nil
+
+        static func == (lhs: State, rhs: State) -> Bool {
+            lhs.isPlaying == rhs.isPlaying &&
+            lhs.error?.localizedDescription == rhs.error?.localizedDescription
+        }
     }
 
     @Published private(set) var state = State()
@@ -39,10 +45,15 @@ class SoundPlayerViewModel: ObservableObject {
     }
 
     func playSound(_ sound: Sound) {
-        state = State(isPlaying: true)
-        soundPlayer.play(sound: sound)
-        state = State(isPlaying: false)
-        reportHandler.logEvent(event: SoundEvent.Play(sound: sound))
+        do {
+            state = State(isPlaying: true)
+            try soundPlayer.play(sound: sound)
+            state = State(isPlaying: false)
+            reportHandler.logEvent(event: SoundEvent.Play(sound: sound))
+        } catch {
+            state = State(isPlaying: false, error: error)
+            reportHandler.reportException(exception: KotlinThrowable(message: error.localizedDescription))
+        }
     }
 
     deinit {

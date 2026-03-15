@@ -43,4 +43,17 @@ struct SoundPlayerViewModelTests {
 
         #expect(viewModel.state.isPlaying == false)
     }
+
+    @Test
+    func playSoundHandlesError() async {
+        let mockPlayer = MockSoundPlayer()
+        mockPlayer.errorToThrow = NSError(domain: "test", code: 1, userInfo: [NSLocalizedDescriptionKey: "playback failed"])
+        let viewModel = SoundPlayerViewModel(soundPlayer: mockPlayer, reportHandler: MockReportHandlerFactory.create())
+
+        viewModel.playSound(Dracula.i)
+
+        #expect(viewModel.state.isPlaying == false)
+        #expect(viewModel.state.error != nil)
+        #expect(viewModel.state.error?.localizedDescription == "playback failed")
+    }
 }
