@@ -26,7 +26,7 @@ class SoundPlayerWrapper: SoundPlayerProtocol {
 class SoundPlayerViewModel: ObservableObject {
     struct State: Equatable {
         var isPlaying: Bool = false
-        var error: Error? = nil
+        var error: Error?
 
         static func == (lhs: State, rhs: State) -> Bool {
             lhs.isPlaying == rhs.isPlaying &&
