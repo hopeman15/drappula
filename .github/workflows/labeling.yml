@@ -15,7 +15,7 @@ jobs:
       repository-projects: write
     steps:
       - name: Labeling
-        uses: hopeman15/labelicious@0.3.0
+        uses: hopeman15/labelicious@0.4.0
         with:
           keywords: "Android,iOS"
           labels: "Android :robot:,iOS :apple:"
