@@ -52,7 +52,7 @@ class SlackRepositoryTest {
                                 },
                             token = "test-token",
                         ),
-                    feedbackConverter = FeedbackConverter(channelId = "test-channel", platform = "test"),
+                    feedbackMapper = FeedbackConverter(channelId = "test-channel", platform = "test"),
                 ) {
                     override suspend fun postFeedback(value: Feedback): Feedback {
                         capturedFeedback = value

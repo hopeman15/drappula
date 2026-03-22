@@ -47,7 +47,7 @@ class SlackCloudTest {
         runTest {
             val client = createMockClient(isSuccessful = true)
             val service = SlackService(client, token = "test-token")
-            val cloud = SlackCloud(service = service, feedbackConverter = FeedbackConverter(channelId = "test-channel", platform = "test"))
+            val cloud = SlackCloud(service = service, feedbackMapper = FeedbackConverter(channelId = "test-channel", platform = "test"))
 
             val feedback = Feedback(title = "Test", message = "Test Message")
             val result = cloud.postFeedback(feedback)
@@ -61,7 +61,7 @@ class SlackCloudTest {
         runTest {
             val client = createMockClient(isSuccessful = false)
             val service = SlackService(client, token = "test-token")
-            val cloud = SlackCloud(service = service, feedbackConverter = FeedbackConverter(channelId = "test-channel", platform = "test"))
+            val cloud = SlackCloud(service = service, feedbackMapper = FeedbackConverter(channelId = "test-channel", platform = "test"))
 
             val feedback = Feedback(title = "Test", message = "Test Message")
             val result = cloud.postFeedback(feedback)

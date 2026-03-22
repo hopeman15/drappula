@@ -1,10 +1,8 @@
 package com.hellocuriosity.drappula.data.network.converters
 
-import com.hellocuriosity.drappula.data.network.models.ApiSlackMessage
 import com.hellocuriosity.drappula.models.Feedback
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
 import kotlin.time.Instant
 
@@ -12,7 +10,7 @@ class FeedbackConverterTest {
     private val converter = FeedbackConverter(channelId = "test-channel", platform = "test")
 
     @Test
-    fun testFromFeedback() {
+    fun testMapFeedback() {
         val created = Instant.fromEpochMilliseconds(1000L)
         val feedback =
             Feedback(
@@ -22,7 +20,7 @@ class FeedbackConverterTest {
                 created = created,
             )
 
-        val result = converter.from(feedback)
+        val result = converter.map(feedback)
 
         assertEquals("test-channel", result.channel)
         assertNotNull(result.attachments)
@@ -35,13 +33,5 @@ class FeedbackConverterTest {
         assertEquals("Test Title", attachment.title)
         assertEquals("Test Message", attachment.text)
         assertEquals(1000L, attachment.createdOn)
-    }
-
-    @Test
-    fun testToThrowsNotImplemented() {
-        val message = ApiSlackMessage()
-        assertFailsWith<NotImplementedError> {
-            converter.to(message)
-        }
     }
 }
