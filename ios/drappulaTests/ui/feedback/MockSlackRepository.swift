@@ -4,8 +4,8 @@ import shared
 enum SlackRepositoryFactory {
     static func create() -> SlackRepository {
         let networkModule = NetworkModule(factory: HttpEngineFactory(), token: "")
-        let converter = FeedbackConverter(channelId: "", platform: "test")
-        let cloud = SlackCloud(service: networkModule.service, feedbackConverter: converter)
+        let mapper = FeedbackConverter(channelId: "", platform: "test")
+        let cloud = SlackCloud(service: networkModule.service, feedbackMapper: mapper)
         return SlackRepository(cloud: cloud, instantProvider: SystemInstantTimeProvider())
     }
 }

@@ -30,7 +30,7 @@ class ApplicationComponent(
             cloud =
                 SlackCloud(
                     service = networkModule.service,
-                    feedbackConverter =
+                    feedbackMapper =
                         FeedbackConverter(
                             channelId = BuildConfig.SLACK_CHANNEL_ID,
                             platform = "Android",
