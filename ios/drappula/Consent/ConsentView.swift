@@ -94,7 +94,7 @@ struct ConsentView: View {
 
                 Button(
                     action: {
-                        if let url = URL(string: Self.secretValue(forKey: "PRIVACY_POLICY_URL")) {
+                        if let url = URL(string: SecretsProvider.secretValue(forKey: "PRIVACY_POLICY_URL")) {
                             openURL(url)
                         }
                     },
@@ -114,18 +114,6 @@ struct ConsentView: View {
             .padding(24)
         }
         .background(theme.gradients.background)
-    }
-}
-
-extension ConsentView {
-    static func secretValue(forKey key: String) -> String {
-        if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
-           let dict = NSDictionary(contentsOfFile: path),
-           let value = dict[key] as? String,
-           !value.isEmpty {
-            return value
-        }
-        return ProcessInfo.processInfo.environment[key] ?? ""
     }
 }
 
