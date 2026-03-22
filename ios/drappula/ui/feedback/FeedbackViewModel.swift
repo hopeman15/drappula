@@ -31,24 +31,14 @@ class FeedbackViewModel: ObservableObject {
     }
 
     static func create() -> FeedbackViewModel {
-        let token = secretValue(forKey: "SLACK_BOT_TOKEN")
-        let channelId = secretValue(forKey: "SLACK_CHANNEL_ID")
+        let token = SecretsProvider.secretValue(forKey: "SLACK_BOT_TOKEN")
+        let channelId = SecretsProvider.secretValue(forKey: "SLACK_CHANNEL_ID")
         let networkModule = NetworkModule(factory: HttpEngineFactory(), token: token)
         let converter = FeedbackConverter(channelId: channelId, platform: "iOS")
         let cloud = SlackCloud(service: networkModule.service, feedbackConverter: converter)
         let repository = SlackRepository(cloud: cloud, instantProvider: SystemInstantTimeProvider())
         let reportHandler = ReportHandlerFactory.create()
         return FeedbackViewModel(repository: repository, reportHandler: reportHandler)
-    }
-
-    private static func secretValue(forKey key: String) -> String {
-        if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
-           let dict = NSDictionary(contentsOfFile: path),
-           let value = dict[key] as? String,
-           !value.isEmpty {
-            return value
-        }
-        return ProcessInfo.processInfo.environment[key] ?? ""
     }
 
     func submit() {
