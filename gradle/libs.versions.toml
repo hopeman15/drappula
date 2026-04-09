@@ -32,7 +32,7 @@ firebaseAnalytics = "23.2.0"
 firebaseBom = "34.11.0"
 firebaseCrashlytics = "20.0.5"
 googleServices = "4.4.4"
-firebaseCrashlyticsPlugin = "3.0.6"
+firebaseCrashlyticsPlugin = "3.0.7"
 firebasePerfPlugin = "2.0.2"
 
 [libraries]
