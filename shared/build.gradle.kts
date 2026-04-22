@@ -36,20 +36,28 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.androidx.core.ktx)
             implementation(libs.ktor.client.okhttp)
-            implementation(libs.firebase.analytics.versioned)
+            implementation(libs.ktor.http)
+            implementation(libs.ktor.serialization)
+            implementation(libs.ktor.utils)
+            api(libs.firebase.analytics.versioned)
             implementation(libs.firebase.crashlytics.versioned)
+            api(libs.kotlinx.serialization.core)
         }
         val androidHostTest by getting {
             dependencies {
                 implementation(libs.mockk)
+                implementation(libs.mockk.core)
+                implementation(libs.mockk.dsl)
+                implementation(libs.kotlin.testJunit)
+                implementation(libs.ktor.http)
+                implementation(libs.ktor.serialization)
+                implementation(libs.kotlinx.serialization.core)
             }
         }
         commonMain.dependencies {
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.client.core)
+            api(libs.ktor.client.core)
             implementation(libs.ktor.serialization.kotlinx.json)
         }
         commonTest.dependencies {
