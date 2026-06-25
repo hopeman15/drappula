@@ -117,11 +117,19 @@ android {
 }
 
 dependencies {
+    // androidx.core:core-ktx was merged into androidx.core:core as of 1.16.0, leaving
+    // newer core-ktx releases as empty relocation artifacts. Force the stale transitive
+    // core-ktx (pulled in by androidx.activity et al.) up to the empty current version so
+    // androidx.core:core is the single provider of the Kotlin extensions we use.
+    constraints {
+        implementation(libs.androidx.core.ktx)
+    }
+
     implementation(libs.kotlin.stdlib)
     implementation(project(":shared"))
 
     implementation(libs.androidx.annotation)
-    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core)
     implementation(libs.androidx.core.splashscreen)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.animation)

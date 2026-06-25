@@ -34,7 +34,7 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(libs.androidx.core.ktx)
+            implementation(libs.androidx.core)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.ktor.http)
             implementation(libs.ktor.serialization)
