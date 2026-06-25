@@ -1,6 +1,14 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import org.gradle.kotlin.dsl.withType
 
+buildscript {
+    dependencies {
+        // The dependency-analysis plugin bundles an older kotlin-metadata-jvm that cannot
+        // parse Kotlin 2.4.0 metadata. Force the matching version onto the buildscript classpath.
+        classpath(libs.kotlin.metadata.jvm)
+    }
+}
+
 plugins {
     // this is necessary to avoid the plugins to be loaded multiple times
     // in each subproject's classloader
