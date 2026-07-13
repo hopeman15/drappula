@@ -48,7 +48,12 @@ jobs:
       - name: Boot simulator
         run: |
           UDID=$(xcrun simctl list devices available -j | jq -r ".devices[] | .[] | select(.name == \"$IOS_SIMULATOR\") | .udid" | head -1)
-          xcrun simctl boot "$UDID" || true
+          if [ -z "$UDID" ]; then
+            echo "::error::No available simulator named '$IOS_SIMULATOR' found. Available devices:"
+            xcrun simctl list devices available
+            exit 1
+          fi
+          xcrun simctl boot "$UDID"
           echo "SIMULATOR_UDID=$UDID" >> $GITHUB_ENV
       - name: Build iOS Framework
         run: make build-ios-simulator
