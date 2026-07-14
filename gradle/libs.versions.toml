@@ -1,5 +1,5 @@
 [versions]
-agp = "9.2.1"
+agp = "9.3.0"
 curiosity = "0.12.0"
 dependencyAnalysis = "3.16.1"
 android-annotation = "1.10.0"
