@@ -1,6 +1,6 @@
 [versions]
 agp = "9.4.0"
-curiosity = "0.12.0"
+curiosity = "1.2.0"
 dependencyAnalysis = "3.19.1"
 android-annotation = "1.10.0"
 android-splashscreen = "1.2.0"
