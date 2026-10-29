@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:
           distribution: 'temurin'
-          java-version: '19'
+          java-version: '25'
           cache: 'gradle'
       - name: Linting
         run: make lint-shared
@@ -41,7 +41,7 @@ jobs:
         uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:
           distribution: 'temurin'
-          java-version: '19'
+          java-version: '25'
           cache: 'gradle'
       - name: Shared Android
         run: make test-shared-android
@@ -64,7 +64,7 @@ jobs:
         uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:
           distribution: 'temurin'
-          java-version: '19'
+          java-version: '25'
           cache: 'gradle'
       - name: Build Shared
         run: make build-shared
